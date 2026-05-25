@@ -1,0 +1,24 @@
+{
+  "name": "Les Deux Blondes",
+
+  "socials": [
+    { "id": "1", "title": "Github",  "link": "https://github.com/" },
+    { "id": "2", "title": "Youtube", "link": "https://www.youtube.com" },
+    { "id": "3", "title": "Email",   "link": "mailto:ericbergeron2000@gmail.com" }
+  ],
+
+  "about": [
+    "blabla blabla EN 1",
+    "blabla blabla EN 2",
+    "blabla blabla EN 3",
+    "blabla blabla EN 4"
+  ],
+
+  "about_fr": [
+    "blabla blabla FR 1",
+    "blabla blabla FR 2",
+    "blabla blabla FR 3",
+    "blabla blabla FR 4",
+    "blabla blabla FR 5"
+  ]
+}
