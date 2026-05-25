@@ -17,7 +17,7 @@
 }
 
 :root {
-  --background: #fdf0f3;
+  --background: linear-gradient(135deg, #f9c6d0, #f5b8cc);
   --foreground: #2a1020;
 }
 
