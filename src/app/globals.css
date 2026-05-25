@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@variant dark (&:where(.dark, .dark *));
-
 @font-face {
   font-family: 'Amsterdam';
   src: url('/fonts/AmsterdamOne.ttf') format('truetype');
@@ -18,22 +16,11 @@
   --breakpoint-desktop: 1600px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 :root {
   --background: #fdf0f3;
   --foreground: #2a1020;
 }
 
-.dark {
-  --background: #05080f;
-  --foreground: #ffffff;
-}
 
 body {
   background: var(--background);
