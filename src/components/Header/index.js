@@ -361,7 +361,11 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
                 </h1>
                 
               </div>
-            
+          
+          <Button onClick={toggle}>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{lang === "fr" ? "EN" : "FR"}</span>
+          </Button>
+
             {/* BOUTON HAMBURGER POPOVER BUTTON*/}  
             <PopoverButton>
               <MenuIcon open={open} mounted={mounted} currentTheme={currentTheme} />
