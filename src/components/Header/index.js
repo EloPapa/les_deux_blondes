@@ -363,7 +363,7 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
 
               </div>          
             
-            <div className="flex items-right gap-2">
+            <div className="flex items-right gap-12">
               <Button onClick={toggle}>
                       {lang === "fr" ? "EN" : "FR"}
               </Button>
