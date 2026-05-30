@@ -7,7 +7,7 @@ export default function AppProviders({ children }) {  // ← renommé
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="dark"
+      defaultTheme="light"
       enableSystem={true}
       disableTransitionOnChange
     >
