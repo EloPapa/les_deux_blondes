@@ -2,6 +2,7 @@
 
 import { useLanguage } from "../context/LanguageContext";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const { lang, t } = useLanguage();
@@ -15,6 +16,8 @@ export default function Home() {
         handleAboutScroll={handleAboutScroll}
         handlePresentationVideoScroll={handlePresentationVideoScroll}
       />
+
+      <Footer/>
     </div>
   );
 }
