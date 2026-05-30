@@ -347,32 +347,31 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
       >       
         {({ open }) => (
           <>
-            <div
-              className="flex items-center justify-between px-1"
-              style={{ height: "60px" }}
-            >
+            <div className="flex items-center justify-between px-1" syle={{ height: "60px" }}>
+              
+              {/* LES DEUX BLONDES HEADER*/} 
               <div className="flex items-center gap-2">
-                <h1
+                <h1>
                   onClick={() => router.push("/")}
                   className="font-medium cursor-default name"
-                  style={nameStyleMobile}
-                >
+                  style={nameStyleMobile}                
                   {name}.
-                </h1>             
-
+                </h1>
               </div>
             
-            {/* BOUTON CHOIX LANGUE*/}  
-            <Button onClick={toggle}>
-                {lang === "fr" ? "EN" : "FR"}
-            </Button> 
+            <div className="flex items-center gap-2">
+              {/* BOUTON CHOIX LANGUE*/}  
+              <Button onClick={toggle}>
+                  {lang === "fr" ? "EN" : "FR"}
+              </Button> 
 
-            {/* BOUTON HAMBURGER POPOVER BUTTON*/}  
-            <PopoverButton>
-              <MenuIcon open={open} mounted={mounted} currentTheme={currentTheme} />
-            </PopoverButton>
-              
-            </div>
+              {/* BOUTON HAMBURGER POPOVER BUTTON*/}  
+              <PopoverButton>
+                <MenuIcon open={open} mounted={mounted} currentTheme={currentTheme} />
+              </PopoverButton>
+            </div>    
+          
+          </div>
 
             {/* 📱 PANNEAU MENU "OUVERT" */}
             <PopoverPanel
