@@ -88,7 +88,7 @@ import Button from "../Button";
 * }
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const getGradient = (theme) =>
-  theme === "dark"
+  theme === "light"
     ? "linear-gradient(to bottom, transparent 60%, #080810 100%), linear-gradient(to right, #080810 0%, #1a0a2e 30%, #2d0f45 50%, #1a0a2e 70%, #080810 100%)"
     : "linear-gradient(to bottom, transparent 60%, #fef2f5 100%), linear-gradient(to right, #fef2f5 0%, #f9d0de 30%, #f5b8cc 50%, #f9d0de 70%, #fef2f5 100%)";
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -384,11 +384,11 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
               <div className="flex flex-col items-center">
                 {/* PANNEAU MENU "OUVERT" - "Bouton" PRÉSENTATION VIDÉO qui dirige à la section PRÉSENTATION VIDÉO */}
                 <Button onClick={handlePresentationVideoScroll}>
-                  
+                  {t.nav.presentation}    
                 </Button>
                 {/* PANNEAU MENU "OUVERT" - "Bouton" À PROPOS qui dirige à la section À PROPOS */}
                 <Button onClick={handleAboutScroll}>
-                  
+                  {t.nav.about}  
                 </Button>
                 {/* PANNEAU MENU "OUVERT" - "Bouton" Contact qui ouvre un message courriel */}
                 <Button onClick={() => window.open("mailto:ericbergeron2000@gmail.com")}>
