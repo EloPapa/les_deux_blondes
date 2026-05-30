@@ -67,8 +67,8 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 
 import { useLanguage } from "../../context/LanguageContext"; // importe le hook useLanguage depuis un fichier spécifique du projet.  — importation nommée (named import). Les accolades indiquent que ce n'est pas l'export par défaut du fichier, mais un export qui porte explicitement ce nom
 
-import data from "../../data/lesDeuxBlondes.json";
 import Button from "../Button";
+import data from "../../data/lesDeuxBlondes.json";
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * const MenuIcon = ({ open, mounted, currentTheme }) => { 
@@ -264,13 +264,12 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
 
   return (
     <>
-      {/* 📱 MOBILE */}      
-      <Popover className="block tablet:hidden w-full" style={{ background: backgroundGradient }}>       
-        {({ open }) => (
+    {/* 📱 MOBILE */}      
+      <Popover className="block tablet:hidden w-full" style={{ background: backgroundGradient }}>              
           <>
             <div className="flex items-center justify-between px-1" syle={{ height: "60px" }}>
               
-              {/* LES DEUX BLONDES HEADER*/} 
+              {/* TEXTE: LES DEUX BLONDES DANS LE HEADER */} 
               <div className="flex items-center gap-2">
                 <h1 onClick={() => router.push("/")} className="font-medium cursor-default name" style={nameStyleMobile}>
                   {name}.           
@@ -315,10 +314,8 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
                 </Button>
               </div>
             </PopoverPanel>
-          </>
-        )}
-      </Popover>
-      
+          </>        
+      </Popover>      
     </>
   );
 };
