@@ -374,7 +374,7 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
               style={{
                 background: gradient,
                 color: textColor,
-                border: "1px solid rgba(180,120,220,0.2)",                 
+                border: "1px solid rgba(180,120,220,1)",                 
               }}
             >
               <div className="flex flex-col items-center">
