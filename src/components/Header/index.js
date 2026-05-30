@@ -262,6 +262,13 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
   }, []);
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 
+const getNameStyle = () => {
+    if (!mounted) return nameStyleDesktop;
+    if (windowWidth >= 1280) return nameStyleXL;
+    if (windowWidth >= 1024) return nameStyleLG;
+    return nameStyleDesktop;
+  };
+
   return (
     <>
     {/* 📱 MOBILE */}      
@@ -315,7 +322,54 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
               </div>
             </PopoverPanel>
           </>        
-      </Popover>      
+      </Popover>
+    
+    {/* 💻 DESKTOP*/}
+    <div className="hidden tablet:flex justify-between items-center sticky top-0 z-10 w-full px-6" style={{background: backgroundGradient,color: textColor,}}>
+    
+        {/* A GAUCHE: TEXTE LES DEUX BLONDES DANS LE HEADER
+            lg : xl(1.17rem) * 0.70 = 0.819rem | xl(75px) * 0.70 = 53px
+            xl : inchangé gap-[1.17rem], singe 75px
+            2xl: inchangé singe 106px
+        */}
+        <div className="flex items-center gap-3 lg:gap-[0.819rem] xl:gap-[1.17rem]">
+          <h1
+            onClick={() => router.push("/")}
+            className="font-medium cursor-default name"
+            style={getNameStyle()}
+          >
+            {name}.
+          </h1>          
+        </div>
+        
+        {/* A DROITE: LES BOUTONS LANGUE ET MENU HAMBURGER
+            lg : xl(1.17rem) * 0.70 = 0.819rem | xl(1.4rem) * 0.70 = 0.98rem
+            xl : inchangé text-[1.17rem], gap-[1.4rem]
+            2xl: inchangé
+        */}
+        <div className="flex items-center gap-3 lg:gap-[0.98rem] xl:gap-[1.4rem] 2xl:gap-[2.2rem]">
+
+          <Button onClick={handlePresentationVideoScroll}>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.nav.presentation}</span>
+          </Button>
+
+          <Button onClick={handleAboutScroll}>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.nav.about}</span>
+          </Button>
+
+          <Button onClick={() => window.open("mailto:ericbergeron2000@gmail.com")}>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.nav.contact}</span>
+          </Button>
+
+          <Button onClick={toggle}>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{lang === "fr" ? "EN" : "FR"}</span>
+          </Button>        
+
+        </div>
+
+    </div>          
+
+
     </>
   );
 };
