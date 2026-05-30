@@ -351,11 +351,8 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
               
               {/* LES DEUX BLONDES HEADER*/} 
               <div className="flex items-center gap-2">
-                <h1>
-                  onClick={() => router.push("/")}
-                  className="font-medium cursor-default name"
-                  style={nameStyleMobile}                
-                  {name}.
+                <h1 onClick={() => router.push("/")} className="font-medium cursor-default name" style={nameStyleMobile}>
+                  {name}.           
                 </h1>
               </div>
             
