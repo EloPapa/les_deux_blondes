@@ -345,6 +345,10 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
         className="block tablet:hidden w-full"
         style={{ background: gradient }}
       >
+        <Button onClick={toggle}>
+                      {lang === "fr" ? "EN" : "FR"}
+        </Button>
+        
         {({ open }) => (
           <>
             <div
@@ -361,13 +365,7 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
                 </h1>
                 
 
-              </div>          
-            
-            <div className="flex items-right gap-12">
-              <Button onClick={toggle}>
-                      {lang === "fr" ? "EN" : "FR"}
-              </Button>
-            </div>
+              </div>                      
 
             {/* BOUTON HAMBURGER POPOVER BUTTON*/}  
             <PopoverButton>
