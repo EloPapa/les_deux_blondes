@@ -29,7 +29,7 @@ const fr = {
 
   footer: {
     scheduleSession: "Planifier une session",
-    madeWith: "Fait avec ❤",
+    madeWith: "Fait avec",
   },
 
 };
@@ -49,7 +49,7 @@ const en = {
 
   footer: {
     scheduleSession: "Schedule a session",
-    madeWith: "Made with ❤",
+    madeWith: "Made with",
   },
 };
 
