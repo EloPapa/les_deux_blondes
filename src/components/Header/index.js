@@ -130,8 +130,24 @@ const MenuIcon = ({ open, mounted, currentTheme }) => {
   );
 };
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* Déclaration du composant React HEADER avec déstructuration des props (propirétés).
+*
+* ({ handleAboutScroll, handlePresentationVideoScroll }) — les props que le composant reçoit de son parent, déstructurées directement.
+*
+* Sans déstructuration, ce serait :
+*
+* const Header = (props) => {
+*  const handleAboutScroll = props.handleAboutScroll;
+*  const handlePresentationVideoScroll = props.handlePresentationVideoScroll;
+*
+* => — syntaxe arrow function. Dit à JS "ce qui suit est le corps de la fonction".
+*
+* En résumé — ({ handleAboutScroll, handlePresentationVideoScroll }) c'est la porte d'entrée du composant : ce sont les instructions que le parent (page.JS) lui passe pour qu'il sache quoi
+* faire quand on clique sur ses boutons. 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
   
   /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -197,7 +213,21 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
  * mounted est un garde-fou qui empêche de rendre du contenu dépendant du client avant que le client soit prêt.
  *------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  */ const [mounted, setMounted] = useState(false);
-  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+ /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  * Ce useEffect règle un problème précis : savoir si le composant est réellement affiché dans le navigateur.
+  * () => { setMounted(true) } — la fonction exécutée après le rendu.
+  * [] — tableau de dépendances vide : l'effet ne tourne qu'une seule fois, au premier rendu. Jamais après.
+  * 
+  * 1. React rend le composant    →  mounted = false
+  * 2. L'HTML apparaît dans le DOM
+  * 3. useEffect se déclenche     →  setMounted(true)
+  * 4. React re-rend              →  mounted = true 
+  *------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  * const { lang, t, toggle } = useLanguage()
@@ -219,20 +249,6 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
  */  const { lang, t, toggle } = useLanguage();
   /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/   
  
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  * Ce useEffect règle un problème précis : savoir si le composant est réellement affiché dans le navigateur.
-  * () => { setMounted(true) } — la fonction exécutée après le rendu.
-  * [] — tableau de dépendances vide : l'effet ne tourne qu'une seule fois, au premier rendu. Jamais après.
-  * 
-  * 1. React rend le composant    →  mounted = false
-  * 2. L'HTML apparaît dans le DOM
-  * 3. useEffect se déclenche     →  setMounted(true)
-  * 4. React re-rend              →  mounted = true 
-  *------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
   /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
   const currentTheme = mounted ? theme || resolvedTheme : "dark";
   /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -278,15 +294,49 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
     paddingLeft: "0.0rem",
   };
 
-  const [windowWidth, setWindowWidth] = useState(0);
-
+  /*-------------------------------------------------------------------------------------------------------------------------------
+  * Mémoriser la largeur de la fenêtre du navigateur en temps réel, pour pouvoir adapter l'affichage selon la taille de l'écran.
+  *
+  * useState c'est le hook React qui permet à un composant de mémoriser une valeur qui peut changer.
+  * const [valeur, setValeur] = useState(valeurInitiale);
+  * valeur         → ce qu'on lit
+  * setValeur      → la fonction pour changer la valeur
+  * valeurInitiale → la valeur au départ
+  * 
+  * On peut stocker n'importe quel type de valeur :
+  * const [count, setCount]       = useState(0);           // nombre
+  * const [nom, setNom]           = useState("Eric");      // string
+  * const [actif, setActif]       = useState(false);       // booléen
+  * const [liste, setListe]       = useState([]);          // tableau
+  * const [user, setUser]         = useState({});          // objet
+  * const [mounted, setMounted]   = useState(false);       // booléen — ton code
+  * 
+  * const [windowWidth, setWindowWidth] = useState(0);     // nombre — le nom de la fonction code qui set
+  * 
+  * 
+  *-------------------------------------------------------------------------------------------------------------------------------*/
+  const [windowWidth, setWindowWidth] = useState(0); 
+   /*------------------------------------------------------------------------------------------------------------------------------
+   * Définit une fonction qui mesure la largeur de la fenêtre et la mémorise.
+   * useEffect : hook React qui permet d'exécuter du code après que le composant s'est affiché dans le navigateur.
+   * useEffect(() => {  ← s'exécute après le rendu
+   * }, []);            ← une seule fois au montage
+   * 
+   * useEffect                    → 📌 React
+   * setWindowWidth               → 📌 React (useState)
+   * window.innerWidth            → 📌 JavaScript natif
+   * window.addEventListener      → 📌 JavaScript natif
+   * window.removeEventListener   → 📌 JavaScript natif
+   * update                       → 📌 User 
+   * 
+   *------------------------------------------------------------------------------------------------------------------------------*/
   useEffect(() => {
     const update = () => setWindowWidth(window.innerWidth);
     update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    window.addEventListener("resize", update); //chaque fois que la fenêtre est redimensionnée, appelle update". "resize" → l'événement surveillé ; update → la fonction à appeler quand ça arrive
+    return () => window.removeEventListener("resize", update); // Le nettoyage — quand le composant disparaît, on arrête de surveiller le redimensionnement pour éviter les fuites mémoire.
   }, []);
-
+/*-------------------------------------------------------------------------------------------------------------------------------*/
 
   return (
     <>
@@ -354,4 +404,13 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
   );
 };
 
+ /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * Cette ligne rend le composant disponible pour être importé ailleurs.
+ *
+ * export  — rend quelque chose disponible en dehors de ce fichier.
+ * default — désigne cet export comme l'export principal du fichier. Un fichier ne peut avoir qu'un seul export default.
+ * Header  — ce qu'on exporte, le composant qu'on a défini plus haut dans le fichier.
+ * 
+ * Sans cette ligne, personne ne peut utiliser le composant
+ * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 export default Header;
