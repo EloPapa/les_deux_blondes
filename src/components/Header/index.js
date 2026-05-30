@@ -359,12 +359,13 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
                 >
                   {name}.
                 </h1>
-
-                <Button onClick={toggle}>
-                    {lang === "fr" ? "EN" : "FR"}
-                </Button>
+                
 
               </div>          
+
+            <Button onClick={toggle}>
+                    {lang === "fr" ? "EN" : "FR"}
+            </Button>
 
             {/* BOUTON HAMBURGER POPOVER BUTTON*/}  
             <PopoverButton>
