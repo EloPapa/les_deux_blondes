@@ -11,13 +11,17 @@ export default function Home() {
   const handlePresentationVideoScroll = () => {};
 
   return (
-    <div className="relative">
+    <div className="relative flex flex-col min-h-screen">
       <Header
         handleAboutScroll={handleAboutScroll}
         handlePresentationVideoScroll={handlePresentationVideoScroll}
       />
 
-      <Footer/>
+      <main className="flex-grow">
+        {/* ton contenu viendra ici */}
+      </main>
+
+      <Footer />
     </div>
   );
 }
