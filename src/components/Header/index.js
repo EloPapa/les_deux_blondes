@@ -65,67 +65,20 @@ import { useRouter } from "next/navigation";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react"; 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-import { useTheme } from "next-themes"; // hook de la librairie next-themes (fonctionnalité spécialisée) qui te donne tout ce qu'il faut pour gérer le thème clair/sombre de ton app.
 import { useLanguage } from "../../context/LanguageContext"; // importe le hook useLanguage depuis un fichier spécifique du projet.  — importation nommée (named import). Les accolades indiquent que ce n'est pas l'export par défaut du fichier, mais un export qui porte explicitement ce nom
 
 import data from "../../data/lesDeuxBlondes.json";
 import Button from "../Button";
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* const getGradient = (theme) =>
-* Cette fonction retourne une chaîne CSS de dégradés (linear-gradient) selon le thème (dark ou non). 
-* Déclare une fonction qui ne changera pas — getGradient ne sera jamais réassignée.
-* getGradient - Le nom de la fonction — tu l'as choisi, c'est ce nom que tu utiliseras pour l'appeler ailleurs.*  
-* => La flèche — dit à JS "ce qui suit est le corps de la fonction". C'est la syntaxe arrow function
-* Ce qui suit la flèche - Puisqu'il n'y a pas d'accolades {}, la fonction retourne directement l'expression qui suit — pas besoin d'écrire return :
-* Expression ternaire
-* Équivalent en if/else
-* 
-* if (theme === "dark") {
-*  return "linear-gradient dark..."
-* } else {
-*   return "linear-gradient light..."
-* }
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-const getGradient = (theme) =>
-  theme === "dark"
-    ? "linear-gradient(to bottom, transparent 60%, #080810 100%), linear-gradient(to right, #080810 0%, #1a0a2e 30%, #2d0f45 50%, #1a0a2e 70%, #080810 100%)"
-    : "linear-gradient(to bottom, transparent 60%, #fef2f5 100%), linear-gradient(to right, #fef2f5 0%, #f9d0de 30%, #f5b8cc 50%, #f9d0de 70%, #fef2f5 100%)";
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * const MenuIcon = ({ open, mounted, currentTheme }) => { 
-* Composant React fonctionnel qui affiche un icône MenuIcon dynamique. 
-* 
-Paramètres reçus:
-* open — le menu est-il ouvert ?
-* mounted — le composant est-il monté côté client ? Sert à éviter les erreurs de mismatch entre serveur et client.
-* currentTheme — thème actif 
-* 
-* 1. Si mounted est false → retourne un <span> vide et s'arrête
-* 2. Si mounted est true → calcule quelle icône afficher :
-* Menu fermé + thème dark → menu-dark.svg
-* Menu fermé + thème light → menu-white.svg
-* Menu ouvert → cancel-white.svg (une croix, peu importe le thème)
-* 
-* 3. Rendu final (dernier return): Retourne un <img> avec le bon fichier SVG depuis /images/
-* En gros — tant que la page n'est pas prête, on affiche rien. Une fois prête, on affiche soit un hamburger (adapté au thème), soit une croix si le menu est ouvert.
-* }
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-const MenuIcon = ({ open, mounted, currentTheme }) => {
-  if (!mounted) 
-  return <span className="h-5 w-5 block" />;
-    const src = !open
-      ? currentTheme === "dark"
-        ? "menu-dark.svg"
-        : "menu-white.svg"
-      : "cancel-white.svg";
-
+const MenuIcon = () => {
   return (
     <img
       className="h-5 cursor-default"
       alt="menu icon"
-      src={`/images/${src}`}
+      src="/images/menu-white.svg"
     />
   );
 };
@@ -169,25 +122,7 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
   *-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   */ const router = useRouter();
   /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
-  
- /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- * useTheme() est un hook (fonction spécialisée généralement de la lib next-themes) qui expose 3 valeurs : 
- * theme         = La valeur explicitement choisie par l'utilisateur : "light", "dark", ou "system". C'est ce qui est stocké en localStorage. Peut être undefined avant l'hydratation.
- * setTheme      = La fonction pour changer de thème. Ex : setTheme("dark") ou setTheme("system").
- * resolvedTheme = Le thème réellement appliqué. Utile quand theme === "system" : il résout automatiquement en "light" ou "dark" selon la préférence OS de l'utilisateur.
- * 
- * équivaut à:
- * const theme         = useTheme().theme;
- * const setTheme      = useTheme().setTheme;
- * const resolvedTheme = useTheme().resolvedTheme;
- * 
- * Savoir ce que l'user a choisi = theme ; Changer le thème = setTheme(...) ; Savoir ce qui s'affiche vraiment = resolvedTheme
- * 
- * En pratique, pour conditionner un style ou une icône, on préfère toujours resolvedTheme pour éviter les erreurs quand le thème est "system".
- *------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- */ const { theme, setTheme, resolvedTheme } = useTheme();
-  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/  
-  
+    
  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  * const [mounted, setMounted] = useState(false)
  * Pattern classique pour gérer l'hydratation SSR en Next.js. Un simple state booléen, initialisé à false, avec son setter.
@@ -247,22 +182,11 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
  * const { lang, t, toggle } = useLanguage();
  * -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  */  const { lang, t, toggle } = useLanguage();
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/   
- 
   /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-  const currentTheme = mounted ? theme || resolvedTheme : "light";
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-  /* Définition d'une fonction qui  bascule le thème entre clair et sombre
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-  const toggleTheme = () => {
-    setTheme(currentTheme === "dark" ? "light" : "dark");
-  };
- /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
-  
- const gradient = getGradient(currentTheme);
+     
   const { name } = data;  
-  const textColor = currentTheme === "dark" ? "#e8e0f0" : "#2a1020";
+  const textColor = "#2a1020";
+  const backgroundGradient = "linear-gradient(to bottom, transparent 60%, #fef2f5 100%), linear-gradient(to right, #fef2f5 0%, #f9d0de 30%, #f5b8cc 50%, #f9d0de 70%, #fef2f5 100%)";
 
   const nameStyleMobile = {
     color: textColor,
@@ -341,8 +265,7 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
   return (
     <>
       {/* 📱 MOBILE */}      
-      <Popover className="block tablet:hidden w-full" style={{ background: gradient }}
-      >       
+      <Popover className="block tablet:hidden w-full" style={{ background: backgroundGradient }}>       
         {({ open }) => (
           <>
             <div className="flex items-center justify-between px-1" syle={{ height: "60px" }}>
@@ -362,7 +285,7 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
 
               {/* BOUTON HAMBURGER POPOVER BUTTON*/}  
               <PopoverButton>
-                <MenuIcon open={open} mounted={mounted} currentTheme={currentTheme} />
+                <MenuIcon/>
               </PopoverButton>
             </div>    
           
@@ -372,7 +295,7 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
             <PopoverPanel
               className="absolute right-2 z-10 w-30 p-4 rounded-md shadow-md"
               style={{
-                background: gradient,
+                background: backgroundGradient,
                 color: textColor,
                 border: "1px solid rgba(180,120,220,1)",                 
               }}
