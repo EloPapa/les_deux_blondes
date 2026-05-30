@@ -267,7 +267,7 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
     {/* 📱 MOBILE */}      
       <Popover className="block tablet:hidden w-full" style={{ background: backgroundGradient }}>              
           <>
-            <div className="flex items-center justify-between px-1" style={{ height: "80px" }}>
+            <div className="flex items-center justify-between px-1" style={{ height: "70px" }}>
               
               {/* TEXTE: LES DEUX BLONDES DANS LE HEADER */} 
               <div className="flex items-center gap-2">
