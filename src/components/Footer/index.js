@@ -42,7 +42,7 @@ const Footer = () => {
       >
         <h2 className="text-sm tablet:text-2xl laptop:text-2xl laptopl:text-2xl font-bold">
           {t.footer.madeWith}{" "}
-          <span style={{ color: "red" }}>♥</span>          
+          <span style={{ color: "red" }}>❤️</span>          
         </h2>
       </div>
 
