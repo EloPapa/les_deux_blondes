@@ -362,10 +362,12 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
                 
 
               </div>          
-
-            <Button onClick={toggle}>
-                    {lang === "fr" ? "EN" : "FR"}
-            </Button>
+            
+            <div className="flex items-right gap-2">
+              <Button onClick={toggle}>
+                      {lang === "fr" ? "EN" : "FR"}
+              </Button>
+            </div>
 
             {/* BOUTON HAMBURGER POPOVER BUTTON*/}  
             <PopoverButton>
