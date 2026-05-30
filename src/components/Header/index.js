@@ -309,15 +309,15 @@ const getNameStyle = () => {
               <div className="flex flex-col items-center">
                 {/* PANNEAU MENU "OUVERT" - "Bouton" PRÉSENTATION VIDÉO qui dirige à la section PRÉSENTATION VIDÉO */}
                 <Button onClick={handlePresentationVideoScroll}>
-                  {t.nav.presentation}    
+                  {t.header.presentation}    
                 </Button>
                 {/* PANNEAU MENU "OUVERT" - "Bouton" À PROPOS qui dirige à la section À PROPOS */}
                 <Button onClick={handleAboutScroll}>
-                  {t.nav.about}  
+                  {t.header.about}  
                 </Button>
                 {/* PANNEAU MENU "OUVERT" - "Bouton" Contact qui ouvre un message courriel */}
                 <Button onClick={() => window.open("mailto:ericbergeron2000@gmail.com")}>
-                  {t.nav.contact}
+                  {t.header.contact}
                 </Button>
               </div>
             </PopoverPanel>
@@ -350,15 +350,15 @@ const getNameStyle = () => {
         <div className="flex items-center gap-3 lg:gap-[0.98rem] xl:gap-[1.4rem] 2xl:gap-[2.2rem]">
 
           <Button onClick={handlePresentationVideoScroll}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.nav.presentation}</span>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.header.presentation}</span>
           </Button>
 
           <Button onClick={handleAboutScroll}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.nav.about}</span>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.header.about}</span>
           </Button>
 
           <Button onClick={() => window.open("mailto:ericbergeron2000@gmail.com")}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.nav.contact}</span>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.header.contact}</span>
           </Button>
 
           <Button onClick={toggle}>

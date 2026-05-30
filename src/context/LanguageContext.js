@@ -14,40 +14,43 @@
 */ import { createContext, useContext, useState } from "react";
 
 const fr = {
-  nav: {
+  header: {
     presentation: "Présentation",
     about: "À propos",
-    contact: "Contact",
-    
+    contact: "Contact",    
   },
 
   sections: {
-  passions: "Passions.",
-  about: "À propos.",
-  contact: "Contact.",
-  
+    passions: "Passions.",
+    about: "À propos.",
+    contact: "Contact.",  
 
   },
 
+  footer: {
+    scheduleSession: "Planifier une session",
+    madeWith: "Fait avec ❤",
+  },
 
 };
 
 const en = {
-  nav: {
+  header: {
     presentation: "Presentation",
     about: "About",
-    contact: "Contact",
-    
+    contact: "Contact",    
   },
-
-  sections: {
-  passions: "Passions.",
-  about: "À propos.",
-  contact: "Contact.",
   
-    
+  sections: {
+    passions: "Passions.",
+    about: "About.",
+    contact: "Contact.",    
   },
 
+  footer: {
+    scheduleSession: "Schedule a session",
+    madeWith: "Made with ❤",
+  },
 };
 
 const translations = { fr, en };

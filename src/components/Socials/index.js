@@ -2,7 +2,7 @@
 import React from "react";
 import Button from "../Button";
 
-import yourData from "../../data/portfolio.json";
+import yourData from "../../data/lesDeuxBlondes.json";
 
 const Socials = ({ className }) => {
   return (
