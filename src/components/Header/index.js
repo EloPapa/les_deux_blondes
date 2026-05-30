@@ -341,7 +341,8 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
   return (
     <>
       {/* 📱 MOBILE */}      
-      <Popover className="block tablet:hidden w-full" style={{ background: gradient }}>       
+      <Popover className="block tablet:hidden w-full" style={{ background: gradient }}
+      >       
         {({ open }) => (
           <>
             <div className="flex items-center justify-between px-1" syle={{ height: "60px" }}>
@@ -372,7 +373,8 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
               className="absolute right-2 z-10 w-30 p-4 rounded-md shadow-md"
               style={{
                 background: gradient,
-                color: textColor,                
+                color: textColor,
+                border: "1px solid rgba(180,120,220,0.2)",                 
               }}
             >
               <div className="flex flex-col items-center">
