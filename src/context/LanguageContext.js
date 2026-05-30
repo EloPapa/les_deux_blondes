@@ -10,20 +10,22 @@
 *
 * useState — hook qui crée une variable d'état réactive. Quand elle change, React re-rend les composants concernés :
 * const [lang, setLang] = useState("fr"); // état local réactif
+*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */ import { createContext, useContext, useState } from "react";
 
 const fr = {
   nav: {
+    presentation: "Présentation",
     about: "À propos",
     contact: "Contact",
-    presentationVideo: "Présentation Vidéo" 
+    
   },
 
   sections: {
   passions: "Passions.",
   about: "À propos.",
   contact: "Contact.",
-  presentationVideo: "Présentation Vidéo" 
+  
 
   },
 
@@ -32,16 +34,17 @@ const fr = {
 
 const en = {
   nav: {
+    presentation: "Presentation",
     about: "About",
     contact: "Contact",
-    presentationVideo: "Video Presentation" 
+    
   },
 
   sections: {
   passions: "Passions.",
   about: "À propos.",
   contact: "Contact.",
-  presentationVideo: "Video Presentation" 
+  
     
   },
 
@@ -73,5 +76,5 @@ export function LanguageProvider({ children }) {
  * function useLanguage() {
  * return useContext(LanguageContext);
  * }
- * 
+ *-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------* 
  */ export const useLanguage = () => useContext(LanguageContext);
