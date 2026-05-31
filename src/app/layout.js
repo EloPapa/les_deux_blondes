@@ -36,6 +36,7 @@ export default function RootLayout({ children }) {
           type="font/ttf"
           crossOrigin="anonymous"
         />
+      <link rel="icon" href="/images/labradorPetite.png" type="image/png" />  
       </head>
       <body className="min-h-full flex flex-col">
         <Providers>
