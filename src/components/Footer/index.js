@@ -40,10 +40,10 @@ const Footer = () => {
         className="w-full mt-16 p-8 text-center"
         style={{ background: backgroundGradient }}
       >
-        <h2 className="text-sm tablet:text-2xl laptop:text-2xl laptopl:text-2xl font-bold">
+        <h3 className="text-sm tablet:text-2xl laptop:text-1xl laptopl:text-1xl font-bold">
           {t.footer.madeWith}{" "}
           <span style={{ color: "red" }}>❤️</span>          
-        </h2>
+        </h3>
       </div>
 
     </footer>
