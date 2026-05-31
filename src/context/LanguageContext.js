@@ -53,9 +53,53 @@ const en = {
   },
 };
 
-const translations = { fr, en };
-const LanguageContext = createContext();
+const translations = { fr, en }; // Structure de donné 
 
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+createContext() : crée un conteneur de données partagées que n'importe quel composant dans ton app peut lire, sans avoir à passer des props de parent en enfant.
+
+Exemple
+page.js
+  └── Header.js        ← veut connaître la langue
+  └── Section.js
+        └── Card.js    ← veut aussi connaître la langue
+
+Sans context, tu devrais passer lang comme prop à chaque niveau. Avec context, tous les composants y accèdent directement.
+C'est juste la création — le conteneur est vide pour l'instant. Ensuite tu le remplis avec un Provider
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+const LanguageContext = createContext();
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+const [lang, setLang] = useState("fr");
+function App() {
+  const [lang, setLang] = useState("fr");
+
+  return (
+    <>
+      <p>Langue : {lang}</p>
+
+      <button onClick={() => setLang("en")}>
+        Anglais
+      </button>
+    </>
+  );
+}
+
+ const t = translations[lang];
+ équivalent à translations.fr ou translations.en
+
+ const toggle = () => {
+  if (lang === "fr") {
+    setLang("en");
+  } else {
+    setLang("fr");
+  }
+};
+toggle() bascule la valeur de lang entre "fr" et "en".
+
+ Le Provider sert à partager des données avec tous les composants qui se trouvent à l'intérieur.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 export function LanguageProvider({ children }) {
   const [lang, setLang] = useState("fr");
   const t = translations[lang];
@@ -67,7 +111,6 @@ export function LanguageProvider({ children }) {
     </LanguageContext.Provider>
   );
 }
-
  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  * Cette ligne définit et exporte le hook useLanguage en une seule ligne.
  * export                      — rend la fonction disponible pour les autres fichiers. C'est ce qui permet le import { useLanguage }, par exemple dans le component header.
