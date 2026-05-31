@@ -20,10 +20,10 @@ const Footer = () => {
         <h2 className="text-3xl tablet:text-4xl laptop:text-4xl laptopl:text-4xl font-bold">
           {t.sections.collaborate2}
         </h2>
-        <div className="mt-8">
+        <div className="mt-7">
           <Button type="primary">{t.footer.scheduleSession}</Button>
         </div>
-        <div className="mt-8">
+        <div className="mt-7">
           <Socials />
         </div>
       </div>
