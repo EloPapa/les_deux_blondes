@@ -10,7 +10,7 @@ const Footer = () => {
   const backgroundGradient = "linear-gradient(to top, transparent 60%, #fef2f5 100%), linear-gradient(to right, #fef2f5 0%, #f9d0de 30%, #f5b8cc 50%, #f9d0de 70%, #fef2f5 100%)";
 
   return (
-    <footer className="w-full flex flex-col items-center mt-20">
+    <footer className="w-full flex flex-col items-center mt-20 min-h-screen">
 
       {/* SECTION CONTACT */}
       <div className="w-full px-6 flex flex-col items-center text-center mt-auto">
