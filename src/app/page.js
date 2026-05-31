@@ -1,7 +1,12 @@
 "use client";
 
 /*-------------------------------------------------------------------------------------------------------------------------------
-*
+* 1. Accéder directement à un élément du DOM
+* C'est utile pour des timers, des animations, garder une valeur précédente, ou manipuler un élément HTML directement.
+* Le DOM (Document Object Model) est la représentation en mémoire de ta page HTML sous forme d'un arbre d'objets que JavaScript peut lire et modifier.
+* 
+* useRef retourne un objet avec une seule propriété : { current: <ta valeur> } Tu lis et modifies toujours via .current.
+* En résumé : utilise useRef quand tu veux retenir quelque chose sans que React réaffiche le composant, ou quand tu veux toucher directement un élément HTML.
  *-------------------------------------------------------------------------------------------------------------------------------*/
 import { useRef } from "react";
 import { useLanguage } from "../context/LanguageContext";
@@ -12,26 +17,53 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   /*-------------------------------------------------------------------------------------------------------------------------------
-  *
+  * export  — rend ce code disponible pour d'autres fichiers qui voudront l'importer.
+  * default — désigne cet export comme l'export principal du fichier. Il ne peut y en avoir qu'un seul par fichier.
+  * Home — le nom de la fonction. Par convention en React, les composants commencent par une majuscule.
+  * 
+  * En résumé : "Je crée une fonction appelée Home et je l'exporte comme élément principal de ce fichier, pour que d'autres fichiers puissent l'utiliser."
+  * 
   *-------------------------------------------------------------------------------------------------------------------------------*/
   const { lang, t } = useLanguage();
   
   /*-------------------------------------------------------------------------------------------------------------------------------
-  *
+  * const    — on déclare une variable constante (la référence elle-même ne sera jamais réassignée).
+  * aboutRef — le nom de la variable. Par convention, les refs se terminent par Ref pour indiquer clairement que c'est une référence.
+  * useRef   — le hook React qui crée la référence (voir explication précédente).
+  * null     — la valeur initiale de current. On met null car au départ, la ref n'est encore attachée à aucun élément HTML du DOM.
+  * 
+  * Une fois attachée à un élément HTML :
+  * aboutRef = { current: <section id="about"> }  // après le rendu
+  *   * 
+  * En résumé : "Je crée une référence vide, qui sera plus tard attachée à un élément HTML de la section about."
   *-------------------------------------------------------------------------------------------------------------------------------*/
   const aboutRef = useRef(null);
   
  /*-------------------------------------------------------------------------------------------------------------------------------
+  * const handleAboutScroll — on déclare une variable constante. Par convention, les fonctions qui gèrent un événement commencent par handle.
+  * () => — c'est une fonction fléchée (arrow function), sans paramètres.
+  * aboutRef.current — on accède à l'élément HTML actuellement attaché à la ref (la section about).
+  * ? — c'est l'opérateur optionnel (?.). Il vérifie que aboutRef.current n'est pas null avant d'appeler la fonction. Sans lui, si la ref est vide, ça planterait.
+  * 
+  * scrollIntoView() — méthode native du DOM qui fait défiler la page jusqu'à l'élément.
+  * { behavior: "smooth" } — option passée à scrollIntoView pour que le défilement soit fluide au lieu d'être instantané.
+  * 
+  * { behavior: "smooth" }  // défilement fluide 🟢
+  * { behavior: "auto" }    // défilement instantané ⚡
   *
+  * En résumé : "Quand cette fonction est appelée, la page défile doucement jusqu'à la section about, mais seulement si elle existe."
   *-------------------------------------------------------------------------------------------------------------------------------*/
   const handleAboutScroll = () => {
     aboutRef.current?.scrollIntoView({ behavior: "smooth" });  
   };
 
   /*-------------------------------------------------------------------------------------------------------------------------------
-  *
+ 
   *-------------------------------------------------------------------------------------------------------------------------------*/
-  const handlePresentationVideoScroll = () => {};
+  const handlePresentationVideoScroll = () => {
+    presentationRef.current?.scrollIntoView({ behavior: "smooth" }); 
+
+  };
   
 
   const aboutParagraphs = lang === "fr" ? data.about_fr || data.about : data.about;
