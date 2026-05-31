@@ -33,7 +33,7 @@ const Footer = () => {
         className="w-full mt-16 p-8 text-center"
         style={{ background: backgroundGradient }}
       >
-        <h3 className="text-sm tablet:text-2xl laptop:text-1xl laptopl:text-1xl font-bold">
+        <h3 className="text-sm tablet:text-sm laptop:text-sm laptopl:text-sm font-bold">
           {t.footer.madeWith}{" "}
           <span style={{ color: "red" }}>❤️</span>          
         </h3>
