@@ -73,12 +73,12 @@ import data from "../../data/lesDeuxBlondes.json";
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * const MenuIcon = ({ open, mounted, currentTheme }) => { 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-const MenuIcon = () => {
+const MenuIcon = ({ open }) => {
   return (
     <img
       className="h-5 cursor-default"
       alt="menu icon"
-      src="/images/menu-white.svg"
+      src={open ? "/images/cancel-white.svg" : "/images/menu-white.svg"}
     />
   );
 };
@@ -271,7 +271,8 @@ const getNameStyle = () => {
   return (
     <>
     {/* 📱 MOBILE */}      
-      <Popover className="block tablet:hidden w-full" style={{ background: backgroundGradient }}>              
+      <Popover className="block tablet:hidden w-full" style={{ background: backgroundGradient }}>
+         {({ open }) => (               
           <>
             <div className="flex items-center justify-between px-1" style={{ height: "70px" }}>
               
@@ -290,7 +291,7 @@ const getNameStyle = () => {
 
               {/* BOUTON HAMBURGER POPOVER BUTTON*/}  
               <PopoverButton>
-                <MenuIcon/>
+                <MenuIcon open={open}/>
               </PopoverButton>
             </div>    
           
@@ -320,7 +321,8 @@ const getNameStyle = () => {
                 </Button>
               </div>
             </PopoverPanel>
-          </>        
+          </>
+        )}        
       </Popover>
     
     {/* 💻 DESKTOP*/}
