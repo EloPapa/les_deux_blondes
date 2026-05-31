@@ -17,7 +17,7 @@ export const metadata = {
   description: "Les 2 Blondes",
   
   icons: {
-    icon: "/images/labradorPetite.png",  
+    icon: "/images/labradorPetite.png?v=2", 
   },
 };
 
@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
           type="font/ttf"
           crossOrigin="anonymous"
         />
-      <link rel="icon" href="/images/labradorPetite.png" type="image/png" />  
+      <link rel="icon" href="/images/labradorPetite.png?v=2" type="image/png" />
       </head>
       <body className="min-h-full flex flex-col">
         <Providers>
