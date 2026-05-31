@@ -15,6 +15,10 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "L2Blondes",
   description: "Les 2 Blondes",
+  
+  icons: {
+    icon: "/images/labradorPetite.png",  
+  },
 };
 
 export default function RootLayout({ children }) {
