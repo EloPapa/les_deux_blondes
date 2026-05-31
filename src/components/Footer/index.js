@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className="w-full flex flex-col items-center mt-20">
 
       {/* SECTION CONTACT */}
-      <div className="w-full px-6 flex flex-col items-center text-center">
+      <div className="w-full px-6 flex flex-col items-center text-center mt-auto">
         <h2 className="text-3xl tablet:text-4xl laptop:text-4xl laptopl:text-4xl font-bold">
           {t.sections.collaborate1}
         </h2>
