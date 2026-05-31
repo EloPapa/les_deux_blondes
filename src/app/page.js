@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div className="relative flex flex-col min-h-screen">
       <Header
-        {/* DÉFILEMENT RAPIDE  */}  
+        /* DÉFILEMENT RAPIDE  */  
         handleAboutScroll={handleAboutScroll}
         handlePresentationVideoScroll={handlePresentationVideoScroll}
       />
