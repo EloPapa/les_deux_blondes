@@ -1,18 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { useLanguage } from "../../context/LanguageContext";
-
 import Button from "../Button";
 import Socials from "../Socials";
 
 const Footer = () => {
   const { t } = useLanguage();
-
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
   
   const backgroundGradient = "linear-gradient(to top, transparent 60%, #fef2f5 100%), linear-gradient(to right, #fef2f5 0%, #f9d0de 30%, #f5b8cc 50%, #f9d0de 70%, #fef2f5 100%)";
 
