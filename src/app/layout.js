@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Les 2 Blondes",
-  description: "2 Blondes",
+  title: "L2Blondes",
+  description: "Les 2 Blondes",
 };
 
 export default function RootLayout({ children }) {
