@@ -40,7 +40,7 @@ export default function Home() {
           >
             {t.sections.about}
           </h1>
-         {/* PARAGRAPHE ABOUT */}   
+         {/* PARAGRAPHE ABOUT À PARTIR DU FICHIER JSON */}   
         <div className="text-xl lg:text-[1rem] xl:text-[0.952rem] 2xl:text-[1.9rem] max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl leading-relaxed xl:leading-loose 2xl:leading-loose">
             {aboutParagraphs.map((paragraph, index) => (
               <p key={index} className="mb-3 lg:mb-[1.05rem] xl:mb-[1.05rem] 2xl:mb-8">
