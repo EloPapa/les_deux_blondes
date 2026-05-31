@@ -17,7 +17,7 @@ export const metadata = {
   description: "Les 2 Blondes",
   
   icons: {
-    icon: "/images/labradorPetite.png?v=2", 
+    icon: "/images/labradorPetite.png?v=2", //Le ?v=2 dit au navigateur que c'est une nouvelle version — il ne peut pas utiliser son cache et doit télécharger le fichier.
   },
 };
 
