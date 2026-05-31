@@ -14,11 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "L2Blondes",
-  description: "Les 2 Blondes",
+  description: "Les 2 Blondes", 
   
-  icons: {
-    icon: "/images/labradorPetite.png?v=2", //Le ?v=2 dit au navigateur que c'est une nouvelle version — il ne peut pas utiliser son cache et doit télécharger le fichier.
-  },
 };
 
 export default function RootLayout({ children }) {
@@ -34,9 +31,8 @@ export default function RootLayout({ children }) {
           href="/fonts/AmsterdamOne.ttf"
           as="font"
           type="font/ttf"
-          crossOrigin="anonymous"
-        />
-      <link rel="icon" href="/images/labradorPetite.png?v=2" type="image/png" />
+          crossOrigin="anonymous"        />
+      
       </head>
       <body className="min-h-full flex flex-col">
         <Providers>
