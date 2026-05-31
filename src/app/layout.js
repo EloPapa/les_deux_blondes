@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Les 2 Blondes",
+  title: "2 Blondes",
   description: "Les 2 Blondes",
 };
 
