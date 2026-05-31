@@ -4,7 +4,7 @@
   "socials": [
     { "id": "1", "title": "Github",  "link": "https://github.com/" },
     { "id": "2", "title": "Youtube", "link": "https://www.youtube.com" },
-    { "id": "3", "title": "Email",   "link": "mailto:ericbergeron2000@gmail.com" }
+    { "id": "3", "title": "LinkledIn",   "link": "https://www.linkedin.com/" }
   ],
 
   "about": [

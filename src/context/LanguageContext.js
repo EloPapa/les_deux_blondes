@@ -28,7 +28,7 @@ const fr = {
   },
 
   footer: {
-    scheduleSession: "Planifier une session",
+    scheduleSession: "Contactez-Nous",
     madeWith: "Fait avec",
   },
 
@@ -48,7 +48,7 @@ const en = {
   },
 
   footer: {
-    scheduleSession: "Schedule a session",
+    scheduleSession: "Contact Us",
     madeWith: "Made with",
   },
 };
