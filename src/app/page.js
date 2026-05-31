@@ -48,7 +48,7 @@ export default function Home() {
         {/* TITRE ABOUT EN FONT AMSTERDAM */}   
         <div className="mt-15t lg:mt-[2.275rem] xl:mt-[2.275rem] pt-2 px-2" ref={aboutRef}>
           <h1
-            className="text-[0.5rem] lg:mt-[2.275rem] mb-[2.275rem] text-[3rem] xl:mt-[2.275rem] mb-[2.275rem] text-[3rem]"
+            className="text-[0.75rem] lg:text-[3rem] xl:text-[3rem] mb-[2.275rem] lg:mt-[2.275rem] lg:mb-[2.275rem] xl:mt-[2.275rem] xl:mb-[2.275rem]"
             style={{
               fontFamily: "'Amsterdam', cursive",
               textDecoration: "underline",
