@@ -99,7 +99,7 @@ export default function Content({ lang = "fr" }) {
 
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "1rem 0" }}>
-      <div style={{ width: "100%", maxWidth: "720px", background: "#e9e9e7", borderRadius: "8px", padding: "2rem 2rem 1.5rem", boxShadow: "0 2px 8px rgba(63,69,81,0.16)", fontFamily: nunitoSans.style.fontFamily, color: "#2b2b2b", boxSizing: "border-box" }}>
+      <div style={{ width: "100%", maxWidth: "720px", background: "linear-gradient(to bottom, transparent 60%, #fff8f0 100%), linear-gradient(to right, #fff8f0 0%, #fed8a8 30%, #fdc07e 50%, #fed8a8 70%, #fff8f0 100%)", borderRadius: "8px", padding: "2rem 2rem 1.5rem", boxShadow: "0 2px 8px rgba(63,69,81,0.16)", fontFamily: nunitoSans.style.fontFamily, color: "#2b2b2b", boxSizing: "border-box" }}>
 
         <div style={{ height: "3px", width: "100%", background: "#a07a3a", marginBottom: "1.25rem" }} />
 
