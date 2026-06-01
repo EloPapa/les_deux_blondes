@@ -9,12 +9,85 @@
 * En résumé : utilise useRef quand tu veux retenir quelque chose sans que React réaffiche le composant, ou quand tu veux toucher directement un élément HTML.
  *-------------------------------------------------------------------------------------------------------------------------------*/
 import { useRef } from "react";
+
+/*-------------------------------------------------------------------------------------------------------------------------------
+* dynamic sert à charger un composant en lazy loading — c'est-à-dire seulement quand il est nécessaire, pas au chargement initial de la page.
+* Ex:
+* const MonComposant = dynamic(() => import("./MonComposant"), {
+*  ssr: false,        // ne pas rendre côté serveur
+*  loading: () => <p>Chargement...</p>  // afficher pendant le chargement
+* });
+*
+* Les cas d'usage typiques :
+* ssr: false — pour des composants qui utilisent window, localStorage, ou des libs qui ne fonctionnent pas côté serveur (cartes, éditeurs de texte, etc.)
+*
+* Perf — éviter de charger un gros composant tant que l'utilisateur n'en a pas besoin
+*
+* Code splitting — réduit la taille du bundle initial
+*
+* Dans mon cas quand on va utiliser des composant reconstruit de d'autre plateforme, exemple le portfolio reconstruit de Canvas 
+*-------------------------------------------------------------------------------------------------------------------------------*/
+import dynamic from "next/dynamic";
+
 import { useLanguage } from "../context/LanguageContext";
+
+/*-------------------------------------------------------------------------------------------------------------------------------
+* Sert à exécuter l'anuimation stagger: 
+* animation où les éléments apparaissent l'un après l'autre avec un petit délai entre chaque, au lieu de tous apparaître en même temps.
+* 
+* Dans ton cas, pourrait çetre 4 titres en haut de page qui arrivent en séquence :
+* "Les 2 Blondes"     → apparaît en 1er
+* "sont"              → apparaît 0.1s après
+* "vraiment"          → apparaît 0.1s après
+* "blondes"           → apparaît 0.1s après
+*
+* Visuellement ça donne un effet de cascade — chaque ligne glisse vers le haut et apparaît progressivement, ce qui est beaucoup plus dynamique que tout afficher d'un coup.
+*  
+* useIsomorphicLayoutEffect(() => {
+*  stagger(
+*    [textOne.current, textTwo.current, textThree.current, textFour.current],
+*    { y: 40, x: -10, transform: "scale(0.95) skew(10deg)" },  // état initial
+*    { y: 0, x: 0, transform: "scale(1)" }                      // état final
+*  );
+* *}, []);
+*
+* Elle prend tes 4 refs de titres et les anime depuis l'état initial (décalés, légèrement inclinés, réduits) vers l'état final (position normale) — en cascade, l'un après l'autre.
+*
+* C'est probablement une fonction GSAP ou similaire définie dans ton fichier ../animations.js.
+*-------------------------------------------------------------------------------------------------------------------------------*/
+import { stagger } from "../animations";
+
+/*-------------------------------------------------------------------------------------------------------------------------------
+* Ça sert à remplacer useLayoutEffect de façon sécurisée. 
+* Le problème : useLayoutEffect génère un warning dans Next.js côté serveur (SSR) parce qu'il n'existe pas dans Node.js.
+* 
+* useIsomorphicLayoutEffect fait simplement : 
+* // côté serveur → useEffect (pas de warning)
+* // côté client  → useLayoutEffect (exécution synchrone avant le paint)
+* 
+* Dans ton code tu l'utilises pour lancer l'animation stagger au montage :
+*
+* useIsomorphicLayoutEffect(() => {
+* stagger(
+*    [textOne.current, textTwo.current, textThree.current, textFour.current],
+*    { y: 40, x: -10, transform: "scale(0.95) skew(10deg)" },
+*    { y: 0, x: 0, transform: "scale(1)" }
+*  );
+* }, []);
+*
+* Sans ça, Next.js cracherait un warning au build* 
+*-------------------------------------------------------------------------------------------------------------------------------*/
+import { useIsomorphicLayoutEffect } from "../utils";
 
 import Header from "../components/Header";
 import data from "../data/lesDeuxBlondes.json";
 import Footer from "../components/Footer";
 
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------- HOME ----------------------------------------------------------------------*/
 export default function Home() {
   /*-------------------------------------------------------------------------------------------------------------------------------
   * export  — rend ce code disponible pour d'autres fichiers qui voudront l'importer.
@@ -65,8 +138,15 @@ export default function Home() {
 
   };
   
-
   const aboutParagraphs = lang === "fr" ? data.about_fr || data.about : data.about;
+
+  useIsomorphicLayoutEffect(() => {
+    stagger(
+      [textOne.current, textTwo.current, textThree.current, textFour.current],
+      { y: 40, x: -10, transform: "scale(0.95) skew(10deg)" },
+      { y: 0, x: 0, transform: "scale(1)" }
+    );
+  }, []);
 
   return (
     <div className="relative flex flex-col min-h-screen">
