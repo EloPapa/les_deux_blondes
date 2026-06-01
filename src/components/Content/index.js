@@ -99,7 +99,7 @@ export default function Content({ lang = "fr" }) {
 
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "1rem 0" }}>
-      <div style={{ width: "100%", maxWidth: "720px", background: "#e9e9e7", fontFamily: nunitoSans.style.fontFamily, color: "#e9e9e7", boxSizing: "border-box" }}>
+      <div style={{ width: "100%", maxWidth: "720px", background: "#fffef5", fontFamily: nunitoSans.style.fontFamily, color: "#2b2b2b", boxSizing: "border-box" }}>
 
         <div style={{ height: "3px", width: "100%", background: "#a07a3a", marginBottom: "1.25rem" }} />
 
@@ -141,7 +141,7 @@ export default function Content({ lang = "fr" }) {
             {t.bottomQuote}
             <span style={{ flex: 1, height: "2px", background: "#a07a3a", display: "inline-block" }} />
           </p>
-          <p style={{ fontSize: "clamp(0.85rem, 2vw, 1rem)", color: "#e9e9e7", margin: "0.25rem 0 0 0", fontStyle: "italic" }}>
+          <p style={{ fontSize: "clamp(0.85rem, 2vw, 1rem)", color: "#4a4a4a", margin: "0.25rem 0 0 0", fontStyle: "italic" }}>
             {t.author}
           </p>
         </div>
