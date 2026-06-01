@@ -104,11 +104,11 @@ export default function Content({ lang = "fr" }) {
         {/*LIGNE DE SÉPARATION*/}
         <div style={{ height: "3px", width: "100%", background: " #fdc07e", marginBottom: "1.25rem" }} />
         {/*HEADER*/}
-        <h2 style={{ fontFamily: nunitoSans.style.fontFamily, fontWeight: 900, fontSize: "clamp(2.5rem, 8vw, 5rem)", color: "#fed8a8", letterSpacing: "0.02em", lineHeight: 1, margin: "0 0 0.5rem 0" }}>
+        <h2 style={{ fontFamily: nunitoSans.style.fontFamily, fontWeight: 900, fontSize: "clamp(2.5rem, 8vw, 5rem)", color: "#fdc07e", letterSpacing: "0.02em", lineHeight: 1, margin: "0 0 0.5rem 0" }}>
           {t.title}
         </h2>
         {/*TEXT TOP*/}
-        <p style={{ fontSize: "clamp(0.85rem, 2.2vw, 1.1rem)", letterSpacing: "0.08em", color: "#fed8a8 ", margin: "0 0 1.25rem 0", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded" }}>
+        <p style={{ fontSize: "clamp(0.85rem, 2.2vw, 1.1rem)", letterSpacing: "0.08em", color: "#fdc07e ", margin: "0 0 1.25rem 0", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded" }}>
           {t.topQuote}
         </p>
 
@@ -138,12 +138,12 @@ export default function Content({ lang = "fr" }) {
 
         {/* CITATION */}
         <div style={{ marginTop: "1.25rem", paddingTop: "0.25rem" }}>
-          <p style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "clamp(0.95rem, 2.2vw, 1.2rem)", letterSpacing: "0.08em", color: "#fed8a8 ", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded", margin: 0 }}>
+          <p style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "clamp(0.95rem, 2.2vw, 1.2rem)", letterSpacing: "0.08em", color: "#fdc07e ", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded", margin: 0 }}>
             {/*TEXT BOTTOM*/}
             {t.bottomQuote}
-            <span style={{ flex: 1, height: "2px", background: "#fed8a8 ", display: "inline-block" }} />
+            <span style={{ flex: 1, height: "2px", background: "#fdc07e ", display: "inline-block" }} />
           </p>
-          <p style={{ fontSize: "clamp(0.85rem, 2vw, 1rem)", color: "#4a4a4a", margin: "0.25rem 0 0 0", fontStyle: "italic" }}>
+          <p style={{ fontSize: "clamp(0.85rem, 2vw, 1rem)", color: "#fdc07e", margin: "0.25rem 0 0 0", fontStyle: "italic" }}>
             {t.author}
           </p>
         </div>
