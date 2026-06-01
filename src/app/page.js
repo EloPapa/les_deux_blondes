@@ -27,7 +27,7 @@ import { useRef } from "react";
 *
 * Dans mon cas quand on va utiliser des composant reconstruit de d'autre plateforme, exemple le portfolio reconstruit de Canvas 
 *-------------------------------------------------------------------------------------------------------------------------------*/
-import dynamic from "next/dynamic";
+//import dynamic from "next/dynamic";
 
 import { useLanguage } from "../context/LanguageContext";
 
@@ -55,7 +55,7 @@ import { useLanguage } from "../context/LanguageContext";
 *
 * C'est probablement une fonction GSAP ou similaire définie dans ton fichier ../animations.js.
 *-------------------------------------------------------------------------------------------------------------------------------*/
-import { stagger } from "../animations";
+// import { stagger } from "../animations";
 
 /*-------------------------------------------------------------------------------------------------------------------------------
 * Ça sert à remplacer useLayoutEffect de façon sécurisée. 
@@ -77,7 +77,7 @@ import { stagger } from "../animations";
 *
 * Sans ça, Next.js cracherait un warning au build* 
 *-------------------------------------------------------------------------------------------------------------------------------*/
-import { useIsomorphicLayoutEffect } from "../utils";
+// import { useIsomorphicLayoutEffect } from "../utils";
 
 import Header from "../components/Header";
 import data from "../data/lesDeuxBlondes.json";
@@ -111,7 +111,7 @@ export default function Home() {
   * En résumé : "Je crée une référence vide, qui sera plus tard attachée à un élément HTML de la section about."
   *-------------------------------------------------------------------------------------------------------------------------------*/
   const aboutRef = useRef(null);
-  
+  const presentationRef = useRef(null);
  /*-------------------------------------------------------------------------------------------------------------------------------
   * const handleAboutScroll — on déclare une variable constante. Par convention, les fonctions qui gèrent un événement commencent par handle.
   * () => — c'est une fonction fléchée (arrow function), sans paramètres.
@@ -139,14 +139,6 @@ export default function Home() {
   };
   
   const aboutParagraphs = lang === "fr" ? data.about_fr || data.about : data.about;
-
-  useIsomorphicLayoutEffect(() => {
-    stagger(
-      [textOne.current, textTwo.current, textThree.current, textFour.current],
-      { y: 40, x: -10, transform: "scale(0.95) skew(10deg)" },
-      { y: 0, x: 0, transform: "scale(1)" }
-    );
-  }, []);
 
   return (
     <div className="relative flex flex-col min-h-screen">
