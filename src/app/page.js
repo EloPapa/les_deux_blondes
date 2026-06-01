@@ -80,7 +80,7 @@ import { useLanguage } from "../context/LanguageContext";
 // import { useIsomorphicLayoutEffect } from "../utils";
 
 import Header from "../components/Header";
-const Content = dynamic(() => import("../components/content/index"), { ssr: false });
+const Content = dynamic(() => import("../components/Content/index"), { ssr: false });
 import data from "../data/lesDeuxBlondes.json";
 import Footer from "../components/Footer";
 
@@ -154,7 +154,7 @@ export default function Home() {
       <Header
         /* DÉFILEMENT RAPIDE  */  
         handleAboutScroll={handleAboutScroll}
-        handlecontentScroll={handleContentScroll}
+        handleContentScroll={handleContentScroll}
         handlePresentationVideoScroll={handlePresentationVideoScroll}
       />
 
@@ -165,7 +165,7 @@ export default function Home() {
               xl:mt : 3.25rem * 0.70 = 2.275rem
         */}
         <div className="mt-10 lg:mt-[2.275rem] xl:mt-[2rem] p-2" ref={contentRef}>
-          <h1 className="sr-only">{t.nav.content}</h1>
+          <h1 className="sr-only">{t.header.content}</h1>
           <Content lang={lang} />
         </div>
 

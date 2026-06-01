@@ -15,13 +15,13 @@
 
 const fr = {
   header: {
-    presentation: "Présentation",
+    content: "Contenu",
     about: "À propos",
     contact: "Contact",    
   },
 
   sections: {
-    passions: "Passions.",
+    content: "Contenu",
     about: "À propos.",
     contact: "Contact.",  
 
@@ -36,13 +36,13 @@ const fr = {
 
 const en = {
   header: {
-    presentation: "Presentation",
+    content: "Content",
     about: "About",
     contact: "Contact",    
   },
   
   sections: {
-    passions: "Passions.",
+    content: "Content",
     about: "About.",
     contact: "Contact.",    
   },
@@ -67,7 +67,11 @@ page.js
 Sans context, tu devrais passer lang comme prop à chaque niveau. Avec context, tous les composants y accèdent directement.
 C'est juste la création — le conteneur est vide pour l'instant. Ensuite tu le remplis avec un Provider
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-const LanguageContext = createContext();
+const LanguageContext = createContext({
+  lang: "fr",
+  t: translations.fr,
+  toggle: () => {},
+});
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
