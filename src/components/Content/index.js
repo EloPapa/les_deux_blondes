@@ -138,7 +138,7 @@ export default function Content({ lang = "fr" }) {
 
         {/* CITATION */}
         <div style={{ marginTop: "1.25rem", paddingTop: "0.25rem" }}>
-          <p style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "clamp(0.95rem, 2.2vw, 1.2rem)", letterSpacing: "0.08em", color: "#7a5a2a", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded", margin: 0 }}>
+          <p style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "clamp(0.95rem, 2.2vw, 1.2rem)", letterSpacing: "0.08em", color: "#fed8a8 30%", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded", margin: 0 }}>
             {/*TEXT BOTTOM*/}
             {t.bottomQuote}
             <span style={{ flex: 1, height: "2px", background: "#fed8a8 30%", display: "inline-block" }} />
