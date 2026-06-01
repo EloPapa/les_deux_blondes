@@ -306,7 +306,8 @@ const getNameStyle = () => {
               style={{
                 background: backgroundGradient,
                 color: textColor,
-                border: "1px solid rgba(180,120,220,1)",                 
+                border: "1px solid rgba(180, 140, 0, 1)",
+                /** border rosé: "1px solid rgba(180,120,220,1)",*/                 
               }}
             >
               <div className="flex flex-col items-center">
