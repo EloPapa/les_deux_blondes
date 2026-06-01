@@ -185,10 +185,11 @@ const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
      
   const { name } = data;  
   const textColor = "#2a1020";
-  const backgroundGradient = "linear-gradient(to bottom, transparent 60%, #fefdf0 100%), linear-gradient(to right, #fefdf0 0%, #fdf0a8 30%, #fce97a 50%, #fdf0a8 70%, #fefdf0 100%)";
+  const backgroundGradient = "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)";
   /*Miel Ambré: "linear-gradient(to bottom, transparent 60%, #fff8f0 100%), linear-gradient(to right, #fff8f0 0%, #fed8a8 30%, #fdc07e 50%, #fed8a8 70%, #fff8f0 100%)";*/ 
-  /*Citron pale: "linear-gradient(to bottom, transparent 60%, #fefdf0 100%), linear-gradient(to right, #fefdf0 0%, #fdf0a8 30%, #fce97a 50%, #fdf0a8 70%, #fefdf0 100%)";*/
+  /*Jaune Doux: "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%);"*/
   /*rosé:"linear-gradient(to bottom, transparent 60%, #fef2f5 100%), linear-gradient(to right, #fef2f5 0%, #f9d0de 30%, #f5b8cc 50%, #f9d0de 70%, #fef2f5 100%)"; */ 
+  
   const nameStyleMobile = {
     color: textColor,
     fontFamily: "'Amsterdam', cursive",
