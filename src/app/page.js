@@ -27,7 +27,7 @@ import { useRef } from "react";
 *
 * Dans mon cas quand on va utiliser des composant reconstruit de d'autre plateforme, exemple le portfolio reconstruit de Canvas 
 *-------------------------------------------------------------------------------------------------------------------------------*/
-//import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
 import { useLanguage } from "../context/LanguageContext";
 
@@ -80,6 +80,7 @@ import { useLanguage } from "../context/LanguageContext";
 // import { useIsomorphicLayoutEffect } from "../utils";
 
 import Header from "../components/Header";
+const Content = dynamic(() => import("../components/content/index"), { ssr: false });
 import data from "../data/lesDeuxBlondes.json";
 import Footer from "../components/Footer";
 
@@ -111,6 +112,7 @@ export default function Home() {
   * En résumé : "Je crée une référence vide, qui sera plus tard attachée à un élément HTML de la section about."
   *-------------------------------------------------------------------------------------------------------------------------------*/
   const aboutRef = useRef(null);
+  const contentRef = useRef(null);
   const presentationRef = useRef(null);
  /*-------------------------------------------------------------------------------------------------------------------------------
   * const handleAboutScroll — on déclare une variable constante. Par convention, les fonctions qui gèrent un événement commencent par handle.
@@ -131,7 +133,14 @@ export default function Home() {
   };
 
   /*-------------------------------------------------------------------------------------------------------------------------------
-  aa
+  
+  *-------------------------------------------------------------------------------------------------------------------------------*/
+  const handleContentScroll = () => {
+    contentRef.current?.scrollIntoView({ behavior: "smooth" });  
+  };
+
+  /*-------------------------------------------------------------------------------------------------------------------------------
+
   *-------------------------------------------------------------------------------------------------------------------------------*/
   const handlePresentationVideoScroll = () => {
     presentationRef.current?.scrollIntoView({ behavior: "smooth" }); 
@@ -145,10 +154,22 @@ export default function Home() {
       <Header
         /* DÉFILEMENT RAPIDE  */  
         handleAboutScroll={handleAboutScroll}
+        handlecontentScroll={handleContentScroll}
         handlePresentationVideoScroll={handlePresentationVideoScroll}
       />
 
       <main className="flex-grow">
+
+         {/* CONTENT
+            xl réduites de 30% :
+              xl:mt : 3.25rem * 0.70 = 2.275rem
+        */}
+        <div className="mt-10 lg:mt-[2.275rem] xl:mt-[2rem] p-2" ref={contentRef}>
+          <h1 className="sr-only">{t.nav.content}</h1>
+          <Content lang={lang} />
+        </div>
+
+
         {/* TITRE ABOUT EN FONT AMSTERDAM */}   
         <div className="mt-15t lg:mt-[2.275rem] xl:mt-[2.275rem] pt-2 px-2" ref={aboutRef}>
           <h1
