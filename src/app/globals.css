@@ -17,7 +17,8 @@
 }
 
 :root {
-  --background: #fdf0f3;
+  --background: #fffef5;
+  /*pour dégradé rosé: --background: #fdf0f3; */
   --foreground: #2a1020;
 }
 
