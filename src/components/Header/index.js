@@ -100,7 +100,7 @@ const MenuIcon = ({ open }) => {
 * En résumé — ({ handleAboutScroll, handlePresentationVideoScroll }) c'est la porte d'entrée du composant : ce sont les instructions que le parent (page.JS) lui passe pour qu'il sache quoi
 * faire quand on clique sur ses boutons. 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-const Header = ({ handleAboutScroll, handlePresentationVideoScroll}) => {
+const Header = ({ handleAboutScroll, handleContentScroll}) => {
   
   /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   * useRouter() est un hook (fonction spécialisée) de Next.js qui donne accès au routeur de navigation
@@ -312,8 +312,8 @@ const getNameStyle = () => {
             >
               <div className="flex flex-col items-center">
                 {/* PANNEAU MENU "OUVERT" - "Bouton" PRÉSENTATION VIDÉO qui dirige à la section PRÉSENTATION VIDÉO */}
-                <Button onClick={handlePresentationVideoScroll}>
-                  {t.header.presentation}    
+                <Button onClick={handleContentScroll}>
+                  {t.header.content}    
                 </Button>
                 {/* PANNEAU MENU "OUVERT" - "Bouton" À PROPOS qui dirige à la section À PROPOS */}
                 <Button onClick={handleAboutScroll}>
@@ -354,7 +354,7 @@ const getNameStyle = () => {
         */}
         <div className="flex items-center gap-3 lg:gap-[0.98rem] xl:gap-[1.4rem] 2xl:gap-[2.2rem]">
 
-          <Button onClick={handlePresentationVideoScroll}>
+          <Button onClick={handleContentScroll}>
             <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.header.presentation}</span>
           </Button>
 
