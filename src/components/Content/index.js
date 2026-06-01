@@ -99,15 +99,15 @@ export default function Content({ lang = "fr" }) {
 
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "1rem 0" }}>
-      <div style={{ width: "100%", maxWidth: "720px", background: "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)", fontFamily: nunitoSans.style.fontFamily, color: "#2b2b2b", boxSizing: "border-box" }}>
+      <div style={{ width: "100%", maxWidth: "720px", background: " #fffef5", borderRadius: "8px", padding: "2rem 2rem 1.5rem", boxShadow: "0 2px 8px rgba(63,69,81,0.16)", fontFamily: nunitoSans.style.fontFamily, color: "#2b2b2b", boxSizing: "border-box" }}>
 
-        <div style={{ height: "3px", width: "100%", background: "#a07a3a", marginBottom: "1.25rem" }} />
+        <div style={{ height: "3px", width: "100%", background: "#fed8a8 30%", marginBottom: "1.25rem" }} />
 
-        <h2 style={{ fontFamily: nunitoSans.style.fontFamily, fontWeight: 900, fontSize: "clamp(2.5rem, 8vw, 5rem)", color: "#a07a3a", letterSpacing: "0.02em", lineHeight: 1, margin: "0 0 0.5rem 0" }}>
+        <h2 style={{ fontFamily: nunitoSans.style.fontFamily, fontWeight: 900, fontSize: "clamp(2.5rem, 8vw, 5rem)", color: "#fed8a8 30%", letterSpacing: "0.02em", lineHeight: 1, margin: "0 0 0.5rem 0" }}>
           {t.title}
         </h2>
 
-        <p style={{ fontSize: "clamp(0.85rem, 2.2vw, 1.1rem)", letterSpacing: "0.08em", color: "#7a5a2a", margin: "0 0 1.25rem 0", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded" }}>
+        <p style={{ fontSize: "clamp(0.85rem, 2.2vw, 1.1rem)", letterSpacing: "0.08em", color: "#fed8a8 30%", margin: "0 0 1.25rem 0", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded" }}>
           {t.topQuote}
         </p>
 
