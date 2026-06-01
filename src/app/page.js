@@ -77,7 +77,7 @@ export default function Home() {
       />
 
       <main className="flex-grow">
-        {/* TITRE ABOUT EN FONT AMSTERDAM */}   
+        {/* TITRE ABOUT EN FONT AMSTERDAM blavl */}   
         <div className="mt-15t lg:mt-[2.275rem] xl:mt-[2.275rem] pt-2 px-2" ref={aboutRef}>
           <h1
             className="text-[1.5rem] mt-4 lg:text-[3rem] xl:text-[3rem] mb-[2.275rem] lg:mt-[2.275rem] lg:mb-[2.275rem] xl:mt-[2.275rem] xl:mb-[2.275rem]"
