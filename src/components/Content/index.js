@@ -141,7 +141,7 @@ export default function Content({ lang = "fr" }) {
             {t.bottomQuote}
             <span style={{ flex: 1, height: "2px", background: "#a07a3a", display: "inline-block" }} />
           </p>
-          <p style={{ fontSize: "clamp(0.85rem, 2vw, 1rem)", color: "#4a4a4a", margin: "0.25rem 0 0 0", fontStyle: "italic" }}>
+          <p style={{ fontSize: "clamp(0.85rem, 2vw, 1rem)", color: "#7a5a2a", margin: "0.25rem 0 0 0", fontStyle: "italic" }}>
             {t.author}
           </p>
         </div>
