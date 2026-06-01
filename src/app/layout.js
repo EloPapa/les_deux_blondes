@@ -14,7 +14,12 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "L2Blondes",
-  description: "Les 2 Blondes", 
+  description: "Les 2 Blondes",
+  
+  icons: {
+    apple: "/apple-touch-icon.png",
+    icon: "/favicon.ico",
+  }, 
   
 };
 
@@ -26,12 +31,8 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <head>
-        <link
-          rel="preload"
-          href="/fonts/AmsterdamOne.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"        />
+        <link rel="preload" href="/fonts/AmsterdamOne.ttf" as="font" type="font/ttf" crossOrigin="anonymous"/>
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       
       </head>
       <body className="min-h-full flex flex-col">
@@ -44,3 +45,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
