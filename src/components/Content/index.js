@@ -18,7 +18,7 @@ const TRANSLATIONS = {
     title: "CONTENU",
     topQuote: "QUI GARDE SON ÂME D'ENFANT",
     bottomQuote: "NE VEILLIT JAMAIS",
-    author: "- La Vie",
+    author: "",
     alt: {
       imageContent1: "imageContenu1",
       imageContent2: "imageContenu2",
@@ -31,7 +31,7 @@ const TRANSLATIONS = {
     title: "CONTENT",
     topQuote: "HE WHO KEEPS HIS CHILDLIKE SPIRIT",
     bottomQuote: "NEVER GROWS OLD",
-    author: "- Life",
+    author: "",
     alt: {
       imageContent1: "imageContent1",
       imageContent2: "imageContent2",
@@ -76,7 +76,12 @@ const cardBaseStyle = {
   outline: "none",
 };
 
+// Correctif 1 — position absolute pour que img/video remplisse
+// le conteneur dont la hauteur vient de aspectRatio
 const mediaStyle = {
+  position: "absolute",
+  top: 0,
+  left: 0,
   width: "100%",
   height: "100%",
   objectFit: "cover",
@@ -95,7 +100,10 @@ function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {
       onMouseEnter={(e) => hoverEnter(e, "img")}
       onMouseLeave={(e) => hoverLeave(e, "img")}
     >
-      <img src={src} alt={alt} loading="lazy" style={mediaStyle} />
+      {/* Correctif 1 — div intermédiaire qui donne une hauteur réelle */}
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+        <img src={src} alt={alt} loading="lazy" style={mediaStyle} />
+      </div>
       {showYoutubeBadge && (
         <span style={{ position: "absolute", bottom: "10px", left: "10px", width: `${badgeSize}px`, height: `${badgeSize}px`, zIndex: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
           <YouTubeIcon size={badgeSize} />
@@ -116,15 +124,20 @@ function VideoCard({ src, alt, ariaLabel, href, external = true, cardStyle = {} 
       onMouseEnter={(e) => hoverEnter(e, "video")}
       onMouseLeave={(e) => hoverLeave(e, "video")}
     >
-      <video
-        src={src}
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-label={alt}
-        style={mediaStyle}
-      />
+      {/* Correctif 1 — div intermédiaire qui donne une hauteur réelle */}
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+        {/* Correctif 2 — <source> avec type pour identification immédiate du codec */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-label={alt}
+          style={mediaStyle}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      </div>
     </a>
   );
 }
