@@ -172,7 +172,7 @@ export default function Content({ lang = "fr" }) {
               cardStyle={{ width: "100%", aspectRatio: "3 / 4" }}
             />
             <div style={{ display: "flex", flexDirection: "column", width: "65%" }}>
-              <ContentCard src="/images/contenu/placeholder.png" alt={t.alt.imageContent2} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "145%", aspectRatio: "1.4 / 1" }} />
+              <ContentCard src="/images/contenu/barJus.png" alt={t.alt.imageContent2} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "145%", aspectRatio: "1.4 / 1" }} />
               <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" aria-label={t.ariaLink} style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: "6px", paddingLeft: "2px" }}>
                 <YouTubeIcon size={84} />
               </a>
