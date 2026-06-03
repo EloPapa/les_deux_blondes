@@ -184,7 +184,7 @@ export default function Content({ lang = "fr" }) {
           {/* COLONNE DE DROITE */}
           {/* CHAT */}
           <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "stretch" }}>
-            <ContentCard src="/images/contenu/cat.png" alt={t.alt.imageContent3} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "90%", aspectRatio: "4 / 4", alignSelf: "flex-start" }} />
+            <ContentCard src="/images/contenu/cat.png" alt={t.alt.imageContent3} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "100%", aspectRatio: "4 / 4", alignSelf: "flex-start" }} />
 
             {/* TABLETTE */}
             <div style={{ position: "relative", width: "100%" }}>
