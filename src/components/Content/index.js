@@ -86,7 +86,7 @@ const mediaStyle = {
 
 function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {}, showYoutubeBadge = false, badgeSize = 36 }) {
   return (
-    
+    <a
       href={href}
       target={external ? "_blank" : "_self"}
       rel={external ? "noopener noreferrer" : undefined}
@@ -107,7 +107,7 @@ function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {
 
 function VideoCard({ src, alt, ariaLabel, href, external = true, cardStyle = {} }) {
   return (
-    
+    <a
       href={href}
       target={external ? "_blank" : "_self"}
       rel={external ? "noopener noreferrer" : undefined}
