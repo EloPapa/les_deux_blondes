@@ -177,7 +177,7 @@ export default function Home() {
             style={{
               fontFamily: "'Amsterdam', cursive",
               textDecoration: "underline",
-              color: "#7a5a2a",
+              color: "#664b23",
               
             }}
           >
