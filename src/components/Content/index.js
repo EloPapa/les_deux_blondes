@@ -114,26 +114,35 @@ function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {
 }
 
 function VideoCard({ src, alt, ariaLabel, href, external = true, cardStyle = {} }) {
+  const { aspectRatio, ...linkStyle } = cardStyle;
   return (
     <a
       href={href}
       target={external ? "_blank" : "_self"}
       rel={external ? "noopener noreferrer" : undefined}
       aria-label={ariaLabel}
-      style={{ ...cardBaseStyle, ...cardStyle }}
+      style={{ ...cardBaseStyle, ...linkStyle }}
       onMouseEnter={(e) => hoverEnter(e, "video")}
       onMouseLeave={(e) => hoverLeave(e, "video")}
     >
-      {/* Correctif 1 — div intermédiaire qui donne une hauteur réelle */}
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
-        {/* Correctif 2 — <source> avec type pour identification immédiate du codec */}
+      <div style={{ position: "relative", width: "100%", aspectRatio, overflow: "hidden" }}>
         <video
           autoPlay
           muted
           loop
           playsInline
           aria-label={alt}
-          style={mediaStyle}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            transition: "transform 0.3s ease, filter 0.3s ease",
+          }}
         >
           <source src={src} type="video/mp4" />
         </video>
