@@ -19,15 +19,13 @@ const TRANSLATIONS = {
     topQuote: "QUI GARDE SON ÂME D'ENFANT",
     bottomQuote: "NE VEILLIT JAMAIS",
     author: "- La Vie",
-    
     alt: {
       imageContent1: "imageContenu1",
       imageContent2: "imageContenu2",
       imageContent3: "imageContenu3",
       imageContent4: "imageContenu4",
-    },    
+    },
     ariaLink: "Voir la chaîne YouTube Les Deux Blondes",
-    
   },
   en: {
     title: "CONTENT",
@@ -40,7 +38,7 @@ const TRANSLATIONS = {
       imageContent3: "imageContent3",
       imageContent4: "imageContent4",
     },
-    ariaLink: "Watch 2 Chicks YouTube channel",    
+    ariaLink: "Watch 2 Chicks YouTube channel",
   },
 };
 
@@ -53,43 +51,80 @@ function YouTubeIcon({ size = 36 }) {
   );
 }
 
+const hoverEnter = (e, selector) => {
+  e.currentTarget.style.transform = "translateY(-3px)";
+  e.currentTarget.style.boxShadow = "0 10px 24px rgba(0,0,0,0.25)";
+  const el = e.currentTarget.querySelector(selector);
+  if (el) { el.style.transform = "scale(1.06)"; el.style.filter = "brightness(0.85)"; }
+};
+
+const hoverLeave = (e, selector) => {
+  e.currentTarget.style.transform = "translateY(0)";
+  e.currentTarget.style.boxShadow = "none";
+  const el = e.currentTarget.querySelector(selector);
+  if (el) { el.style.transform = "scale(1)"; el.style.filter = "brightness(1)"; }
+};
+
+const cardBaseStyle = {
+  position: "relative",
+  display: "block",
+  overflow: "hidden",
+  borderRadius: "4px",
+  cursor: "pointer",
+  textDecoration: "none",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  outline: "none",
+};
+
+const mediaStyle = {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  display: "block",
+  transition: "transform 0.3s ease, filter 0.3s ease",
+};
+
 function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {}, showYoutubeBadge = false, badgeSize = 36 }) {
   return (
-    <a
+    
       href={href}
       target={external ? "_blank" : "_self"}
       rel={external ? "noopener noreferrer" : undefined}
       aria-label={ariaLabel}
-      style={{
-        position: "relative",
-        display: "block",
-        overflow: "hidden",
-        borderRadius: "4px",
-        cursor: "pointer",
-        textDecoration: "none",
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        outline: "none",
-        ...cardStyle,
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-3px)";
-        e.currentTarget.style.boxShadow = "0 10px 24px rgba(0,0,0,0.25)";
-        const img = e.currentTarget.querySelector("img");
-        if (img) { img.style.transform = "scale(1.06)"; img.style.filter = "brightness(0.85)"; }
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "none";
-        const img = e.currentTarget.querySelector("img");
-        if (img) { img.style.transform = "scale(1)"; img.style.filter = "brightness(1)"; }
-      }}
+      style={{ ...cardBaseStyle, ...cardStyle }}
+      onMouseEnter={(e) => hoverEnter(e, "img")}
+      onMouseLeave={(e) => hoverLeave(e, "img")}
     >
-      <img src={src} alt={alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.3s ease, filter 0.3s ease" }} />
+      <img src={src} alt={alt} loading="lazy" style={mediaStyle} />
       {showYoutubeBadge && (
         <span style={{ position: "absolute", bottom: "10px", left: "10px", width: `${badgeSize}px`, height: `${badgeSize}px`, zIndex: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
           <YouTubeIcon size={badgeSize} />
         </span>
       )}
+    </a>
+  );
+}
+
+function VideoCard({ src, alt, ariaLabel, href, external = true, cardStyle = {} }) {
+  return (
+    
+      href={href}
+      target={external ? "_blank" : "_self"}
+      rel={external ? "noopener noreferrer" : undefined}
+      aria-label={ariaLabel}
+      style={{ ...cardBaseStyle, ...cardStyle }}
+      onMouseEnter={(e) => hoverEnter(e, "video")}
+      onMouseLeave={(e) => hoverLeave(e, "video")}
+    >
+      <video
+        src={src}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-label={alt}
+        style={mediaStyle}
+      />
     </a>
   );
 }
@@ -115,7 +150,14 @@ export default function Content({ lang = "fr" }) {
 
           {/* COLONNE DE GAUCHE */}
           <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "flex-start" }}>
-            <ContentCard src="/images/contenu/placeholder.png" alt={t.alt.imageContent1} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "100%", aspectRatio: "3 / 4" }} />
+            <VideoCard
+              src="/images/contenu/babySitting.mp4"
+              alt={t.alt.imageContent1}
+              ariaLabel={t.ariaLink}
+              href={YOUTUBE_URL}
+              external={true}
+              cardStyle={{ width: "100%", aspectRatio: "3 / 4" }}
+            />
             <div style={{ display: "flex", flexDirection: "column", width: "65%" }}>
               <ContentCard src="/images/contenu/placeholder.png" alt={t.alt.imageContent2} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "145%", aspectRatio: "1.4 / 1" }} />
               <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" aria-label={t.ariaLink} style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: "6px", paddingLeft: "2px" }}>
@@ -130,7 +172,7 @@ export default function Content({ lang = "fr" }) {
 
             {/* Tablette */}
             <div style={{ position: "relative", width: "100%" }}>
-              <ContentCard src="/images/contenu/tablet.png" alt={t.alt.imageContent4} ariaLabel={t.ariaLink}href={YOUTUBE_URL} external={false} cardStyle={{ width: "100%", aspectRatio: "2 / 3" }} />             
+              <ContentCard src="/images/contenu/tablet.png" alt={t.alt.imageContent4} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={false} cardStyle={{ width: "100%", aspectRatio: "2 / 3" }} />
             </div>
           </div>
         </div>
