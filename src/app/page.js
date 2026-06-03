@@ -182,7 +182,7 @@ export default function Home() {
             {t.sections.about}
           </h1>
          {/* PARAGRAPHE ABOUT À PARTIR DU FICHIER JSON */}   
-        <div className="text-xl lg:text-[1rem] xl:text-[0.952rem] 2xl:text-[1.9rem] max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl leading-relaxed xl:leading-loose 2xl:leading-loose">
+        <div className="text-xl lg:text-[1rem] xl:text-[0.952rem] 2xl:text-[1.9rem] max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl leading-relaxed xl:leading-loose 2xl:leading-loose" style={{ color: "#7a5a2a" }}>
             {/* PARAGRAPHE ABOUT À PARTIR DU FICHIER JSON */}   
             
             {aboutParagraphs.map((paragraph, index) => (
