@@ -286,7 +286,7 @@ const getNameStyle = () => {
                 </h1>
               </div>
             
-            <div className="flex items-center gap-2 mr-2">
+            <div className="flex items-center gap-2 mr-2" style={{ color: textColor }}>
               {/* BOUTON CHOIX LANGUE*/}  
               <Button onClick={toggle}>
                   {lang === "fr" ? "EN" : "FR"}
