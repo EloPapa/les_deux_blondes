@@ -15,7 +15,7 @@ const YOUTUBE_URL = "https://www.youtube.com/@HappyEloiseB";
 
 const TRANSLATIONS = {
   fr: {
-    title: "CONTENU",
+    title: "MÉDIA",
     topQuote: "QUI GARDE SON ÂME D'ENFANT",
     bottomQuote: "NE VEILLIT JAMAIS",
     author: "",
@@ -28,7 +28,7 @@ const TRANSLATIONS = {
     ariaLink: "Voir la chaîne YouTube Les Deux Blondes",
   },
   en: {
-    title: "CONTENT",
+    title: "MEDIA",
     topQuote: "HE WHO KEEPS HIS CHILDLIKE SPIRIT",
     bottomQuote: "NEVER GROWS OLD",
     author: "",
@@ -148,13 +148,13 @@ export default function Content({ lang = "fr" }) {
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "1rem 0" }}>
       <div style={{ width: "100%", maxWidth: "720px", background: "#fffef5", fontFamily: nunitoSans.style.fontFamily, color: "#2b2b2b", boxSizing: "border-box" }}>
-
+        {/* LIGNE DE SÉPARATION */}
         <div style={{ height: "3px", width: "100%", background: "#a07a3a", marginBottom: "1.25rem" }} />
-
+        {/* MÉDIA TXT */}
         <h2 style={{ fontFamily: nunitoSans.style.fontFamily, fontWeight: 900, fontSize: "clamp(2.5rem, 8vw, 5rem)", color: "#a07a3a", letterSpacing: "0.02em", lineHeight: 1, margin: "0 0 0.5rem 0" }}>
           {t.title}
         </h2>
-
+        {/* TOP QUOTE TXT  */}
         <p style={{ fontSize: "clamp(0.85rem, 2.2vw, 1.1rem)", letterSpacing: "0.08em", color: "#7a5a2a", margin: "0 0 1.25rem 0", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded" }}>
           {t.topQuote}
         </p>
@@ -195,6 +195,7 @@ export default function Content({ lang = "fr" }) {
 
         {/* CITATION */}
         <div style={{ marginTop: "1.25rem", paddingTop: "0.25rem" }}>
+          {/* BOTTOM QUOTE TXT  */}
           <p style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "clamp(0.95rem, 2.2vw, 1.2rem)", letterSpacing: "0.08em", color: "#7a5a2a", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded", margin: 0 }}>
             {t.bottomQuote}
             <span style={{ flex: 1, height: "2px", background: "#a07a3a", display: "inline-block" }} />

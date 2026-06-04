@@ -184,7 +184,7 @@ const Header = ({ handleAboutScroll, handleContentScroll}) => {
   /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
      
   const { name } = data;  
-  const textColor = "#2a1020";
+  const textColor = "#a07a3a";
   const backgroundGradient = "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)";
   /*Miel Ambré: "linear-gradient(to bottom, transparent 60%, #fff8f0 100%), linear-gradient(to right, #fff8f0 0%, #fed8a8 30%, #fdc07e 50%, #fed8a8 70%, #fff8f0 100%)";*/ 
   /*Jaune Doux: "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%);"*/
