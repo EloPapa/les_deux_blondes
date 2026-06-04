@@ -188,7 +188,7 @@ export default function Content({ lang = "fr" }) {
 
             {/* TABLETTE */}
             <div style={{ position: "relative", width: "100%" }}>
-              <ContentCard src="/images/contenu/tablet.png" alt={t.alt.imageContent4} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={false} cardStyle={{ width: "100%", aspectRatio: "2 / 3" }} />
+              <ContentCard src="/images/contenu/tablet.png" alt={t.alt.imageContent4} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={false} cardStyle={{ width: "100%", aspectRatio: "3 / 2" }} />
             </div>
           </div>
         </div>
