@@ -15,13 +15,13 @@
 
 const fr = {
   header: {
-    content: "Contenu",
+    content: "Média",
     about: "À propos",
     contact: "Contact",    
   },
 
   sections: {
-    content: "Contenu",
+    content: "Média",
     about: "À propos.",
     contact: "Contact.",  
 
@@ -36,13 +36,13 @@ const fr = {
 
 const en = {
   header: {
-    content: "Content",
+    content: "Media",
     about: "About",
     contact: "Contact",    
   },
   
   sections: {
-    content: "Content",
+    content: "Media",
     about: "About.",
     contact: "Contact.",    
   },
