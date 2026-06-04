@@ -187,8 +187,8 @@ export default function Content({ lang = "fr" }) {
             <ContentCard src="/images/contenu/cat.png" alt={t.alt.imageContent3} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "100%", aspectRatio: "4 / 4", alignSelf: "flex-start" }} />
 
             {/* TABLETTE */}
-            <div style={{ position: "relative", width: "100%", }}>
-              <ContentCard src="/images/contenu/tablet.png" alt={t.alt.imageContent4} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={false} cardStyle={{ width: "100%",height:"60%", aspectRatio: "2 / 3" }} />
+            <div style={{ position: "relative", width: "100%", height: "60vh"}}>
+              <ContentCard src="/images/contenu/tablet.png" alt={t.alt.imageContent4} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={false} cardStyle={{ width: "100%",height:"100%", aspectRatio: "2 / 3" }} />
             </div>
           </div>
         </div>
