@@ -302,7 +302,7 @@ const getNameStyle = () => {
 
             {/* 📱 PANNEAU MENU "OUVERT" */}
             <PopoverPanel
-              className="absolute right-2 z-10 w-30 p-4 rounded-md shadow-md"
+               className="absolute right-2 top-full z-[9999] w-30 p-4 rounded-md shadow-md"
               style={{
                 background: backgroundGradient,
                 color: textColor,
