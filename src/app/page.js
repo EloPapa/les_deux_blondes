@@ -172,28 +172,31 @@ export default function Home() {
 
         {/* TITRE ABOUT EN FONT AMSTERDAM */}   
         <div className="mt-15t lg:mt-[2.275rem] xl:mt-[2.275rem] pt-2 px-2 flex flex-col items-center" ref={aboutRef}>
-          <h1
-            className="text-[1.5rem] mt-4 lg:text-[3rem] xl:text-[3rem] mb-[2.275rem] lg:mt-[2.275rem] lg:mb-[2.275rem] xl:mt-[2.275rem] xl:mb-[2.275rem]"
-            style={{
-              fontFamily: "'Amsterdam', cursive",
-              textDecoration: "underline",
-              color: "#664b23",
-              
-            }}
-          >
-            {t.sections.about}
-          </h1>
-         {/* PARAGRAPHE ABOUT À PARTIR DU FICHIER JSON */}   
-        <div className="text-xl lg:text-[1rem] xl:text-[0.952rem] 2xl:text-[1.9rem] max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl leading-relaxed xl:leading-loose 2xl:leading-loose" style={{ color: "#7a5a2a" }}>
-            {/* PARAGRAPHE ABOUT À PARTIR DU FICHIER JSON */}   
+          
+          {/* BLOC TITRE + PARAGRAPHES alignés ensemble */}
+          <div className="max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
             
-            {aboutParagraphs.map((paragraph, index) => (
-              <p key={index} className="mb-3 lg:mb-[1.05rem] xl:mb-[1.05rem] 2xl:mb-8">
-                {paragraph}
-              </p>
+            <h1
+              className="text-[1.5rem] mt-4 lg:text-[3rem] xl:text-[3rem] mb-[2.275rem] lg:mt-[2.275rem] lg:mb-[2.275rem] xl:mt-[2.275rem] xl:mb-[2.275rem]"
+              style={{
+                fontFamily: "'Amsterdam', cursive",
+                textDecoration: "underline",
+                color: "#664b23",
+              }}
+            >
+              {t.sections.about}
+            </h1>
 
-            ))}
-          </div>        
+            {/* PARAGRAPHE ABOUT À PARTIR DU FICHIER JSON */}
+            <div className="text-xl lg:text-[1rem] xl:text-[0.952rem] 2xl:text-[1.9rem] leading-relaxed xl:leading-loose 2xl:leading-loose" style={{ color: "#7a5a2a" }}>
+              {aboutParagraphs.map((paragraph, index) => (
+                <p key={index} className="mb-3 lg:mb-[1.05rem] xl:mb-[1.05rem] 2xl:mb-8">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+          </div>
         </div>      
       </main>
 
