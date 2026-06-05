@@ -41,13 +41,13 @@ export default function Home() {
       <div
         className="
           absolute z-10
-          right-[2%] top-[4rem]
+          right-[2%] top-[5rem]
           w-[120px] h-[120px]
-          sm:right-[2%] sm:top-[10rem] sm:w-[180px] sm:h-[180px]
+          sm:right-[2%] sm:top-[5rem] sm:w-[180px] sm:h-[180px]
           md:right-[2%] md:top-[5rem] md:w-[250px] md:h-[250px]
           lg:right-[4%] lg:top-[6rem] lg:w-[160px] lg:h-[160px]
-          xl:right-[4%] xl:top-[7rem] xl:w-[180px] xl:h-[180px]
-          2xl:right-[4%] 2xl:top-[7rem] 2xl:w-[220px] 2xl:h-[220px]
+          xl:right-[4%] xl:top-[6rem] xl:w-[180px] xl:h-[180px]
+          2xl:right-[4%] 2xl:top-[6rem] 2xl:w-[220px] 2xl:h-[220px]
           rounded-full overflow-hidden"
       >
         <img
