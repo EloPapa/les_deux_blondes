@@ -150,34 +150,7 @@ export default function Home() {
   const aboutParagraphs = lang === "fr" ? data.about_fr || data.about : data.about;
 
   return (
-    <div className="relative flex flex-col min-h-screen">
-
-      {/* AVATAR
-          xl réduites de 30% :
-            xl:w/h  : 347px * 0.70 = 243px
-            xl:right: 10% → inchangé (valeur relative)
-            xl:top  : 4%  → inchangé (valeur relative)
-      */}
-      <div
-  className="
-    absolute z-10
-    right-[2%] top-[6%]
-    w-[120px] h-[120px]
-    sm:right-[2%] sm:top-[5%] sm:w-[180px] sm:h-[180px]
-    md:right-[2%] md:top-[4%] md:w-[250px] md:h-[250px]
-    lg:right-[2%] lg:top-[3%] lg:w-[243px] lg:h-[243px]
-    xl:right-[2%] xl:top-[3%] xl:w-[280px] xl:h-[280px]
-    2xl:right-[2%] 2xl:top-[3%] 2xl:w-[400px] 2xl:h-[400px]
-    rounded-full overflow-hidden
-  "
->
-        <img
-          src="/images/contenu/avatar.png"
-          alt="avatar"
-          className="w-full h-full object-cover object-center"
-          style={{ objectPosition: "center 15%" }}
-        />
-      </div> 
+    <div className="relative flex flex-col min-h-screen">     
 
       <Header
         /* DÉFILEMENT RAPIDE  */  
@@ -188,11 +161,38 @@ export default function Home() {
 
       <main className="flex-grow">
 
+        {/* AVATAR
+            xl réduites de 30% :
+              xl:w/h  : 347px * 0.70 = 243px
+              xl:right: 10% → inchangé (valeur relative)
+              xl:top  : 4%  → inchangé (valeur relative)
+        */}
+        <div
+          className="
+            absolute z-10
+            right-[2%] top-[6%]
+            w-[120px] h-[120px]
+            sm:right-[2%] sm:top-[5%] sm:w-[180px] sm:h-[180px]
+            md:right-[2%] md:top-[4%] md:w-[250px] md:h-[250px]
+            lg:right-[2%] lg:top-[3%] lg:w-[243px] lg:h-[243px]
+            xl:right-[2%] xl:top-[3%] xl:w-[280px] xl:h-[280px]
+            2xl:right-[2%] 2xl:top-[3%] 2xl:w-[400px] 2xl:h-[400px]
+            rounded-full overflow-hidden
+            "
+          >
+          <img
+            src="/images/contenu/avatar.png"
+            alt="avatar"
+            className="w-full h-full object-cover object-center"
+            style={{ objectPosition: "center 15%" }}
+          />
+        </div> 
+
          {/* CONTENT
             xl réduites de 30% :
               xl:mt : 3.25rem * 0.70 = 2.275rem
         */}
-        <div className="mt-10 lg:mt-[2.275rem] xl:mt-[2rem] p-2" ref={contentRef}>
+        <div className="mt-30 lg:mt-[2.275rem] xl:mt-[2rem] p-2" ref={contentRef}>
           <h1 className="sr-only">{t.header.content}</h1>
           <Content lang={lang} />
         </div>
