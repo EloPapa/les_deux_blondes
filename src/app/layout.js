@@ -14,7 +14,16 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "L2Blondes",
-  description: "Les 2 Blondes", 
+  description: "Les 2 Blondes",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",        // iOS
+    shortcut: "/favicon.ico",
+    other: {
+      rel: "icon",
+      url: "/android-chrome-192x192.png",  // Android
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
