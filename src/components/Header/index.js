@@ -386,6 +386,7 @@ const getNameStyle = () => {
     </div>
   </>
 );
+}; // ← fermeture du composant Header
 
  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  * Cette ligne rend le composant disponible pour être importé ailleurs.
