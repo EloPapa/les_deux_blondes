@@ -1,150 +1,29 @@
 "use client";
 
-/*-------------------------------------------------------------------------------------------------------------------------------
-* 1. Accéder directement à un élément du DOM
-* C'est utile pour des timers, des animations, garder une valeur précédente, ou manipuler un élément HTML directement.
-* Le DOM (Document Object Model) est la représentation en mémoire de ta page HTML sous forme d'un arbre d'objets que JavaScript peut lire et modifier.
-* 
-* useRef retourne un objet avec une seule propriété : { current: <ta valeur> } Tu lis et modifies toujours via .current.
-* En résumé : utilise useRef quand tu veux retenir quelque chose sans que React réaffiche le composant, ou quand tu veux toucher directement un élément HTML.
- *-------------------------------------------------------------------------------------------------------------------------------*/
 import { useRef } from "react";
-
-/*-------------------------------------------------------------------------------------------------------------------------------
-* dynamic sert à charger un composant en lazy loading — c'est-à-dire seulement quand il est nécessaire, pas au chargement initial de la page.
-* Ex:
-* const MonComposant = dynamic(() => import("./MonComposant"), {
-*  ssr: false,        // ne pas rendre côté serveur
-*  loading: () => <p>Chargement...</p>  // afficher pendant le chargement
-* });
-*
-* Les cas d'usage typiques :
-* ssr: false — pour des composants qui utilisent window, localStorage, ou des libs qui ne fonctionnent pas côté serveur (cartes, éditeurs de texte, etc.)
-*
-* Perf — éviter de charger un gros composant tant que l'utilisateur n'en a pas besoin
-*
-* Code splitting — réduit la taille du bundle initial
-*
-* Dans mon cas quand on va utiliser des composant reconstruit de d'autre plateforme, exemple le portfolio reconstruit de Canvas 
-*-------------------------------------------------------------------------------------------------------------------------------*/
 import dynamic from "next/dynamic";
-
 import { useLanguage } from "../context/LanguageContext";
-
-/*-------------------------------------------------------------------------------------------------------------------------------
-* Sert à exécuter l'anuimation stagger: 
-* animation où les éléments apparaissent l'un après l'autre avec un petit délai entre chaque, au lieu de tous apparaître en même temps.
-* 
-* Dans ton cas, pourrait çetre 4 titres en haut de page qui arrivent en séquence :
-* "Les 2 Blondes"     → apparaît en 1er
-* "sont"              → apparaît 0.1s après
-* "vraiment"          → apparaît 0.1s après
-* "blondes"           → apparaît 0.1s après
-*
-* Visuellement ça donne un effet de cascade — chaque ligne glisse vers le haut et apparaît progressivement, ce qui est beaucoup plus dynamique que tout afficher d'un coup.
-*  
-* useIsomorphicLayoutEffect(() => {
-*  stagger(
-*    [textOne.current, textTwo.current, textThree.current, textFour.current],
-*    { y: 40, x: -10, transform: "scale(0.95) skew(10deg)" },  // état initial
-*    { y: 0, x: 0, transform: "scale(1)" }                      // état final
-*  );
-* *}, []);
-*
-* Elle prend tes 4 refs de titres et les anime depuis l'état initial (décalés, légèrement inclinés, réduits) vers l'état final (position normale) — en cascade, l'un après l'autre.
-*
-* C'est probablement une fonction GSAP ou similaire définie dans ton fichier ../animations.js.
-*-------------------------------------------------------------------------------------------------------------------------------*/
-// import { stagger } from "../animations";
-
-/*-------------------------------------------------------------------------------------------------------------------------------
-* Ça sert à remplacer useLayoutEffect de façon sécurisée. 
-* Le problème : useLayoutEffect génère un warning dans Next.js côté serveur (SSR) parce qu'il n'existe pas dans Node.js.
-* 
-* useIsomorphicLayoutEffect fait simplement : 
-* // côté serveur → useEffect (pas de warning)
-* // côté client  → useLayoutEffect (exécution synchrone avant le paint)
-* 
-* Dans ton code tu l'utilises pour lancer l'animation stagger au montage :
-*
-* useIsomorphicLayoutEffect(() => {
-* stagger(
-*    [textOne.current, textTwo.current, textThree.current, textFour.current],
-*    { y: 40, x: -10, transform: "scale(0.95) skew(10deg)" },
-*    { y: 0, x: 0, transform: "scale(1)" }
-*  );
-* }, []);
-*
-* Sans ça, Next.js cracherait un warning au build* 
-*-------------------------------------------------------------------------------------------------------------------------------*/
-// import { useIsomorphicLayoutEffect } from "../utils";
-
 import Header from "../components/Header";
 const Content = dynamic(() => import("../components/Content/index"), { ssr: false });
 import data from "../data/lesDeuxBlondes.json";
 import Footer from "../components/Footer";
 
-/*-------------------------------------------------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------------------------------------------------*/
-/*--------------------------------------------------- HOME ----------------------------------------------------------------------*/
 export default function Home() {
-  /*-------------------------------------------------------------------------------------------------------------------------------
-  * export  — rend ce code disponible pour d'autres fichiers qui voudront l'importer.
-  * default — désigne cet export comme l'export principal du fichier. Il ne peut y en avoir qu'un seul par fichier.
-  * Home — le nom de la fonction. Par convention en React, les composants commencent par une majuscule.
-  * 
-  * En résumé : "Je crée une fonction appelée Home et je l'exporte comme élément principal de ce fichier, pour que d'autres fichiers puissent l'utiliser."
-  * 
-  *-------------------------------------------------------------------------------------------------------------------------------*/
   const { lang, t } = useLanguage();
-  
-  /*-------------------------------------------------------------------------------------------------------------------------------
-  * const    — on déclare une variable constante (la référence elle-même ne sera jamais réassignée).
-  * aboutRef — le nom de la variable. Par convention, les refs se terminent par Ref pour indiquer clairement que c'est une référence.
-  * useRef   — le hook React qui crée la référence (voir explication précédente).
-  * null     — la valeur initiale de current. On met null car au départ, la ref n'est encore attachée à aucun élément HTML du DOM.
-  * 
-  * Une fois attachée à un élément HTML :
-  * aboutRef = { current: <section id="about"> }  // après le rendu
-  *   * 
-  * En résumé : "Je crée une référence vide, qui sera plus tard attachée à un élément HTML de la section about."
-  *-------------------------------------------------------------------------------------------------------------------------------*/
   const aboutRef = useRef(null);
   const contentRef = useRef(null);
   const presentationRef = useRef(null);
- /*-------------------------------------------------------------------------------------------------------------------------------
-  * const handleAboutScroll — on déclare une variable constante. Par convention, les fonctions qui gèrent un événement commencent par handle.
-  * () => — c'est une fonction fléchée (arrow function), sans paramètres.
-  * aboutRef.current — on accède à l'élément HTML actuellement attaché à la ref (la section about).
-  * ? — c'est l'opérateur optionnel (?.). Il vérifie que aboutRef.current n'est pas null avant d'appeler la fonction. Sans lui, si la ref est vide, ça planterait.
-  * 
-  * scrollIntoView() — méthode native du DOM qui fait défiler la page jusqu'à l'élément.
-  * { behavior: "smooth" } — option passée à scrollIntoView pour que le défilement soit fluide au lieu d'être instantané.
-  * 
-  * { behavior: "smooth" }  // défilement fluide 🟢
-  * { behavior: "auto" }    // défilement instantané ⚡
-  *
-  * En résumé : "Quand cette fonction est appelée, la page défile doucement jusqu'à la section about, mais seulement si elle existe."
-  *-------------------------------------------------------------------------------------------------------------------------------*/
+
   const handleAboutScroll = () => {
     aboutRef.current?.scrollIntoView({ behavior: "smooth" });  
   };
 
-  /*-------------------------------------------------------------------------------------------------------------------------------
-  
-  *-------------------------------------------------------------------------------------------------------------------------------*/
   const handleContentScroll = () => {
     contentRef.current?.scrollIntoView({ behavior: "smooth" });  
   };
 
-  /*-------------------------------------------------------------------------------------------------------------------------------
-
-  *-------------------------------------------------------------------------------------------------------------------------------*/
   const handlePresentationVideoScroll = () => {
     presentationRef.current?.scrollIntoView({ behavior: "smooth" }); 
-
   };
   
   const aboutParagraphs = lang === "fr" ? data.about_fr || data.about : data.about;
@@ -153,7 +32,6 @@ export default function Home() {
     <div className="relative flex flex-col min-h-screen">     
 
       <Header
-        /* DÉFILEMENT RAPIDE  */  
         handleAboutScroll={handleAboutScroll}
         handleContentScroll={handleContentScroll}
         handlePresentationVideoScroll={handlePresentationVideoScroll}
@@ -167,9 +45,9 @@ export default function Home() {
           w-[120px] h-[120px]
           sm:right-[2%] sm:top-[4rem] sm:w-[180px] sm:h-[180px]
           md:right-[2%] md:top-[4rem] md:w-[250px] md:h-[250px]
-          lg:right-[2%] lg:top-[4rem] lg:w-[243px] lg:h-[243px]
-          xl:right-[2%] xl:top-[4rem] xl:w-[280px] xl:h-[280px]
-          2xl:right-[2%] 2xl:top-[4rem] 2xl:w-[400px] 2xl:h-[400px]
+          lg:right-[4%] lg:top-[4.5rem] lg:w-[160px] lg:h-[160px]
+          xl:right-[4%] xl:top-[4.5rem] xl:w-[180px] xl:h-[180px]
+          2xl:right-[4%] 2xl:top-[4.5rem] 2xl:w-[220px] 2xl:h-[220px]
           rounded-full overflow-hidden"
       >
         <img
@@ -181,11 +59,12 @@ export default function Home() {
       </div>
 
       <main className="flex-grow">
-        <div className="mt-30 lg:mt-[10rem] xl:mt-[10rem] 2xl:mt-[12rem] p-2" ref={contentRef}>
+
+        {/* CONTENT */}
+        <div className="mt-30 lg:mt-[14rem] xl:mt-[14rem] 2xl:mt-[16rem] p-2" ref={contentRef}>
           <h1 className="sr-only">{t.header.content}</h1>
           <Content lang={lang} />
         </div>
-
 
         {/* TITRE ABOUT EN FONT AMSTERDAM */}   
         <div className="mt-15t lg:mt-[2.275rem] xl:mt-[2.275rem] pt-2 px-2 flex flex-col items-center" ref={aboutRef}>
