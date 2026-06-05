@@ -165,8 +165,8 @@ export default function Content({ lang = "fr" }) {
               cardStyle={{ width: "100%", aspectRatio: "3 / 4" }}
             />
 
-            {/* TABLETTE */}
-            <div style={{ position: "relative", width: "100%" }}>
+            {/* TABLETTE + LOGO YOUTUBE */}
+            <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
               <ContentCard
                 src="/images/contenu/tablet.png"
                 alt={t.alt.imageContent4}
@@ -175,6 +175,15 @@ export default function Content({ lang = "fr" }) {
                 external={false}
                 cardStyle={{ width: "100%", height: "100%", aspectRatio: "2 / 3" }}
               />
+              <a
+                href={YOUTUBE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.ariaLink}
+                style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: "6px", paddingLeft: "2px" }}
+              >
+                <YouTubeIcon size={84} />
+              </a>
             </div>
           </div>
 
@@ -194,7 +203,6 @@ export default function Content({ lang = "fr" }) {
             {/* BAR A JUS */}
             <div style={{ display: "flex", flexDirection: "column", width: "65%" }}>
               <ContentCard
-              
                 src="/images/contenu/barJus.png"
                 alt={t.alt.imageContent2}
                 ariaLabel={t.ariaLink}
@@ -202,15 +210,6 @@ export default function Content({ lang = "fr" }) {
                 external={true}
                 cardStyle={{ width: "145%", aspectRatio: "1.4 / 1.8" }}
               />
-              <a
-                href={YOUTUBE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t.ariaLink}
-                style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: "6px", paddingLeft: "2px" }}
-              >
-                <YouTubeIcon size={84} />
-              </a>
             </div>
           </div>
         </div>
