@@ -13,7 +13,7 @@ const Footer = () => {
   /**jaune doux: "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)"; */
 
   return (
-    <footer className="w-full flex flex-col items-center mt-5 min-h-screen">
+    <footer className="w-full flex flex-col items-center mt-5">
 
       {/* SECTION CONTACT */}
       <div className="w-full px-6 flex flex-col items-center text-center mt-auto">
