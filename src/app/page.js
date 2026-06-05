@@ -12,7 +12,7 @@ export default function Home() {
   const { lang, t } = useLanguage();
   const aboutRef = useRef(null);
   const contentRef = useRef(null);
-  const presentationRef = useRef(null);
+  const contactRef = useRef(null);
 
   const handleAboutScroll = () => {
     aboutRef.current?.scrollIntoView({ behavior: "smooth" });  
@@ -22,8 +22,8 @@ export default function Home() {
     contentRef.current?.scrollIntoView({ behavior: "smooth" });  
   };
 
-  const handlePresentationVideoScroll = () => {
-    presentationRef.current?.scrollIntoView({ behavior: "smooth" }); 
+  const handleContactScroll = () => {
+    contactRef.current?.scrollIntoView({ behavior: "smooth" }); 
   };
   
   const aboutParagraphs = lang === "fr" ? data.about_fr || data.about : data.about;
@@ -34,7 +34,7 @@ export default function Home() {
       <Header
         handleAboutScroll={handleAboutScroll}
         handleContentScroll={handleContentScroll}
-        handlePresentationVideoScroll={handlePresentationVideoScroll}
+        handleContactScroll={handleContactScroll}
       />
 
       {/* AVATAR */}      
@@ -96,7 +96,7 @@ export default function Home() {
         </div>      
       </main>
 
-      <Footer />
+      <Footer ref={contactRef}/>
     </div>
   );
 }

@@ -100,7 +100,7 @@ const MenuIcon = ({ open }) => {
 * En résumé — ({ handleAboutScroll, handlePresentationVideoScroll }) c'est la porte d'entrée du composant : ce sont les instructions que le parent (page.JS) lui passe pour qu'il sache quoi
 * faire quand on clique sur ses boutons. 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-const Header = ({ handleAboutScroll, handleContentScroll}) => {
+const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll}) => {
   
   /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   * useRouter() est un hook (fonction spécialisée) de Next.js qui donne accès au routeur de navigation
@@ -319,10 +319,10 @@ const getNameStyle = () => {
                 <Button onClick={handleAboutScroll}>
                   {t.header.about}  
                 </Button>
-                {/* PANNEAU MENU "OUVERT" - "Bouton" Contact qui ouvre un message courriel */}
-                <Button onClick={() => window.open("mailto:ericbergeron2000@gmail.com")}>
-                  {t.header.contact}
-                </Button>
+                {/* PANNEAU MENU "OUVERT" - "Bouton" Contact qui dirige à la section CONTACT */}                
+                <Button onClick={handleContactScroll}>
+                  {t.header.contact}    
+                
               </div>
             </PopoverPanel>
           </>
