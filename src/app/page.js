@@ -159,35 +159,29 @@ export default function Home() {
         handlePresentationVideoScroll={handlePresentationVideoScroll}
       />
 
-      <main className="flex-grow">
-
-        {/* AVATAR
-            xl réduites de 30% :
-              xl:w/h  : 347px * 0.70 = 243px
-              xl:right: 10% → inchangé (valeur relative)
-              xl:top  : 4%  → inchangé (valeur relative)
-        */}
-        <div
+      {/* AVATAR*/}      
+      <div
           className="
-            absolute z-10
-            right-[2%] top-[10%]
-            w-[120px] h-[120px]
-            sm:right-[2%] sm:top-[9%] sm:w-[180px] sm:h-[180px]
-            md:right-[2%] md:top-[8%] md:w-[250px] md:h-[250px]
-            lg:right-[2%] lg:top-[6%] lg:w-[243px] lg:h-[243px]
-            xl:right-[2%] xl:top-[6%] xl:w-[280px] xl:h-[280px]
-            2xl:right-[2%] 2xl:top-[6%] 2xl:w-[400px] 2xl:h-[400px]
-            rounded-full overflow-hidden
-"
-          >
-          <img
-            src="/images/contenu/avatar.png"
-            alt="avatar"
-            className="w-full h-full object-cover object-center"
-            style={{ objectPosition: "center 15%" }}
-          />
-        </div> 
+          absolute z-10
+          right-[2%] top-[10%]
+          w-[120px] h-[120px]
+          sm:right-[2%] sm:top-[9%] sm:w-[180px] sm:h-[180px]
+          md:right-[2%] md:top-[8%] md:w-[250px] md:h-[250px]
+          lg:right-[2%] lg:top-[6%] lg:w-[243px] lg:h-[243px]
+          xl:right-[2%] xl:top-[6%] xl:w-[280px] xl:h-[280px]
+          2xl:right-[2%] 2xl:top-[6%] 2xl:w-[400px] 2xl:h-[400px]
+          rounded-full overflow-hidden"
+        >
+        <img
+          src="/images/contenu/avatar.png"
+          alt="avatar"
+          className="w-full h-full object-cover object-center"
+          style={{ objectPosition: "center 15%" }}
+        />
+      </div> 
 
+      <main className="flex-grow">
+        
          {/* CONTENT
             xl réduites de 30% :
               xl:mt : 3.25rem * 0.70 = 2.275rem
