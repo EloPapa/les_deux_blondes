@@ -159,18 +159,18 @@ export default function Home() {
             xl:top  : 4%  → inchangé (valeur relative)
       */}
       <div
-        className="
-          absolute z-10
-          right-[5%] top-[9%]
-          w-[120px] h-[120px]
-          sm:w-[180px] sm:h-[180px]
-          md:w-[280px] md:top-[3%] md:h-[280px]
-          lg:right-[8%] lg:top-[3%] lg:w-[243px] lg:h-[243px]
-          xl:right-[10%] xl:top-[4%] xl:w-[243px] xl:h-[243px]
-          2xl:right-[20%] 2xl:top-[5%] 2xl:w-[476px] 2xl:h-[476px]
-          rounded-full overflow-hidden
-        "
-      >
+  className="
+    absolute z-10
+    right-[2%] top-[6%]
+    w-[120px] h-[120px]
+    sm:right-[2%] sm:top-[5%] sm:w-[180px] sm:h-[180px]
+    md:right-[2%] md:top-[4%] md:w-[250px] md:h-[250px]
+    lg:right-[2%] lg:top-[3%] lg:w-[243px] lg:h-[243px]
+    xl:right-[2%] xl:top-[3%] xl:w-[280px] xl:h-[280px]
+    2xl:right-[2%] 2xl:top-[3%] 2xl:w-[400px] 2xl:h-[400px]
+    rounded-full overflow-hidden
+  "
+>
         <img
           src="/images/contenu/avatar.png"
           alt="avatar"
