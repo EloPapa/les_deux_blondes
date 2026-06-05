@@ -76,8 +76,6 @@ const cardBaseStyle = {
   outline: "none",
 };
 
-// Correctif 1 — position absolute pour que img/video remplisse
-// le conteneur dont la hauteur vient de aspectRatio
 const mediaStyle = {
   position: "absolute",
   top: 0,
@@ -100,7 +98,6 @@ function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {
       onMouseEnter={(e) => hoverEnter(e, "img")}
       onMouseLeave={(e) => hoverLeave(e, "img")}
     >
-      {/* Correctif 1 — div intermédiaire qui donne une hauteur réelle */}
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
         <img src={src} alt={alt} loading="lazy" style={mediaStyle} />
       </div>
@@ -124,17 +121,8 @@ function VideoCard({ src, alt, ariaLabel, href, external = true, cardStyle = {} 
       onMouseEnter={(e) => hoverEnter(e, "video")}
       onMouseLeave={(e) => hoverLeave(e, "video")}
     >
-      {/* Correctif 1 — div intermédiaire qui donne une hauteur réelle */}
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
-        {/* Correctif 2 — <source> avec type pour identification immédiate du codec */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-label={alt}
-          style={mediaStyle}
-        >
+        <video autoPlay muted loop playsInline aria-label={alt} style={mediaStyle}>
           <source src={src} type="video/mp4" />
         </video>
       </div>
@@ -148,13 +136,16 @@ export default function Content({ lang = "fr" }) {
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "1rem 0" }}>
       <div style={{ width: "100%", maxWidth: "720px", background: "#fffef5", fontFamily: nunitoSans.style.fontFamily, color: "#2b2b2b", boxSizing: "border-box" }}>
+
         {/* LIGNE DE SÉPARATION */}
         <div style={{ height: "3px", width: "100%", background: "#a07a3a", marginBottom: "1.25rem" }} />
+
         {/* MÉDIA TXT */}
         <h2 style={{ fontFamily: nunitoSans.style.fontFamily, fontWeight: 900, fontSize: "clamp(2.5rem, 8vw, 5rem)", color: "#a07a3a", letterSpacing: "0.02em", lineHeight: 1, margin: "0 0 0.5rem 0" }}>
           {t.title}
         </h2>
-        {/* TOP QUOTE TXT  */}
+
+        {/* TOP QUOTE TXT */}
         <p style={{ fontSize: "clamp(0.85rem, 2.2vw, 1.1rem)", letterSpacing: "0.08em", color: "#7a5a2a", margin: "0 0 1.25rem 0", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded" }}>
           {t.topQuote}
         </p>
@@ -162,8 +153,9 @@ export default function Content({ lang = "fr" }) {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: "16px", alignItems: "start" }}>
 
           {/* COLONNE DE GAUCHE */}
-          {/* BABY SITTING VIDEO */}
           <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "flex-start" }}>
+
+            {/* BABY SITTING VIDEO */}
             <VideoCard
               src="/images/contenu/babySitting.mp4"
               alt={t.alt.imageContent1}
@@ -172,30 +164,59 @@ export default function Content({ lang = "fr" }) {
               external={true}
               cardStyle={{ width: "100%", aspectRatio: "3 / 4" }}
             />
-            {/* BAR A JUS */}
-            <div style={{ display: "flex", flexDirection: "column", width: "65%" }}>
-              <ContentCard src="/images/contenu/barJus.png" alt={t.alt.imageContent2} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "145%", aspectRatio: "1.4 / 1.8" }} />
-              <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" aria-label={t.ariaLink} style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: "6px", paddingLeft: "2px" }}>
-                <YouTubeIcon size={84} />
-              </a>
+
+            {/* TABLETTE */}
+            <div style={{ position: "relative", width: "100%" }}>
+              <ContentCard
+                src="/images/contenu/tablet.png"
+                alt={t.alt.imageContent4}
+                ariaLabel={t.ariaLink}
+                href={YOUTUBE_URL}
+                external={false}
+                cardStyle={{ width: "100%", height: "100%", aspectRatio: "2 / 3" }}
+              />
             </div>
           </div>
 
           {/* COLONNE DE DROITE */}
-          {/* CHAT */}
           <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "stretch" }}>
-            <ContentCard src="/images/contenu/cat.png" alt={t.alt.imageContent3} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "100%", aspectRatio: "4 / 4", alignSelf: "flex-start" }} />
 
-            {/* TABLETTE */}
-            <div style={{ position: "relative", width: "100%", }}>
-              <ContentCard src="/images/contenu/tablet.png" alt={t.alt.imageContent4} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={false} cardStyle={{ width: "100%",height:"100%", aspectRatio: "2 / 3" }} />
+            {/* CHAT */}
+            <ContentCard
+              src="/images/contenu/cat.png"
+              alt={t.alt.imageContent3}
+              ariaLabel={t.ariaLink}
+              href={YOUTUBE_URL}
+              external={true}
+              cardStyle={{ width: "100%", aspectRatio: "4 / 4", alignSelf: "flex-start" }}
+            />
+
+            {/* BAR A JUS */}
+            <div style={{ display: "flex", flexDirection: "column", width: "65%" }}>
+              <ContentCard
+              
+                src="/images/contenu/barJus.png"
+                alt={t.alt.imageContent2}
+                ariaLabel={t.ariaLink}
+                href={YOUTUBE_URL}
+                external={true}
+                cardStyle={{ width: "145%", aspectRatio: "1.4 / 1.8" }}
+              />
+              <a
+                href={YOUTUBE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.ariaLink}
+                style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: "6px", paddingLeft: "2px" }}
+              >
+                <YouTubeIcon size={84} />
+              </a>
             </div>
           </div>
         </div>
 
         {/* CITATION */}
         <div style={{ marginTop: "1.25rem", paddingTop: "0.25rem" }}>
-          {/* BOTTOM QUOTE TXT  */}
           <p style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "clamp(0.95rem, 2.2vw, 1.2rem)", letterSpacing: "0.08em", color: "#7a5a2a", fontWeight: 700, fontFamily: nunitoSans.style.fontFamily, fontStretch: "expanded", margin: 0 }}>
             {t.bottomQuote}
             <span style={{ flex: 1, height: "2px", background: "#a07a3a", display: "inline-block" }} />
