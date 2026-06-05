@@ -96,7 +96,9 @@ export default function Home() {
         </div>      
       </main>
 
-      <Footer ref={contactRef}/>
+      <div ref={contactRef}>
+        <Footer />
+      </div>
     </div>
   );
 }

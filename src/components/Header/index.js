@@ -272,112 +272,120 @@ const getNameStyle = () => {
   };
 
   return (
-    <>
-    {/* 📱 MOBILE */}      
-      <Popover className="block tablet:hidden w-full" style={{ background: backgroundGradient }}>
-         {({ open }) => (               
-          <>
-            <div className="flex items-center justify-between px-1" style={{ height: "70px" }}>
-              
-              {/* TEXTE: LES DEUX BLONDES DANS LE HEADER */} 
-              <div className="flex items-center gap-2">
-                <h1 onClick={() => router.push("/")} className="font-medium cursor-default name" style={nameStyleMobile}>
-                  {name}.           
-                </h1>
-              </div>
-            
-            <div className="flex items-center gap-2 mr-2" style={{ color: textColor }}>
-              {/* BOUTON CHOIX LANGUE*/}  
-              <Button onClick={toggle}>
-                  {lang === "fr" ? "EN" : "FR"}
-              </Button> 
+  <>
+    {/* 📱 MOBILE */}
+    <Popover
+      className="relative block tablet:hidden w-full z-[9999]"
+      style={{ background: backgroundGradient }}
+    >
+      {({ open }) => (
+        <>
+          <div
+            className="flex items-center justify-between px-1"
+            style={{ height: "70px" }}
+          >
+            {/* TEXTE: LES DEUX BLONDES DANS LE HEADER */}
+            <div className="flex items-center gap-2">
+              <h1
+                onClick={() => router.push("/")}
+                className="font-medium cursor-default name"
+                style={nameStyleMobile}
+              >
+                {name}.
+              </h1>
+            </div>
 
-              {/* BOUTON HAMBURGER POPOVER BUTTON*/}  
+            <div
+              className="flex items-center gap-2 mr-2"
+              style={{ color: textColor }}
+            >
+              {/* BOUTON CHOIX LANGUE */}
+              <Button onClick={toggle}>
+                {lang === "fr" ? "EN" : "FR"}
+              </Button>
+
+              {/* BOUTON HAMBURGER */}
               <PopoverButton>
-                <MenuIcon open={open}/>
+                <MenuIcon open={open} />
               </PopoverButton>
-            </div>    
-          
+            </div>
           </div>
 
-            {/* 📱 PANNEAU MENU "OUVERT" */}
-            <PopoverPanel
-               className="absolute right-2 top-full z-[9999] w-30 p-4 rounded-md shadow-md"
-              style={{
-                background: backgroundGradient,
-                color: textColor,
-                border: "1px solid rgba(180, 140, 0, 1)",
-                /** border rosé: "1px solid rgba(180,120,220,1)",*/                 
-              }}
-            >
-              <div className="flex flex-col items-center">
-                {/* PANNEAU MENU "OUVERT" - "Bouton" PRÉSENTATION VIDÉO qui dirige à la section PRÉSENTATION VIDÉO */}
-                <Button onClick={handleContentScroll}>
-                  {t.header.content}    
-                </Button>
-                {/* PANNEAU MENU "OUVERT" - "Bouton" À PROPOS qui dirige à la section À PROPOS */}
-                <Button onClick={handleAboutScroll}>
-                  {t.header.about}  
-                </Button>
-                {/* PANNEAU MENU "OUVERT" - "Bouton" Contact qui dirige à la section CONTACT */}                
-                <Button onClick={handleContactScroll}>
-                  {t.header.contact}    
-                
-              </div>
-            </PopoverPanel>
-          </>
-        )}        
-      </Popover>
-    
-    {/* 💻 DESKTOP*/}
-    <div className="hidden tablet:flex justify-between items-center sticky top-0 z-10 w-full px-6" style={{background: backgroundGradient,color: textColor,}}>
-    
-        {/* A GAUCHE: TEXTE LES DEUX BLONDES DANS LE HEADER
-            lg : xl(1.17rem) * 0.70 = 0.819rem | xl(75px) * 0.70 = 53px
-            xl : inchangé gap-[1.17rem], singe 75px
-            2xl: inchangé singe 106px
-        */}
-        <div className="flex items-center gap-3 lg:gap-[0.819rem] xl:gap-[1.17rem]">
-          <h1
-            onClick={() => router.push("/")}
-            className="font-medium cursor-default name"
-            style={getNameStyle()}
+          {/* 📱 PANNEAU MENU OUVERT */}
+          <PopoverPanel
+            className="absolute right-2 top-full z-[9999] w-30 p-4 rounded-md shadow-md"
+            style={{
+              background: backgroundGradient,
+              color: textColor,
+              border: "1px solid rgba(180, 140, 0, 1)",
+            }}
           >
-            {name}.
-          </h1>          
-        </div>
-        
-        {/* A DROITE: LES BOUTONS LANGUE ET MENU HAMBURGER
-            lg : xl(1.17rem) * 0.70 = 0.819rem | xl(1.4rem) * 0.70 = 0.98rem
-            xl : inchangé text-[1.17rem], gap-[1.4rem]
-            2xl: inchangé
-        */}
-        <div className="flex items-center gap-3 lg:gap-[0.98rem] xl:gap-[1.4rem] 2xl:gap-[2.2rem]">
+            <div className="flex flex-col items-center">
+              <Button onClick={handleContentScroll}>
+                {t.header.content}
+              </Button>
 
-          <Button onClick={handleContentScroll}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.header.presentation}</span>
-          </Button>
+              <Button onClick={handleAboutScroll}>
+                {t.header.about}
+              </Button>
 
-          <Button onClick={handleAboutScroll}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.header.about}</span>
-          </Button>
+              <Button onClick={handleContactScroll}>
+                {t.header.contact}
+              </Button>
+            </div>
+          </PopoverPanel>
+        </>
+      )}
+    </Popover>
 
-          <Button onClick={() => window.open("mailto:ericbergeron2000@gmail.com")}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{t.header.contact}</span>
-          </Button>
+    {/* 💻 DESKTOP */}
+    <div
+      className="hidden tablet:flex justify-between items-center sticky top-0 z-10 w-full px-6"
+      style={{
+        background: backgroundGradient,
+        color: textColor,
+      }}
+    >
+      {/* NOM */}
+      <div className="flex items-center gap-3 lg:gap-[0.819rem] xl:gap-[1.17rem]">
+        <h1
+          onClick={() => router.push("/")}
+          className="font-medium cursor-default name"
+          style={getNameStyle()}
+        >
+          {name}.
+        </h1>
+      </div>
 
-          <Button onClick={toggle}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">{lang === "fr" ? "EN" : "FR"}</span>
-          </Button>        
+      {/* BOUTONS */}
+      <div className="flex items-center gap-3 lg:gap-[0.98rem] xl:gap-[1.4rem] 2xl:gap-[2.2rem]">
+        <Button onClick={handleContentScroll}>
+          <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+            {t.header.presentation}
+          </span>
+        </Button>
 
-        </div>
+        <Button onClick={handleAboutScroll}>
+          <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+            {t.header.about}
+          </span>
+        </Button>
 
-    </div>          
+        <Button onClick={handleContactScroll}>
+          <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+            {t.header.contact}
+          </span>
+        </Button>
 
-
-    </>
-  );
-};
+        <Button onClick={toggle}>
+          <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+            {lang === "fr" ? "EN" : "FR"}
+          </span>
+        </Button>
+      </div>
+    </div>
+  </>
+);
 
  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  * Cette ligne rend le composant disponible pour être importé ailleurs.
