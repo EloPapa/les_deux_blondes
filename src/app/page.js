@@ -43,11 +43,11 @@ export default function Home() {
           absolute z-10
           right-[2%] top-[4rem]
           w-[120px] h-[120px]
-          sm:right-[2%] sm:top-[4rem] sm:w-[180px] sm:h-[180px]
-          md:right-[2%] md:top-[4rem] md:w-[250px] md:h-[250px]
-          lg:right-[4%] lg:top-[4.5rem] lg:w-[160px] lg:h-[160px]
-          xl:right-[4%] xl:top-[4.5rem] xl:w-[180px] xl:h-[180px]
-          2xl:right-[4%] 2xl:top-[4.5rem] 2xl:w-[220px] 2xl:h-[220px]
+          sm:right-[2%] sm:top-[7rem] sm:w-[180px] sm:h-[180px]
+          md:right-[2%] md:top-[7rem] md:w-[250px] md:h-[250px]
+          lg:right-[4%] lg:top-[7rem] lg:w-[160px] lg:h-[160px]
+          xl:right-[4%] xl:top-[7rem] xl:w-[180px] xl:h-[180px]
+          2xl:right-[4%] 2xl:top-[7rem] 2xl:w-[220px] 2xl:h-[220px]
           rounded-full overflow-hidden"
       >
         <img
