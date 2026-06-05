@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Nunito_Sans } from "next/font/google";
 
 const nunitoSans = Nunito_Sans({
@@ -87,7 +87,8 @@ const mediaStyle = {
   transition: "transform 0.3s ease, filter 0.3s ease",
 };
 
-function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {}, showYoutubeBadge = false, badgeSize = 36 }) {
+function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {}, showYoutubeBadge = false, badgeSize = 36, onClick }) {
+  const handleClick = onClick ? (e) => { e.preventDefault(); onClick(); } : undefined;
   return (
     <a
       href={href}
@@ -95,12 +96,28 @@ function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {
       rel={external ? "noopener noreferrer" : undefined}
       aria-label={ariaLabel}
       style={{ ...cardBaseStyle, ...cardStyle }}
+      onClick={handleClick}
       onMouseEnter={(e) => hoverEnter(e, "img")}
       onMouseLeave={(e) => hoverLeave(e, "img")}
     >
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
         <img src={src} alt={alt} loading="lazy" style={mediaStyle} />
       </div>
+      {/* ICÔNE PLAY */}
+      {onClick && (
+        <span style={{
+          position: "absolute", top: "50%", left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "56px", height: "56px", borderRadius: "50%",
+          background: "rgba(0,0,0,0.5)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          zIndex: 10,
+        }}>
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </span>
+      )}
       {showYoutubeBadge && (
         <span style={{ position: "absolute", bottom: "10px", left: "10px", width: `${badgeSize}px`, height: `${badgeSize}px`, zIndex: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
           <YouTubeIcon size={badgeSize} />
@@ -130,8 +147,59 @@ function VideoCard({ src, alt, ariaLabel, href, external = true, cardStyle = {} 
   );
 }
 
+function VideoPopup({ src, alt, onClose }) {
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 1000,
+        background: "rgba(0,0,0,0.85)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          position: "relative",
+          width: "90vw", maxWidth: "600px",
+          borderRadius: "12px", overflow: "hidden",
+          background: "#000",
+        }}
+      >
+        {/* BOUTON FERMER */}
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute", top: "10px", right: "10px",
+            zIndex: 10, background: "rgba(0,0,0,0.6)",
+            border: "none", borderRadius: "50%",
+            width: "36px", height: "36px",
+            color: "white", fontSize: "18px",
+            cursor: "pointer", display: "flex",
+            alignItems: "center", justifyContent: "center",
+          }}
+        >
+          ✕
+        </button>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+          aria-label={alt}
+          style={{ width: "100%", display: "block", aspectRatio: "3 / 4", objectFit: "cover" }}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  );
+}
+
 export default function Content({ lang = "fr" }) {
   const t = TRANSLATIONS[lang] ?? TRANSLATIONS.fr;
+  const [showVideoPopup, setShowVideoPopup] = useState(false);
 
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center", padding: "1rem 0" }}>
@@ -155,18 +223,21 @@ export default function Content({ lang = "fr" }) {
           {/* COLONNE DE GAUCHE */}
           <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "flex-start" }}>
 
-            {/* BABY SITTING VIDEO */}
-            <VideoCard
-              src="/images/contenu/babySitting.mp4"
+            {/* BABY SITTING — image cliquable qui ouvre le popup */}
+            <ContentCard
+              src="/images/contenu/babySitting.png"
               alt={t.alt.imageContent1}
               ariaLabel={t.ariaLink}
-              href={YOUTUBE_URL}
-              external={true}
+              href="#"
+              external={false}
               cardStyle={{ width: "100%", aspectRatio: "3 / 4" }}
+              onClick={() => setShowVideoPopup(true)}
             />
 
             {/* TABLETTE + LOGO YOUTUBE */}
+            
             <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+              
               <ContentCard
                 src="/images/contenu/tablet.png"
                 alt={t.alt.imageContent4}
@@ -175,8 +246,9 @@ export default function Content({ lang = "fr" }) {
                 external={false}
                 cardStyle={{ width: "100%", height: "100%", aspectRatio: "2 / 2.7" }}
               />
-              <a
+              
                 href={YOUTUBE_URL}
+                <a
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t.ariaLink}
@@ -226,6 +298,15 @@ export default function Content({ lang = "fr" }) {
         </div>
 
       </div>
+
+      {/* POPUP VIDÉO */}
+      {showVideoPopup && (
+        <VideoPopup
+          src="/images/contenu/babySitting.mp4"
+          alt={t.alt.imageContent1}
+          onClose={() => setShowVideoPopup(false)}
+        />
+      )}
     </div>
   );
 }
