@@ -172,26 +172,25 @@ export default function Content({ lang = "fr" }) {
               external={true}
               cardStyle={{ width: "100%", aspectRatio: "3 / 4" }}
             />
-            {/* BAR A JUS */}
-            <div style={{ display: "flex", flexDirection: "column", width: "65%" }}>
-              <ContentCard src="/images/contenu/barJus.png" alt={t.alt.imageContent2} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "145%", aspectRatio: "1.4 / 1.8" }} />
-              <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" aria-label={t.ariaLink} style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: "6px", paddingLeft: "2px" }}>
-                <YouTubeIcon size={84} />
-              </a>
-            </div>
-          </div>
-
-          {/* COLONNE DE DROITE */}
-          {/* CHAT */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "stretch" }}>
-            <ContentCard src="/images/contenu/cat.png" alt={t.alt.imageContent3} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "100%", aspectRatio: "4 / 4", alignSelf: "flex-start" }} />
-
             {/* TABLETTE */}
             <div style={{ position: "relative", width: "100%",}}>
               <ContentCard src="/images/contenu/tablet.png" alt={t.alt.imageContent4} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={false} cardStyle={{ width: "100%",height:"100%", aspectRatio: "2 / 3" }} />
             </div>
           </div>
-        </div>
+        </div>            
+
+          {/* COLONNE DE DROITE */}
+          {/* CHAT */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "stretch" }}>
+            <ContentCard src="/images/contenu/cat.png" alt={t.alt.imageContent3} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "100%", aspectRatio: "4 / 4", alignSelf: "flex-start" }} />
+          {/* BAR A JUS */}
+              <div style={{ display: "flex", flexDirection: "column", width: "65%" }}>
+                <ContentCard src="/images/contenu/barJus.png" alt={t.alt.imageContent2} ariaLabel={t.ariaLink} href={YOUTUBE_URL} external={true} cardStyle={{ width: "145%", aspectRatio: "1.4 / 1.8" }} />
+                <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" aria-label={t.ariaLink} style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: "6px", paddingLeft: "2px" }}>
+                  <YouTubeIcon size={84} />
+                </a>
+              </div>
+            </div>            
 
         {/* CITATION */}
         <div style={{ marginTop: "1.25rem", paddingTop: "0.25rem" }}>
