@@ -159,34 +159,29 @@ export default function Home() {
         handlePresentationVideoScroll={handlePresentationVideoScroll}
       />
 
-      {/* AVATAR*/}      
+      {/* AVATAR */}      
       <div
-          className="
+        className="
           absolute z-10
-          right-[2%] top-[10%]
+          right-[2%] top-[4rem]
           w-[120px] h-[120px]
-          sm:right-[2%] sm:top-[9%] sm:w-[180px] sm:h-[180px]
-          md:right-[2%] md:top-[8%] md:w-[250px] md:h-[250px]
-          lg:right-[2%] lg:top-[6%] lg:w-[243px] lg:h-[243px]
-          xl:right-[2%] xl:top-[6%] xl:w-[280px] xl:h-[280px]
-          2xl:right-[2%] 2xl:top-[6%] 2xl:w-[400px] 2xl:h-[400px]
+          sm:right-[2%] sm:top-[4rem] sm:w-[180px] sm:h-[180px]
+          md:right-[2%] md:top-[4rem] md:w-[250px] md:h-[250px]
+          lg:right-[2%] lg:top-[4rem] lg:w-[243px] lg:h-[243px]
+          xl:right-[2%] xl:top-[4rem] xl:w-[280px] xl:h-[280px]
+          2xl:right-[2%] 2xl:top-[4rem] 2xl:w-[400px] 2xl:h-[400px]
           rounded-full overflow-hidden"
-        >
+      >
         <img
           src="/images/contenu/avatar.png"
           alt="avatar"
           className="w-full h-full object-cover object-center"
           style={{ objectPosition: "center 15%" }}
         />
-      </div> 
+      </div>
 
       <main className="flex-grow">
-        
-         {/* CONTENT
-            xl réduites de 30% :
-              xl:mt : 3.25rem * 0.70 = 2.275rem
-        */}
-        <div className="mt-30 lg:mt-[2.275rem] xl:mt-[2rem] p-2" ref={contentRef}>
+        <div className="mt-30 lg:mt-[10rem] xl:mt-[10rem] 2xl:mt-[12rem] p-2" ref={contentRef}>
           <h1 className="sr-only">{t.header.content}</h1>
           <Content lang={lang} />
         </div>
