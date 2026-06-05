@@ -34,7 +34,7 @@ const Footer = () => {
       {/* FOOTER BAS — pleine largeur */}
       <div
         className="w-full mt- p-8 text-center"
-        style={{ background: backgroundGradient }}
+        style={{ background: backgroundGradient,  color: "#664b23"}}
       >
         <h2 className="text-sm tablet:text-base laptop:text-base laptopl:text-base font-bold">
           {t.footer.madeWith}{" "}
