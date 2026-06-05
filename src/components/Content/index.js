@@ -103,7 +103,6 @@ function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
         <img src={src} alt={alt} loading="lazy" style={mediaStyle} />
       </div>
-      {/* ICÔNE PLAY */}
       {onClick && (
         <span style={{
           position: "absolute", top: "50%", left: "50%",
@@ -127,26 +126,6 @@ function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {
   );
 }
 
-function VideoCard({ src, alt, ariaLabel, href, external = true, cardStyle = {} }) {
-  return (
-    <a
-      href={href}
-      target={external ? "_blank" : "_self"}
-      rel={external ? "noopener noreferrer" : undefined}
-      aria-label={ariaLabel}
-      style={{ ...cardBaseStyle, ...cardStyle }}
-      onMouseEnter={(e) => hoverEnter(e, "video")}
-      onMouseLeave={(e) => hoverLeave(e, "video")}
-    >
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
-        <video autoPlay muted loop playsInline aria-label={alt} style={mediaStyle}>
-          <source src={src} type="video/mp4" />
-        </video>
-      </div>
-    </a>
-  );
-}
-
 function VideoPopup({ src, alt, onClose }) {
   return (
     <div
@@ -161,12 +140,11 @@ function VideoPopup({ src, alt, onClose }) {
         onClick={(e) => e.stopPropagation()}
         style={{
           position: "relative",
-          width: "90vw", maxWidth: "600px",
+          width: "50vw", maxWidth: "340px",
           borderRadius: "12px", overflow: "hidden",
           background: "#000",
         }}
       >
-        {/* BOUTON FERMER */}
         <button
           onClick={onClose}
           style={{
@@ -188,7 +166,7 @@ function VideoPopup({ src, alt, onClose }) {
           playsInline
           controls
           aria-label={alt}
-          style={{ width: "100%", display: "block", aspectRatio: "3 / 4", objectFit: "cover" }}
+          style={{ width: "100%", display: "block", aspectRatio: "3 / 4", objectFit: "cover", maxHeight: "80vh" }}
         >
           <source src={src} type="video/mp4" />
         </video>
@@ -218,12 +196,13 @@ export default function Content({ lang = "fr" }) {
           {t.topQuote}
         </p>
 
+        {/* GRILLE 2 COLONNES ÉGALES */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: "16px", alignItems: "start" }}>
 
           {/* COLONNE DE GAUCHE */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "flex-start" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "stretch" }}>
 
-            {/* BABY SITTING — image cliquable qui ouvre le popup */}
+            {/* BABY SITTING */}
             <ContentCard
               src="/images/contenu/babySitting.png"
               alt={t.alt.imageContent1}
@@ -235,20 +214,17 @@ export default function Content({ lang = "fr" }) {
             />
 
             {/* TABLETTE + LOGO YOUTUBE */}
-            
             <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-              
               <ContentCard
                 src="/images/contenu/tablet.png"
                 alt={t.alt.imageContent4}
                 ariaLabel={t.ariaLink}
                 href={YOUTUBE_URL}
                 external={false}
-                cardStyle={{ width: "100%", height: "100%", aspectRatio: "2 / 2.7" }}
+                cardStyle={{ width: "100%", aspectRatio: "2 / 2.7" }}
               />
-              
+              <a
                 href={YOUTUBE_URL}
-                <a
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t.ariaLink}
@@ -269,7 +245,7 @@ export default function Content({ lang = "fr" }) {
               ariaLabel={t.ariaLink}
               href={YOUTUBE_URL}
               external={true}
-              cardStyle={{ width: "100%", aspectRatio: "4 / 4", alignSelf: "flex-start" }}
+              cardStyle={{ width: "100%", aspectRatio: "4 / 4" }}
             />
 
             {/* BAR A JUS */}
