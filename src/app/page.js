@@ -18,7 +18,7 @@ export default function Home() {
   const getHeaderOffset = () => {
     if (window.innerWidth < 640) return 8;  
     if (window.innerWidth < 1024) return -35; // Écran Large
-    return -70; // Écran XL et plus
+    return -35; // Écran XL et plus
   };
 
    {/* getBoundingClientRect().top donne la position relative au viewport actuel, donc en ajoutant window.scrollY tu obtiens la position absolue — et l'offset s'applique correctement dans les deux directions.*/}
