@@ -381,7 +381,7 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
         }}
       >
         {/* NOM */}
-        <div className="flex items-center gap-3 lg:gap-[0.819rem] xl:gap-[1.17rem]">
+        <div className="flex items-center gap-3 lg:gap-[0.819rem] xl:gap-[1.17rem] mt-2">
           <h1
             onClick={() => router.push("/")}
             className="font-medium cursor-default name"
