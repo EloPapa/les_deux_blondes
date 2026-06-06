@@ -16,7 +16,7 @@ const ICON_MAP = {
   facebook: (size) => <FaFacebook size={size} color="#1877F2" />,
 };
 
-const ICON_SIZE = 32; // taille de base doublée (16 → 32)
+const ICON_SIZE = 64; // taille de base doublée (16 → 32)
 
 const Socials = ({ className }) => {
   return (
