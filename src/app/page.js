@@ -48,40 +48,44 @@ export default function Home() {
         {/* TITRE ABOUT EN FONT AMSTERDAM */}   
         <div className="mt-15t lg:mt-[2.275rem] xl:mt-[2.275rem] pt-2 px-2 flex flex-col items-center" ref={aboutRef}>
           
-          {/* BLOC TITRE + PARAGRAPHES + AVATAR alignés ensemble */}
-          <div className="relative max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
+          {/* BLOC TITRE + PARAGRAPHES alignés ensemble */}
+          <div className="max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
 
-            {/* AVATAR — positionné à droite du bloc About */}
-            <div
-              className="
-                absolute z-10
-                -right-4 top-0
-                w-[100px] h-[100px]
-                sm:w-[130px] sm:h-[130px] sm:-top-4
-                md:w-[160px] md:h-[160px] md:-top-4
-                lg:w-[140px] lg:h-[140px] lg:-top-8
-                xl:w-[160px] xl:h-[160px] xl:-top-8
-                2xl:w-[200px] 2xl:h-[200px] 2xl:-top-12
-                rounded-full overflow-hidden"
-            >
-              <img
-                src="/images/contenu/avatar.png"
-                alt="avatar"
-                className="w-full h-full object-cover object-center"
-                style={{ objectPosition: "center 15%" }}
-              />
+            {/* TITRE + AVATAR côte à côte */}
+            <div className="flex items-center gap-4 mt-4 lg:mt-[2.275rem] mb-[2.275rem]">
+
+              <h1
+                className="text-[1.5rem] lg:text-[3rem] xl:text-[3rem]"
+                style={{
+                  fontFamily: "'Amsterdam', cursive",
+                  textDecoration: "underline",
+                  color: "#664b23",
+                }}
+              >
+                {t.sections.about}
+              </h1>
+
+              {/* AVATAR — juste à droite du titre */}
+              <div
+                className="
+                  flex-shrink-0
+                  w-[60px] h-[60px]
+                  sm:w-[80px] sm:h-[80px]
+                  md:w-[90px] md:h-[90px]
+                  lg:w-[80px] lg:h-[80px]
+                  xl:w-[90px] xl:h-[90px]
+                  2xl:w-[110px] 2xl:h-[110px]
+                  rounded-full overflow-hidden"
+              >
+                <img
+                  src="/images/contenu/avatar.png"
+                  alt="avatar"
+                  className="w-full h-full object-cover object-center"
+                  style={{ objectPosition: "center 15%" }}
+                />
+              </div>
+
             </div>
-            
-            <h1
-              className="text-[1.5rem] mt-4 lg:text-[3rem] xl:text-[3rem] mb-[2.275rem] lg:mt-[2.275rem] lg:mb-[2.275rem] xl:mt-[2.275rem] xl:mb-[2.275rem]"
-              style={{
-                fontFamily: "'Amsterdam', cursive",
-                textDecoration: "underline",
-                color: "#664b23",
-              }}
-            >
-              {t.sections.about}
-            </h1>
 
             {/* PARAGRAPHE ABOUT À PARTIR DU FICHIER JSON */}
             <div className="text-xl lg:text-[1rem] xl:text-[0.952rem] 2xl:text-[1.9rem] leading-relaxed xl:leading-loose 2xl:leading-loose" style={{ color: "#7a5a2a" }}>
