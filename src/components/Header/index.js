@@ -117,7 +117,7 @@ const useSearch = () => {
    *--------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
   const highlight = useCallback((query) => {
     clearHighlights();
-    if (!query || query.trim().length < 2) return;
+    if (!query || query.trim().length < 1) return;
 
     const root = document.querySelector("main");
     if (!root) return;
@@ -220,8 +220,16 @@ const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
   }, [isOpen]);
 
   const handleChange = (e) => {
-    setValue(e.target.value);
-    onSearch(e.target.value);
+    const newValue = e.target.value;
+    setValue(newValue);
+
+    // Annule le timer précédent à chaque frappe
+    if (handleChange._timer) clearTimeout(handleChange._timer);
+
+    // Lance la recherche 220ms après la dernière frappe
+    handleChange._timer = setTimeout(() => {
+      onSearch(newValue);
+    }, 220);
   };
 
   /*
