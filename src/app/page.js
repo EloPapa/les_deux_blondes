@@ -46,7 +46,7 @@ export default function Home() {
         </div>
 
         {/* TITRE ABOUT EN FONT AMSTERDAM */}   
-        <div className="mt-4 lg:mt-[1rem] xl:mt-[1rem] pt-1 px-2 flex flex-col items-center" ref={aboutRef}>
+        <div className="mt-0 lg:mt-[1rem] xl:mt-[1rem] pt-1 px-2 flex flex-col items-center" ref={aboutRef}>
           
           {/* BLOC TITRE + PARAGRAPHES alignés ensemble */}
           <div className="max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
