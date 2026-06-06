@@ -55,14 +55,14 @@ export default function Home() {
             <div
               className="
                 absolute z-10
-                right-0 -top-4
+                right-0 top-0
                 w-[100px] h-[100px]
-                sm:w-[130px] sm:h-[130px]
-                md:w-[160px] md:h-[160px]
-                lg:w-[140px] lg:h-[140px]
-                xl:w-[160px] xl:h-[160px]
-                2xl:w-[200px] 2xl:h-[200px]
-                rounded-full overflow-hidden"
+                sm:w-[130px] sm:h-[130px] top-4
+                md:w-[160px] md:h-[160px] top-4
+                lg:w-[140px] lg:h-[140px] top-8
+                xl:w-[160px] xl:h-[160px] top-8
+                2xl:w-[200px] 2xl:h-[200px] top-12
+                rounded-full overflow-hidden" top-12
             >
               <img
                 src="/images/contenu/avatar.png"
