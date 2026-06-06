@@ -67,28 +67,10 @@ const CloseIcon = ({ size = 14, color = "#664b23" }) => (
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * useSearch — hook personnalisé qui encapsule toute la logique de recherche dans la page.
-*
-* highlight(query) — parcourt tous les nœuds texte du <main>, entoure les occurrences
-*                    trouvées dans des <mark> jaunes, puis scrolle vers le premier résultat.
-*
-* clearHighlights() — supprime tous les <mark> injectés et remet le texte original.
-*
-* Pourquoi on manipule le DOM directement ?
-*   React ne gère pas les nœuds texte bruts — on a besoin de TreeWalker (API DOM native)
-*   pour trouver les occurrences dans n'importe quel composant enfant sans modifier leur code.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const useSearch = () => {
-  /*
-   * Référence vers tous les <mark> créés, pour pouvoir les supprimer proprement.
-   * useRef ici parce qu'on ne veut PAS de re-rendu quand la liste change.
-   */
   const marksRef = useRef([]);
 
-  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-   * clearHighlights — supprime chaque <mark> en remplaçant le nœud par son contenu texte.
-   * node.parentNode.replaceChild(textNode, node) → retire le <mark> et remet le texte brut.
-   * normalize() fusionne les nœuds texte adjacents (évite la fragmentation du DOM).
-   *--------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
   const clearHighlights = useCallback(() => {
     marksRef.current.forEach((mark) => {
       if (mark.parentNode) {
@@ -100,21 +82,6 @@ const useSearch = () => {
     marksRef.current = [];
   }, []);
 
-  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-   * highlight — trouve et surligne toutes les occurrences de `query` dans le <main>.
-   *
-   * TreeWalker : API DOM qui traverse l'arbre des nœuds. On filtre sur NodeFilter.SHOW_TEXT
-   * pour ne visiter que les nœuds texte (pas les balises).
-   *
-   * On évite de chercher dans les <mark> déjà créés (nodeName === "MARK") pour ne pas
-   * créer de doublons si on relance la recherche.
-   *
-   * Pour chaque nœud texte qui contient la query :
-   *   1. On découpe le texte autour de l'occurrence (splitText)
-   *   2. On crée un <mark> avec le texte trouvé
-   *   3. On insère le <mark> à la bonne position dans le DOM
-   *   4. On mémorise le <mark> dans marksRef pour pouvoir le retirer plus tard
-   *--------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
   const highlight = useCallback((query) => {
     clearHighlights();
     if (!query || query.trim().length < 1) return;
@@ -124,12 +91,6 @@ const useSearch = () => {
 
     const queryLower = query.toLowerCase();
 
-    /*
-     * TreeWalker — visiteur de nœuds DOM.
-     * NodeFilter.SHOW_TEXT  → ne retourne que les nœuds texte.
-     * Le filtre rejette les nœuds dont l'ancêtre direct est déjà un <mark>
-     * et les nœuds vides (whitespace only).
-     */
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode: (node) => {
         if (node.parentNode?.nodeName === "MARK") return NodeFilter.FILTER_REJECT;
@@ -146,42 +107,27 @@ const useSearch = () => {
       }
     }
 
-    /*
-     * On traite les nœuds après la traversée pour ne pas perturber le TreeWalker
-     * (modifier le DOM pendant la traversée peut sauter des nœuds).
-     */
     nodesToProcess.forEach((node) => {
       const text = node.textContent;
       const lowerText = text.toLowerCase();
       let lastIndex = 0;
       let idx;
 
-      /*
-       * Fragment temporaire pour construire le remplacement :
-       * [texte avant][<mark>occurrence</mark>][texte après][<mark>...]...
-       */
       const fragment = document.createDocumentFragment();
 
       while ((idx = lowerText.indexOf(queryLower, lastIndex)) !== -1) {
-        // texte avant l'occurrence
         if (idx > lastIndex) {
-          fragment.appendChild(
-            document.createTextNode(text.slice(lastIndex, idx))
-          );
+          fragment.appendChild(document.createTextNode(text.slice(lastIndex, idx)));
         }
-
-        // le <mark> avec l'occurrence
         const mark = document.createElement("mark");
         mark.textContent = text.slice(idx, idx + query.length);
         mark.style.cssText =
           "background-color: #fdeea0; color: #664b23; border-radius: 2px; padding: 0 1px;";
         fragment.appendChild(mark);
         marksRef.current.push(mark);
-
         lastIndex = idx + query.length;
       }
 
-      // texte restant après la dernière occurrence
       if (lastIndex < text.length) {
         fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
       }
@@ -189,28 +135,21 @@ const useSearch = () => {
       node.parentNode.replaceChild(fragment, node);
     });
 
-    // Scroll vers le premier résultat trouvé
     if (marksRef.current.length > 0) {
       marksRef.current[0].scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [clearHighlights]);
 
-  return { highlight, clearHighlights, count: marksRef.current.length };
+  return { highlight, clearHighlights };
 };
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* SearchBar — champ de recherche animé, partagé mobile et desktop.
-*
-* Props :
-*   isOpen        — booléen : le champ est-il visible ?
-*   onClose       — ferme la barre et efface les surlignages
-*   onSearch      — appelé à chaque frappe avec la valeur courante
-*   inputRef      — ref passée depuis le parent pour focus automatique
-*   textColor     — couleur du texte (cohérence avec le thème)
+* SearchBar — champ de recherche. La recherche se déclenche sur Enter, se ferme sur Escape.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
   const [value, setValue] = useState("");
 
+  // Vide le champ quand la barre se ferme
   useEffect(() => {
     if (!isOpen) setValue("");
   }, [isOpen]);
@@ -219,20 +158,9 @@ const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
     setValue(e.target.value);
   };
 
-  /*
-   * Enter  → lance la recherche.
-   * Escape → ferme la barre.
-   */
+  // Enter → recherche, Escape → ferme
   const handleKeyDown = (e) => {
     if (e.key === "Enter") onSearch(value);
-    if (e.key === "Escape") onClose();
-  };
-
-  /*
-   * Escape → ferme la barre.
-   * Enter  → ne fait rien de plus (la recherche est déjà en temps réel).
-   */
-  const handleKeyDown = (e) => {
     if (e.key === "Escape") onClose();
   };
 
@@ -241,9 +169,7 @@ const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
   return (
     <div
       className="flex items-center gap-1"
-      style={{
-        animation: "searchFadeIn 0.18s ease",
-      }}
+      style={{ animation: "searchFadeIn 0.18s ease" }}
     >
       <style>{`
         @keyframes searchFadeIn {
@@ -341,35 +267,20 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
     return nameStyleDesktop;
   };
 
-  /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-   * État de la barre de recherche — partagé entre mobile et desktop.
-   * searchOpen   → true = la barre est visible
-   * inputRef     → permet de donner le focus automatiquement à l'input quand on ouvre
-   *------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef(null);
   const { highlight, clearHighlights } = useSearch();
 
-  /*
-   * Ouvre la barre et met le focus sur l'input au prochain tick
-   * (le input n'existe dans le DOM qu'après le re-rendu).
-   */
   const openSearch = () => {
     setSearchOpen(true);
     setTimeout(() => inputRef.current?.focus(), 50);
   };
 
-  /*
-   * Ferme la barre et efface tous les surlignages dans la page.
-   */
   const closeSearch = () => {
     setSearchOpen(false);
     clearHighlights();
   };
 
-  /*
-   * Appelé à chaque frappe — lance le surlignage en temps réel.
-   */
   const handleSearch = (query) => {
     highlight(query);
   };
@@ -404,7 +315,6 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
                 className="flex items-center gap-2 mr-2"
                 style={{ color: textColor }}
               >
-                {/* BARRE DE RECHERCHE (mobile) — remplace les boutons quand ouverte */}
                 {searchOpen ? (
                   <SearchBar
                     isOpen={searchOpen}
@@ -415,7 +325,6 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
                   />
                 ) : (
                   <>
-                    {/* LOUPE */}
                     <button
                       onClick={openSearch}
                       className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity"
@@ -424,12 +333,10 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
                       <SearchIcon size={18} color={textColor} />
                     </button>
 
-                    {/* BOUTON LANGUE */}
                     <Button onClick={toggle}>
                       {lang === "fr" ? "EN" : "FR"}
                     </Button>
 
-                    {/* HAMBURGER */}
                     <PopoverButton>
                       <MenuIcon open={open} />
                     </PopoverButton>
@@ -451,11 +358,9 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
                 <Button onClick={handleContentScroll}>
                   {t.header.content}
                 </Button>
-
                 <Button onClick={handleAboutScroll}>
                   {t.header.about}
                 </Button>
-
                 <Button onClick={handleContactScroll}>
                   {t.header.contact}
                 </Button>
@@ -489,7 +394,6 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
         {/* BOUTONS + RECHERCHE */}
         <div className="flex items-center gap-3 lg:gap-[0.98rem] xl:gap-[1.4rem] 2xl:gap-[2.2rem]">
 
-          {/* BARRE DE RECHERCHE (desktop) — apparaît à gauche du bouton langue */}
           {searchOpen && (
             <SearchBar
               isOpen={searchOpen}
@@ -518,7 +422,7 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
             </span>
           </Button>
 
-          {/* LOUPE — à gauche du bouton langue */}
+          {/* LOUPE */}
           <button
             onClick={searchOpen ? closeSearch : openSearch}
             className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity"
