@@ -210,29 +210,22 @@ const useSearch = () => {
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
   const [value, setValue] = useState("");
-  const timerRef = useRef(null); // ← stocke le timer entre les rendus
 
-  /*
-   * Quand isOpen passe à false, on vide le champ et annule tout timer en cours.
-   */
   useEffect(() => {
-    if (!isOpen) {
-      setValue("");
-      if (timerRef.current) clearTimeout(timerRef.current);
-    }
+    if (!isOpen) setValue("");
   }, [isOpen]);
 
   const handleChange = (e) => {
-    const newValue = e.target.value;
-    setValue(newValue);
+    setValue(e.target.value);
+  };
 
-    // Annule le timer précédent à chaque frappe
-    if (timerRef.current) clearTimeout(timerRef.current);
-
-    // Lance la recherche 300ms après la dernière frappe
-    timerRef.current = setTimeout(() => {
-      onSearch(newValue);
-    }, 300);
+  /*
+   * Enter  → lance la recherche.
+   * Escape → ferme la barre.
+   */
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") onSearch(value);
+    if (e.key === "Escape") onClose();
   };
 
   /*
