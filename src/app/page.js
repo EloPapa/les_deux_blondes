@@ -16,7 +16,7 @@ export default function Home() {
 
   /* AJUSTER LE OFFSET QUAND ON SCROLL TO A PARTIR DU DES BOUTONS DU HEADER */
   const getHeaderOffset = () => {
-    if (window.innerWidth < 640) return 8;  
+    if (window.innerWidth < 640) return 10;  
     if (window.innerWidth < 1024) return -35; // Écran Large
     return -35; // Écran XL et plus
   };
