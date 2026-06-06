@@ -46,7 +46,7 @@ export default function Home() {
         </div>
 
         {/* TITRE ABOUT EN FONT AMSTERDAM */}   
-        <div className="mt-0 lg:mt-[1rem] xl:mt-[1rem] pt-1 px-2 flex flex-col items-center" ref={aboutRef}>
+        <div className="mt-4 lg:mt-[1rem] xl:mt-[1rem] pt-1 px-2 flex flex-col items-center" ref={aboutRef}>
           
           {/* BLOC TITRE + PARAGRAPHES alignés ensemble */}
           <div className="max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
@@ -88,7 +88,7 @@ export default function Home() {
             </div>
 
             {/* PARAGRAPHE ABOUT À PARTIR DU FICHIER JSON */}
-            <div className="text-xl lg:text-[1rem] xl:text-[0.952rem] 2xl:text-[1.9rem] leading-relaxed xl:leading-loose 2xl:leading-loose" style={{ color: "#7a5a2a" }}>
+            <div className="mt-4 lg:mt-6 xl:mt-6 2xl:mt-8 text-xl lg:text-[1rem] xl:text-[0.952rem] 2xl:text-[1.9rem] leading-relaxed xl:leading-loose 2xl:leading-loose" style={{ color: "#7a5a2a" }}>
               {aboutParagraphs.map((paragraph, index) => (
                 <p key={index} className="mb-3 lg:mb-[1.05rem] xl:mb-[1.05rem] 2xl:mb-8">
                   {paragraph}
