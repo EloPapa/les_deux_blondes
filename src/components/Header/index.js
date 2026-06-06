@@ -296,28 +296,28 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
   const nameStyleMobile = {
     color: textColor,
     fontFamily: "'Amsterdam', cursive",
-    fontSize: "1rem",
+    fontSize: "1.3rem",
     paddingLeft: "0.5rem",
   };
 
   const nameStyleDesktop = {
     color: textColor,
     fontFamily: "'Amsterdam', cursive",
-    fontSize: "1.25rem",
+    fontSize: "1.625rem",
     paddingLeft: "0.0rem",
   };
 
   const nameStyleLG = {
     color: textColor,
     fontFamily: "'Amsterdam', cursive",
-    fontSize: "1.309rem",
+    fontSize: "1.702rem",
     paddingLeft: "0.0rem",
   };
 
   const nameStyleXL = {
     color: textColor,
     fontFamily: "'Amsterdam', cursive",
-    fontSize: "1.87rem",
+    fontSize: "2.431rem",
     paddingLeft: "0.0rem",
   };
 
