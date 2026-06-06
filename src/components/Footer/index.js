@@ -4,8 +4,6 @@ import { useLanguage } from "../../context/LanguageContext";
 import Button from "../Button";
 import Socials from "../Socials";
 
-
-
 const Footer = () => {
   const { t } = useLanguage();
   
