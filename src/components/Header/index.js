@@ -210,13 +210,16 @@ const useSearch = () => {
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
   const [value, setValue] = useState("");
+  const timerRef = useRef(null); // ← stocke le timer entre les rendus
 
   /*
-   * Quand isOpen passe à false, on vide le champ.
-   * Quand isOpen passe à true, le focus est géré par le parent via inputRef.
+   * Quand isOpen passe à false, on vide le champ et annule tout timer en cours.
    */
   useEffect(() => {
-    if (!isOpen) setValue("");
+    if (!isOpen) {
+      setValue("");
+      if (timerRef.current) clearTimeout(timerRef.current);
+    }
   }, [isOpen]);
 
   const handleChange = (e) => {
@@ -224,12 +227,12 @@ const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
     setValue(newValue);
 
     // Annule le timer précédent à chaque frappe
-    if (handleChange._timer) clearTimeout(handleChange._timer);
+    if (timerRef.current) clearTimeout(timerRef.current);
 
-    // Lance la recherche 220ms après la dernière frappe
-    handleChange._timer = setTimeout(() => {
+    // Lance la recherche 300ms après la dernière frappe
+    timerRef.current = setTimeout(() => {
       onSearch(newValue);
-    }, 220);
+    }, 300);
   };
 
   /*
