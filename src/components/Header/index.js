@@ -1,78 +1,18 @@
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * "use client" c'est une directive Next.js qui dit : ce composant tourne dans le navigateur, pas sur le serveur.
-* 
-* Next.js a deux environnements :
-*
-* SERVEUR                          NAVIGATEUR (client)
-* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-* génère le HTML                   affiche le HTML
-* pas d'interactivité              interactivité possible
-* pas accès à window/document      accès à window/document
-* hooks React interdits            hooks React autorisés
-*
-* Par défaut dans Next.js, tous les composants sont "serveur". Si tu utilises des hooks ou des événements sans "use client", tu obtiens des erreurs.
-* En résumé — "use client" c'est la permission d'utiliser tout ce qui est interactif et dynamique.
-*
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 "use client";
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* C'est l'import de base de React avec deux de ses hooks (fonctionnalités) les plus fondamentaux.
-* React — la librairie elle-même. Sans elle, ton fichier ne sait pas ce qu'est un composant, ni comment interpréter le JSX.
-*
-* useState  — permet à un composant de mémoriser une valeur qui peut changer. Quand la valeur change, React re-rend le composant automatiquement.
-* useEffect — permet d'exécuter du code après le rendu. Utile pour tout ce qui ne peut pas tourner pendant le rendu (appels API, événements, timers...).
-*
-* En résumé — React c'est le moteur, useState c'est la mémoire, useEffect c'est le moment où tu agis.
-*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-import React, { useEffect, useState } from "react";
-/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* useRouter c'est un hook (fonctionnalité spécialisée) de Next.js qui te donne un objet router pour naviguer entre les pages par du code, sans que l'utilisateur clique sur un lien <a>.
-*
-* Les méthodes les plus utiles
-* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-* router.push("/about")      // navigue vers /about
-* router.push("/")            // retourne à l'accueil
-* router.back()               // page précédente (comme le bouton ← du navigateur)
-* router.refresh()            // recharge la page courante
-* router.replace("/login")    // navigue SANS ajouter à l'historique (l'user ne peut pas revenir en arrière)
-*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* headlessui c'est une librairie de composants UI qui gèrent la logique et l'accessibilité, mais sans aucun style visuel.
-*
-* Librairie normale (ex: MUI, Bootstrap)    Headlessui
-* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━    ━━━━━━━━━━━━━━━━━━━━━
-*✅ logique (ouvert/fermé)                 ✅ logique (ouvert/fermé)
-*✅ accessibilité (ARIA, clavier)          ✅ accessibilité (ARIA, clavier)
-*✅ styles imposés (couleurs, bordures)    ❌ zéro style — tu fais le tien
-* headlessui:
-* ━━━━━━━━━━
-* gère automatiquement le open/close sans que tu écrives un useState
-* ferme le panneau si tu cliques en dehors
-* gère les touches clavier (Escape pour fermer, Tab pour naviguer)
-* ajoute les bons attributs ARIA pour l'accessibilité
-*
-* Popover — le conteneur parent. C'est lui qui gère l'état ouvert/fermé. Il ne rend rien de visible
-* PopoverButton — le déclencheur visible. C'est le bouton cliquable qui dit au Popover "ouvre-toi" ou "ferme-toi". Sans lui, rien ne peut s'ouvrir.
-* PopoverPanel — le contenu qui apparaît/disparaît. Il est automatiquement caché ou affiché selon l'état du Popover parent. C'est là que tu mets tes liens, boutons, etc.
-*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react"; 
-/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-import { useLanguage } from "../../context/LanguageContext"; // importe le hook useLanguage depuis un fichier spécifique du projet.  — importation nommée (named import). Les accolades indiquent que ce n'est pas l'export par défaut du fichier, mais un export qui porte explicitement ce nom
-
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import { useLanguage } from "../../context/LanguageContext";
 import Button from "../Button";
 import data from "../../data/lesDeuxBlondes.json";
 
-/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* const MenuIcon = ({ open, mounted, currentTheme }) => { 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* MenuIcon — icône hamburger / croix selon l'état open du Popover.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const MenuIcon = ({ open }) => {
   return (
     <img
@@ -82,114 +22,277 @@ const MenuIcon = ({ open }) => {
     />
   );
 };
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* Déclaration du composant React HEADER avec déstructuration des props (propirétés).
-*
-* ({ handleAboutScroll, handlePresentationVideoScroll }) — les props que le composant reçoit de son parent, déstructurées directement.
-*
-* Sans déstructuration, ce serait :
-*
-* const Header = (props) => {
-*  const handleAboutScroll = props.handleAboutScroll;
-*  const handlePresentationVideoScroll = props.handlePresentationVideoScroll;
-*
-* => — syntaxe arrow function. Dit à JS "ce qui suit est le corps de la fonction".
-*
-* En résumé — ({ handleAboutScroll, handlePresentationVideoScroll }) c'est la porte d'entrée du composant : ce sont les instructions que le parent (page.JS) lui passe pour qu'il sache quoi
-* faire quand on clique sur ses boutons. 
+* SearchIcon — loupe SVG inline, pas de dépendance externe.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll}) => {
-  
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  * useRouter() est un hook (fonction spécialisée) de Next.js qui donne accès au routeur de navigation
-  * En l'appelant, tu récupères un objet router qui permet de naviguer entre les pages sans recharger la page — comme un lien, mais contrôlé par du code.
-  * Exemple:
-  *  
-  * <h1 onClick={() => router.push("/")}>
-  *   {name}.
-  * </h1>
-  * 
-  * Quand on clique sur le nom, ça redirige vers la page d'accueil sans rechargement.
-  *
-  * Les méthodes les plus courantes de router :
-  * router.push("/about") ----------- Navigue vers about
-  * router.back()-------------------- Retourne à la page précédente
-  * router.refresh()----------------- Recharge la page courante
-  * router.replace("/")-------------- Navigue sans ajouter à l'historique
-  *-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  */ const router = useRouter();
-  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
-    
- /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- * const [mounted, setMounted] = useState(false)
- * Pattern classique pour gérer l'hydratation SSR en Next.js. Un simple state booléen, initialisé à false, avec son setter.
- * Souvent utilisé pour savoir : "est-ce que le composant est déjà rendu côté client ?"
- * En Next.js, le composant est d'abord rendu côté serveur (HTML statique), puis "hydraté" côté client. Pendant ce délai, des hooks comme useTheme() ne sont pas encore disponibles
- * — resolvedTheme vaut undefined.
- * Si tu affiches quand même une icône ou une couleur basée sur le thème, tu obtiens un mismatch hydratation : le serveur rend X, le client rend Y → erreur React + flash visuel.
- * 
- * const [mounted, setMounted] = useState(false);
- * mounted → valeur actuelle setMounted ; → fonction pour changer la valeur ; false → valeur initiale
- * 
- * Ex
- * 
- * useEffect(() => {
- *    setMounted(true);
- * }, []); // se déclenche uniquement côté client, après le montage
- * 
- * if (!mounted) return null; // ou un skeleton
- * 
- * useEffect ne tourne jamais sur le serveur, donc mounted passe à true uniquement côté client, signalant que l'environnement est prêt.
- * 
- * 
- * mounted est un garde-fou qui empêche de rendre du contenu dépendant du client avant que le client soit prêt.
- *------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- */ const [mounted, setMounted] = useState(false);
- /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  * Ce useEffect règle un problème précis : savoir si le composant est réellement affiché dans le navigateur.
-  * () => { setMounted(true) } — la fonction exécutée après le rendu.
-  * [] — tableau de dépendances vide : l'effet ne tourne qu'une seule fois, au premier rendu. Jamais après.
-  * 
-  * 1. React rend le composant    →  mounted = false
-  * 2. L'HTML apparaît dans le DOM
-  * 3. useEffect se déclenche     →  setMounted(true)
-  * 4. React re-rend              →  mounted = true 
-  *------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+const SearchIcon = ({ size = 18, color = "#664b23" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={color}
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="11" cy="11" r="7" />
+    <line x1="17" y1="17" x2="22" y2="22" />
+  </svg>
+);
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* CloseIcon — petite croix pour fermer le champ de recherche.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+const CloseIcon = ({ size = 14, color = "#664b23" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={color}
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* useSearch — hook personnalisé qui encapsule toute la logique de recherche dans la page.
+*
+* highlight(query) — parcourt tous les nœuds texte du <main>, entoure les occurrences
+*                    trouvées dans des <mark> jaunes, puis scrolle vers le premier résultat.
+*
+* clearHighlights() — supprime tous les <mark> injectés et remet le texte original.
+*
+* Pourquoi on manipule le DOM directement ?
+*   React ne gère pas les nœuds texte bruts — on a besoin de TreeWalker (API DOM native)
+*   pour trouver les occurrences dans n'importe quel composant enfant sans modifier leur code.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+const useSearch = () => {
+  /*
+   * Référence vers tous les <mark> créés, pour pouvoir les supprimer proprement.
+   * useRef ici parce qu'on ne veut PAS de re-rendu quand la liste change.
+   */
+  const marksRef = useRef([]);
+
+  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   * clearHighlights — supprime chaque <mark> en remplaçant le nœud par son contenu texte.
+   * node.parentNode.replaceChild(textNode, node) → retire le <mark> et remet le texte brut.
+   * normalize() fusionne les nœuds texte adjacents (évite la fragmentation du DOM).
+   *--------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+  const clearHighlights = useCallback(() => {
+    marksRef.current.forEach((mark) => {
+      if (mark.parentNode) {
+        const text = document.createTextNode(mark.textContent);
+        mark.parentNode.replaceChild(text, mark);
+        mark.parentNode.normalize();
+      }
+    });
+    marksRef.current = [];
+  }, []);
+
+  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   * highlight — trouve et surligne toutes les occurrences de `query` dans le <main>.
+   *
+   * TreeWalker : API DOM qui traverse l'arbre des nœuds. On filtre sur NodeFilter.SHOW_TEXT
+   * pour ne visiter que les nœuds texte (pas les balises).
+   *
+   * On évite de chercher dans les <mark> déjà créés (nodeName === "MARK") pour ne pas
+   * créer de doublons si on relance la recherche.
+   *
+   * Pour chaque nœud texte qui contient la query :
+   *   1. On découpe le texte autour de l'occurrence (splitText)
+   *   2. On crée un <mark> avec le texte trouvé
+   *   3. On insère le <mark> à la bonne position dans le DOM
+   *   4. On mémorise le <mark> dans marksRef pour pouvoir le retirer plus tard
+   *--------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+  const highlight = useCallback((query) => {
+    clearHighlights();
+    if (!query || query.trim().length < 2) return;
+
+    const root = document.querySelector("main");
+    if (!root) return;
+
+    const queryLower = query.toLowerCase();
+
+    /*
+     * TreeWalker — visiteur de nœuds DOM.
+     * NodeFilter.SHOW_TEXT  → ne retourne que les nœuds texte.
+     * Le filtre rejette les nœuds dont l'ancêtre direct est déjà un <mark>
+     * et les nœuds vides (whitespace only).
+     */
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: (node) => {
+        if (node.parentNode?.nodeName === "MARK") return NodeFilter.FILTER_REJECT;
+        if (!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      },
+    });
+
+    const nodesToProcess = [];
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (node.textContent.toLowerCase().includes(queryLower)) {
+        nodesToProcess.push(node);
+      }
+    }
+
+    /*
+     * On traite les nœuds après la traversée pour ne pas perturber le TreeWalker
+     * (modifier le DOM pendant la traversée peut sauter des nœuds).
+     */
+    nodesToProcess.forEach((node) => {
+      const text = node.textContent;
+      const lowerText = text.toLowerCase();
+      let lastIndex = 0;
+      let idx;
+
+      /*
+       * Fragment temporaire pour construire le remplacement :
+       * [texte avant][<mark>occurrence</mark>][texte après][<mark>...]...
+       */
+      const fragment = document.createDocumentFragment();
+
+      while ((idx = lowerText.indexOf(queryLower, lastIndex)) !== -1) {
+        // texte avant l'occurrence
+        if (idx > lastIndex) {
+          fragment.appendChild(
+            document.createTextNode(text.slice(lastIndex, idx))
+          );
+        }
+
+        // le <mark> avec l'occurrence
+        const mark = document.createElement("mark");
+        mark.textContent = text.slice(idx, idx + query.length);
+        mark.style.cssText =
+          "background-color: #fdeea0; color: #664b23; border-radius: 2px; padding: 0 1px;";
+        fragment.appendChild(mark);
+        marksRef.current.push(mark);
+
+        lastIndex = idx + query.length;
+      }
+
+      // texte restant après la dernière occurrence
+      if (lastIndex < text.length) {
+        fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+      }
+
+      node.parentNode.replaceChild(fragment, node);
+    });
+
+    // Scroll vers le premier résultat trouvé
+    if (marksRef.current.length > 0) {
+      marksRef.current[0].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [clearHighlights]);
+
+  return { highlight, clearHighlights, count: marksRef.current.length };
+};
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* SearchBar — champ de recherche animé, partagé mobile et desktop.
+*
+* Props :
+*   isOpen        — booléen : le champ est-il visible ?
+*   onClose       — ferme la barre et efface les surlignages
+*   onSearch      — appelé à chaque frappe avec la valeur courante
+*   inputRef      — ref passée depuis le parent pour focus automatique
+*   textColor     — couleur du texte (cohérence avec le thème)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
+  const [value, setValue] = useState("");
+
+  /*
+   * Quand isOpen passe à false, on vide le champ.
+   * Quand isOpen passe à true, le focus est géré par le parent via inputRef.
+   */
+  useEffect(() => {
+    if (!isOpen) setValue("");
+  }, [isOpen]);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    onSearch(e.target.value);
+  };
+
+  /*
+   * Escape → ferme la barre.
+   * Enter  → ne fait rien de plus (la recherche est déjà en temps réel).
+   */
+  const handleKeyDown = (e) => {
+    if (e.key === "Escape") onClose();
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="flex items-center gap-1"
+      style={{
+        animation: "searchFadeIn 0.18s ease",
+      }}
+    >
+      <style>{`
+        @keyframes searchFadeIn {
+          from { opacity: 0; transform: translateX(8px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+      `}</style>
+      <input
+        ref={inputRef}
+        type="text"
+        value={value}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        placeholder="Rechercher…"
+        className="outline-none bg-transparent border-b text-sm"
+        style={{
+          borderColor: textColor,
+          color: textColor,
+          width: "140px",
+          paddingBottom: "1px",
+          fontSize: "0.85rem",
+        }}
+        aria-label="Rechercher dans la page"
+      />
+      <button
+        onClick={onClose}
+        className="flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity"
+        aria-label="Fermer la recherche"
+      >
+        <CloseIcon color={textColor} />
+      </button>
+    </div>
+  );
+};
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* Header — composant principal.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll }) => {
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
     setMounted(true);
   }, []);
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
- /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- * const { lang, t, toggle } = useLanguage()
- * hook personnalisé React (fonction spécialisée). Il encapsule toute la logique liée à la langue de l'application et retourne un objet avec plusieurs propriétés.
- * 
- * lang — la langue active en ce moment (ex: "fr", "en"). C'est probablement une chaîne de caractères ou une valeur d'état (useState).
- * t    — probablement une fonction de traduction (convention très courante). On l'appelle avec une clé et elle retourne le texte dans la bonne langue : t("welcome") // → "Bienvenue" ou "Welcome" selon lang
- * toggle — une fonction pour basculer entre les langues (ex: FR ↔ EN). On l'appelle sans argument ou avec une langue cible : toggle() // passe de "fr" à "en" et vice-versa
- * 
- * Sans déstructuration, ce serait :
- * const language = useLanguage();
- * const lang   = language.lang;
- * const t      = language.t;
- * const toggle = language.toggle;
- * 
- * Avec déstructuration, en une ligne :
- * const { lang, t, toggle } = useLanguage();
- * -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- */  const { lang, t, toggle } = useLanguage();
-  /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-     
-  const { name } = data;  
+  const { lang, t, toggle } = useLanguage();
+  const { name } = data;
+
   const textColor = "#664b23";
-  const backgroundGradient = "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)";
-  /*Miel Ambré: "linear-gradient(to bottom, transparent 60%, #fff8f0 100%), linear-gradient(to right, #fff8f0 0%, #fed8a8 30%, #fdc07e 50%, #fed8a8 70%, #fff8f0 100%)";*/ 
-  /*Jaune Doux: "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%);"*/
-  /*rosé:"linear-gradient(to bottom, transparent 60%, #fef2f5 100%), linear-gradient(to right, #fef2f5 0%, #f9d0de 30%, #f5b8cc 50%, #f9d0de 70%, #fef2f5 100%)"; */ 
-  
+  const backgroundGradient =
+    "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)";
+
   const nameStyleMobile = {
     color: textColor,
     fontFamily: "'Amsterdam', cursive",
@@ -204,7 +307,6 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll}) 
     paddingLeft: "0.0rem",
   };
 
-  // lg = 15"–22" : xl(1.87rem) * 0.70 = 1.309rem
   const nameStyleLG = {
     color: textColor,
     fontFamily: "'Amsterdam', cursive",
@@ -212,7 +314,6 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll}) 
     paddingLeft: "0.0rem",
   };
 
-  // xl = 22"+ : inchangé
   const nameStyleXL = {
     color: textColor,
     fontFamily: "'Amsterdam', cursive",
@@ -220,181 +321,220 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll}) 
     paddingLeft: "0.0rem",
   };
 
-  /*-------------------------------------------------------------------------------------------------------------------------------
-  * Mémoriser la largeur de la fenêtre du navigateur en temps réel, pour pouvoir adapter l'affichage selon la taille de l'écran.
-  *
-  * useState c'est le hook React qui permet à un composant de mémoriser une valeur qui peut changer.
-  * const [valeur, setValeur] = useState(valeurInitiale);
-  * valeur         → ce qu'on lit
-  * setValeur      → la fonction pour changer la valeur
-  * valeurInitiale → la valeur au départ
-  * 
-  * On peut stocker n'importe quel type de valeur :
-  * const [count, setCount]       = useState(0);           // nombre
-  * const [nom, setNom]           = useState("Eric");      // string
-  * const [actif, setActif]       = useState(false);       // booléen
-  * const [liste, setListe]       = useState([]);          // tableau
-  * const [user, setUser]         = useState({});          // objet
-  * const [mounted, setMounted]   = useState(false);       // booléen — ton code
-  * 
-  * const [windowWidth, setWindowWidth] = useState(0);     // nombre — le nom de la fonction code qui set
-  * 
-  * 
-  *-------------------------------------------------------------------------------------------------------------------------------*/
-  const [windowWidth, setWindowWidth] = useState(0); 
-   /*------------------------------------------------------------------------------------------------------------------------------
-   * Définit une fonction qui mesure la largeur de la fenêtre et la mémorise.
-   * useEffect : hook React qui permet d'exécuter du code après que le composant s'est affiché dans le navigateur.
-   * useEffect(() => {  ← s'exécute après le rendu
-   * }, []);            ← une seule fois au montage
-   * 
-   * useEffect                    → 📌 React
-   * setWindowWidth               → 📌 React (useState)
-   * window.innerWidth            → 📌 JavaScript natif
-   * window.addEventListener      → 📌 JavaScript natif
-   * window.removeEventListener   → 📌 JavaScript natif
-   * update                       → 📌 User 
-   * 
-   *------------------------------------------------------------------------------------------------------------------------------*/
+  const [windowWidth, setWindowWidth] = useState(0);
+
   useEffect(() => {
     const update = () => setWindowWidth(window.innerWidth);
     update();
-    window.addEventListener("resize", update); //chaque fois que la fenêtre est redimensionnée, appelle update". "resize" → l'événement surveillé ; update → la fonction à appeler quand ça arrive
-    return () => window.removeEventListener("resize", update); // Le nettoyage — quand le composant disparaît, on arrête de surveiller le redimensionnement pour éviter les fuites mémoire.
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
-/*-------------------------------------------------------------------------------------------------------------------------------*/
 
-const getNameStyle = () => {
+  const getNameStyle = () => {
     if (!mounted) return nameStyleDesktop;
     if (windowWidth >= 1280) return nameStyleXL;
     if (windowWidth >= 1024) return nameStyleLG;
     return nameStyleDesktop;
   };
 
+  /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   * État de la barre de recherche — partagé entre mobile et desktop.
+   * searchOpen   → true = la barre est visible
+   * inputRef     → permet de donner le focus automatiquement à l'input quand on ouvre
+   *------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+  const [searchOpen, setSearchOpen] = useState(false);
+  const inputRef = useRef(null);
+  const { highlight, clearHighlights } = useSearch();
+
+  /*
+   * Ouvre la barre et met le focus sur l'input au prochain tick
+   * (le input n'existe dans le DOM qu'après le re-rendu).
+   */
+  const openSearch = () => {
+    setSearchOpen(true);
+    setTimeout(() => inputRef.current?.focus(), 50);
+  };
+
+  /*
+   * Ferme la barre et efface tous les surlignages dans la page.
+   */
+  const closeSearch = () => {
+    setSearchOpen(false);
+    clearHighlights();
+  };
+
+  /*
+   * Appelé à chaque frappe — lance le surlignage en temps réel.
+   */
+  const handleSearch = (query) => {
+    highlight(query);
+  };
+
   return (
-  <>
-    {/* 📱 MOBILE */}
-    <Popover
-      className="relative block tablet:hidden w-full z-[9999]"
-      style={{ background: backgroundGradient }}
-    >
-      {({ open }) => (
-        <>
-          <div
-            className="flex items-center justify-between px-1"
-            style={{ height: "70px" }}
-          >
-            {/* TEXTE: LES DEUX BLONDES DANS LE HEADER */}
-            <div className="flex items-center gap-2">
-              <h1
-                onClick={() => router.push("/")}
-                className="font-medium cursor-default name"
-                style={nameStyleMobile}
-              >
-                {name}.
-              </h1>
-            </div>
-
+    <>
+      {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          📱 MOBILE
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+      <Popover
+        className="relative block tablet:hidden w-full z-[9999]"
+        style={{ background: backgroundGradient }}
+      >
+        {({ open }) => (
+          <>
             <div
-              className="flex items-center gap-2 mr-2"
-              style={{ color: textColor }}
+              className="flex items-center justify-between px-1"
+              style={{ height: "70px" }}
             >
-              {/* BOUTON CHOIX LANGUE */}
-              <Button onClick={toggle}>
-                {lang === "fr" ? "EN" : "FR"}
-              </Button>
+              {/* NOM */}
+              <div className="flex items-center gap-2">
+                <h1
+                  onClick={() => router.push("/")}
+                  className="font-medium cursor-default name"
+                  style={nameStyleMobile}
+                >
+                  {name}.
+                </h1>
+              </div>
 
-              {/* BOUTON HAMBURGER */}
-              <PopoverButton>
-                <MenuIcon open={open} />
-              </PopoverButton>
+              <div
+                className="flex items-center gap-2 mr-2"
+                style={{ color: textColor }}
+              >
+                {/* BARRE DE RECHERCHE (mobile) — remplace les boutons quand ouverte */}
+                {searchOpen ? (
+                  <SearchBar
+                    isOpen={searchOpen}
+                    onClose={closeSearch}
+                    onSearch={handleSearch}
+                    inputRef={inputRef}
+                    textColor={textColor}
+                  />
+                ) : (
+                  <>
+                    {/* LOUPE */}
+                    <button
+                      onClick={openSearch}
+                      className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity"
+                      aria-label="Ouvrir la recherche"
+                    >
+                      <SearchIcon size={18} color={textColor} />
+                    </button>
+
+                    {/* BOUTON LANGUE */}
+                    <Button onClick={toggle}>
+                      {lang === "fr" ? "EN" : "FR"}
+                    </Button>
+
+                    {/* HAMBURGER */}
+                    <PopoverButton>
+                      <MenuIcon open={open} />
+                    </PopoverButton>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
 
-          {/* 📱 PANNEAU MENU OUVERT */}
-          <PopoverPanel
-            className="absolute right-2 top-full z-[9999] w-30 p-4 rounded-md shadow-md"
-            style={{
-              background: backgroundGradient,
-              color: textColor,
-              border: "1px solid rgba(180, 140, 0, 1)",
-            }}
+            {/* PANNEAU MENU OUVERT */}
+            <PopoverPanel
+              className="absolute right-2 top-full z-[9999] w-30 p-4 rounded-md shadow-md"
+              style={{
+                background: backgroundGradient,
+                color: textColor,
+                border: "1px solid rgba(180, 140, 0, 1)",
+              }}
+            >
+              <div className="flex flex-col items-center">
+                <Button onClick={handleContentScroll}>
+                  {t.header.content}
+                </Button>
+
+                <Button onClick={handleAboutScroll}>
+                  {t.header.about}
+                </Button>
+
+                <Button onClick={handleContactScroll}>
+                  {t.header.contact}
+                </Button>
+              </div>
+            </PopoverPanel>
+          </>
+        )}
+      </Popover>
+
+      {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          💻 DESKTOP
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+      <div
+        className="hidden tablet:flex justify-between items-center sticky top-0 z-10 w-full px-6"
+        style={{
+          background: backgroundGradient,
+          color: textColor,
+        }}
+      >
+        {/* NOM */}
+        <div className="flex items-center gap-3 lg:gap-[0.819rem] xl:gap-[1.17rem]">
+          <h1
+            onClick={() => router.push("/")}
+            className="font-medium cursor-default name"
+            style={getNameStyle()}
           >
-            <div className="flex flex-col items-center">
-              <Button onClick={handleContentScroll}>
-                {t.header.content}
-              </Button>
+            {name}.
+          </h1>
+        </div>
 
-              <Button onClick={handleAboutScroll}>
-                {t.header.about}
-              </Button>
+        {/* BOUTONS + RECHERCHE */}
+        <div className="flex items-center gap-3 lg:gap-[0.98rem] xl:gap-[1.4rem] 2xl:gap-[2.2rem]">
 
-              <Button onClick={handleContactScroll}>
-                {t.header.contact}
-              </Button>
-            </div>
-          </PopoverPanel>
-        </>
-      )}
-    </Popover>
+          {/* BARRE DE RECHERCHE (desktop) — apparaît à gauche du bouton langue */}
+          {searchOpen && (
+            <SearchBar
+              isOpen={searchOpen}
+              onClose={closeSearch}
+              onSearch={handleSearch}
+              inputRef={inputRef}
+              textColor={textColor}
+            />
+          )}
 
-    {/* 💻 DESKTOP */}
-    <div
-      className="hidden tablet:flex justify-between items-center sticky top-0 z-10 w-full px-6"
-      style={{
-        background: backgroundGradient,
-        color: textColor,
-      }}
-    >
-      {/* NOM */}
-      <div className="flex items-center gap-3 lg:gap-[0.819rem] xl:gap-[1.17rem]">
-        <h1
-          onClick={() => router.push("/")}
-          className="font-medium cursor-default name"
-          style={getNameStyle()}
-        >
-          {name}.
-        </h1>
+          <Button onClick={handleContentScroll}>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+              {t.header.presentation}
+            </span>
+          </Button>
+
+          <Button onClick={handleAboutScroll}>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+              {t.header.about}
+            </span>
+          </Button>
+
+          <Button onClick={handleContactScroll}>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+              {t.header.contact}
+            </span>
+          </Button>
+
+          {/* LOUPE — à gauche du bouton langue */}
+          <button
+            onClick={searchOpen ? closeSearch : openSearch}
+            className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity"
+            aria-label={searchOpen ? "Fermer la recherche" : "Ouvrir la recherche"}
+          >
+            <SearchIcon
+              size={windowWidth >= 1280 ? 20 : windowWidth >= 1024 ? 17 : 16}
+              color={textColor}
+            />
+          </button>
+
+          <Button onClick={toggle}>
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+              {lang === "fr" ? "EN" : "FR"}
+            </span>
+          </Button>
+        </div>
       </div>
+    </>
+  );
+};
 
-      {/* BOUTONS */}
-      <div className="flex items-center gap-3 lg:gap-[0.98rem] xl:gap-[1.4rem] 2xl:gap-[2.2rem]">
-        <Button onClick={handleContentScroll}>
-          <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
-            {t.header.presentation}
-          </span>
-        </Button>
-
-        <Button onClick={handleAboutScroll}>
-          <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
-            {t.header.about}
-          </span>
-        </Button>
-
-        <Button onClick={handleContactScroll}>
-          <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
-            {t.header.contact}
-          </span>
-        </Button>
-
-        <Button onClick={toggle}>
-          <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
-            {lang === "fr" ? "EN" : "FR"}
-          </span>
-        </Button>
-      </div>
-    </div>
-  </>
-);
-}; // ← fermeture du composant Header
-
- /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- * Cette ligne rend le composant disponible pour être importé ailleurs.
- *
- * export  — rend quelque chose disponible en dehors de ce fichier.
- * default — désigne cet export comme l'export principal du fichier. Un fichier ne peut avoir qu'un seul export default.
- * Header  — ce qu'on exporte, le composant qu'on a défini plus haut dans le fichier.
- * 
- * Sans cette ligne, personne ne peut utiliser le composant
- * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 export default Header;
