@@ -14,8 +14,15 @@ export default function Home() {
   const contentRef = useRef(null);
   const contactRef = useRef(null);
 
+  /* AJUSTER LE OFFSET QUAND ON SCROLL TO A PARTIR DU DES BOUTONS DU HEADER */
+  const getHeaderOffset = () => {
+    if (window.innerWidth < 640) return 40;
+    if (window.innerWidth < 1024) return 70;
+    return 275;
+  };
+
   const handleAboutScroll = () => {
-    aboutRef.current?.scrollIntoView({ behavior: "smooth" });  
+    aboutRef.current?.scrollIntoView({top: aboutRef.current.offsetTop, behavior: "smooth" });  
   };
 
   const handleContentScroll = () => {
