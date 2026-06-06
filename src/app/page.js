@@ -16,13 +16,13 @@ export default function Home() {
 
   /* AJUSTER LE OFFSET QUAND ON SCROLL TO A PARTIR DU DES BOUTONS DU HEADER */
   const getHeaderOffset = () => {
-    if (window.innerWidth < 640) return 40;  //VERS LE HAUT
-    if (window.innerWidth < 1024) return 70; //VERS LE HAUT
+    if (window.innerWidth < 640) return 40;  
+    if (window.innerWidth < 1024) return 70; 
     return 275;
   };
 
  const handleAboutScroll = () => {
-    const top = aboutRef.current.offsetTop + getHeaderOffset();
+    const top = aboutRef.current.offsetTop - getHeaderOffset(); //VERS LE HAUT
     window.scrollTo({ top, behavior: "smooth" });
 };
 
