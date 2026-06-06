@@ -46,18 +46,18 @@ export default function Home() {
         </div>
 
         {/* TITRE ABOUT EN FONT AMSTERDAM */}   
-        <div className="mt-15t lg:mt-[2.275rem] xl:mt-[2.275rem] pt-2 px-2 flex flex-col items-center" ref={aboutRef}>
+        <div className="mt-4 lg:mt-[1rem] xl:mt-[1rem] pt-1 px-2 flex flex-col items-center" ref={aboutRef}>
           
           {/* BLOC TITRE + PARAGRAPHES alignés ensemble */}
           <div className="max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
 
             {/* TITRE + AVATAR côte à côte */}
-            <div className="flex items-center gap-4 mt-4 lg:mt-[2.275rem] mb-[2.275rem]">
+            <div className="flex items-center gap-4 mt-2 lg:mt-[1rem] mb-[1rem]">
 
               {/* AVATAR — à gauche du titre, réduit de 20% */}
               <div
                 className="
-                  flex-shrink-0 mr-4 mt-0
+                  flex-shrink-0 mr-4 -mt-8
                   w-[94px] h-[94px]
                   sm:w-[125px] sm:h-[125px]
                   md:w-[140px] md:h-[140px]
@@ -75,7 +75,7 @@ export default function Home() {
               </div>
 
               <h1
-                className="text-[1.5rem] lg:text-[3rem] xl:text-[3rem]"
+                className="text-[1.95rem] lg:text-[3.9rem] xl:text-[3.9rem]"
                 style={{
                   fontFamily: "'Amsterdam', cursive",
                   textDecoration: "underline",
@@ -144,5 +144,4 @@ export default function Home() {
 * React affiche les 3 <p> dans la page
 *
 *----------------------------------------------------------------------------------------------------*/
-
 
