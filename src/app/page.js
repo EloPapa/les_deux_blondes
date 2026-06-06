@@ -17,12 +17,12 @@ export default function Home() {
   /* AJUSTER LE OFFSET QUAND ON SCROLL TO A PARTIR DU DES BOUTONS DU HEADER */
   const getHeaderOffset = () => {
     if (window.innerWidth < 640) return 5;  
-    if (window.innerWidth < 1024) return 0; 
+    if (window.innerWidth < 1024) return -5; 
     return 275;
   };
 
  const handleAboutScroll = () => {
-    const top = aboutRef.current.offsetTop - getHeaderOffset(); //VERS LE HAUT
+    const top = aboutRef.current.offsetTop - getHeaderOffset(); 
     window.scrollTo({ top, behavior: "smooth" });
 };
 
