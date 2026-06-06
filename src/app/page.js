@@ -21,9 +21,10 @@ export default function Home() {
     return 275;
   };
 
-  const handleAboutScroll = () => {
-    aboutRef.current?.scrollIntoView({top: aboutRef.current.offsetTop, behavior: "smooth" });  
-  };
+ const handleAboutScroll = () => {
+    const top = aboutRef.current.offsetTop + getHeaderOffset();
+    window.scrollTo({ top, behavior: "smooth" });
+};
 
   const handleContentScroll = () => {
     contentRef.current?.scrollIntoView({ behavior: "smooth" });  
