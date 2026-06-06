@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Button from "../Button";
+import { FaGithub, FaYoutube, FaLinkedin, FaFacebook } from "react-icons/fa";
 
 import yourData from "../../data/lesDeuxBlondes.json";
 

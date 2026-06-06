@@ -3,7 +3,7 @@
 import { useLanguage } from "../../context/LanguageContext";
 import Button from "../Button";
 import Socials from "../Socials";
-import { FaGithub, FaYoutube, FaLinkedin, FaFacebook } from "react-icons/fa";
+
 
 
 const Footer = () => {
@@ -16,10 +16,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full flex flex-col items-center mt-5">
-      <FaGithub size={24} />
-      <FaYoutube size={24} />
-      <FaLinkedin size={24} />
-      <FaFacebook size={24} />
+      
       {/* SECTION CONTACT */}
       <div className="w-full px-6 flex flex-col items-center text-center mt-auto">
         <h2 className="text-3xl tablet:text-4xl laptop:text-4xl laptopl:text-4xl font-bold">
