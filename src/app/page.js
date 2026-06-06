@@ -54,6 +54,26 @@ export default function Home() {
             {/* TITRE + AVATAR côte à côte */}
             <div className="flex items-center gap-4 mt-4 lg:mt-[2.275rem] mb-[2.275rem]">
 
+              {/* AVATAR — à gauche du titre, réduit de 20% */}
+              <div
+                className="
+                  flex-shrink-0 mr-4 -mt-8
+                  w-[94px] h-[94px]
+                  sm:w-[125px] sm:h-[125px]
+                  md:w-[140px] md:h-[140px]
+                  lg:w-[125px] lg:h-[125px]
+                  xl:w-[140px] xl:h-[140px]
+                  2xl:w-[172px] 2xl:h-[172px]
+                  rounded-full overflow-hidden"
+              >
+                <img
+                  src="/images/contenu/avatar.png"
+                  alt="avatar"
+                  className="w-full h-full object-cover object-center"
+                  style={{ objectPosition: "center 15%" }}
+                />
+              </div>
+
               <h1
                 className="text-[1.5rem] lg:text-[3rem] xl:text-[3rem]"
                 style={{
@@ -64,26 +84,6 @@ export default function Home() {
               >
                 {t.sections.about}
               </h1>
-
-              {/* AVATAR — juste à droite du titre */}
-              <div
-                className="
-                  flex-shrink-0 ml-28 -mt-8
-                  w-[117px] h-[117px]
-                  sm:w-[156px] sm:h-[156px]
-                  md:w-[175px] md:h-[175px]
-                  lg:w-[156px] lg:h-[156px]
-                  xl:w-[175px] xl:h-[175px]
-                  2xl:w-[215px] 2xl:h-[215px]
-                  rounded-full overflow-hidden"
-              >
-                <img
-                  src="/images/contenu/avatar.png"
-                  alt="avatar"
-                  className="w-full h-full object-cover object-center"
-                  style={{ objectPosition: "center 15%" }}
-                />
-              </div>
 
             </div>
 
