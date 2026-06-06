@@ -17,15 +17,16 @@ export default function Home() {
   /* AJUSTER LE OFFSET QUAND ON SCROLL TO A PARTIR DU DES BOUTONS DU HEADER */
   const getHeaderOffset = () => {
     if (window.innerWidth < 640) return 8;  
-    if (window.innerWidth < 1024) return -35; 
+    if (window.innerWidth < 1024) return -135; 
     return 275;
   };
 
-const handleAboutScroll = () => {
-  const rect = aboutRef.current.getBoundingClientRect();
-  const top = window.scrollY + rect.top - getHeaderOffset();
-  window.scrollTo({ top, behavior: "smooth" });
-};
+   {/* getBoundingClientRect().top donne la position relative au viewport actuel, donc en ajoutant window.scrollY tu obtiens la position absolue — et l'offset s'applique correctement dans les deux directions.*/}
+  const handleAboutScroll = () => {
+    const rect = aboutRef.current.getBoundingClientRect();
+    const top = window.scrollY + rect.top - getHeaderOffset();
+    window.scrollTo({ top, behavior: "smooth" });
+  };
 
   const handleContentScroll = () => {
     contentRef.current?.scrollIntoView({ behavior: "smooth" });  
