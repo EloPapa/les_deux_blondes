@@ -16,8 +16,8 @@ export default function Home() {
 
   /* AJUSTER LE OFFSET QUAND ON SCROLL TO A PARTIR DU DES BOUTONS DU HEADER */
   const getHeaderOffset = () => {
-    if (window.innerWidth < 640) return 0;  
-    if (window.innerWidth < 1024) return 20; 
+    if (window.innerWidth < 640) return 2;  
+    if (window.innerWidth < 1024) return 10; 
     return 275;
   };
 
