@@ -57,7 +57,7 @@ export default function Home() {
               {/* AVATAR — à gauche du titre, réduit de 20% */}
               <div
                 className="
-                  flex-shrink-0 mr-4 -mt-8
+                  flex-shrink-0 mr-4 mt-0
                   w-[94px] h-[94px]
                   sm:w-[125px] sm:h-[125px]
                   md:w-[140px] md:h-[140px]
