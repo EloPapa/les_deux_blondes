@@ -55,7 +55,7 @@ export default function Home() {
             <div
               className="
                 absolute z-10
-                right-0 -top-4
+                -right-4 top-0
                 w-[100px] h-[100px]
                 sm:w-[130px] sm:h-[130px] sm:-top-4
                 md:w-[160px] md:h-[160px] md:-top-4
