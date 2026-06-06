@@ -37,27 +37,6 @@ export default function Home() {
         handleContactScroll={handleContactScroll}
       />
 
-      {/* AVATAR */}      
-      <div
-        className="
-          absolute z-10
-          right-[2%] top-[4.5rem]
-          w-[120px] h-[120px]
-          sm:right-[2%] sm:top-[5rem] sm:w-[180px] sm:h-[180px]
-          md:right-[2%] md:top-[5rem] md:w-[250px] md:h-[250px]
-          lg:right-[4%] lg:top-[6rem] lg:w-[160px] lg:h-[160px]
-          xl:right-[4%] xl:top-[6rem] xl:w-[180px] xl:h-[180px]
-          2xl:right-[4%] 2xl:top-[6rem] 2xl:w-[220px] 2xl:h-[220px]
-          rounded-full overflow-hidden"
-      >
-        <img
-          src="/images/contenu/avatar.png"
-          alt="avatar"
-          className="w-full h-full object-cover object-center"
-          style={{ objectPosition: "center 15%" }}
-        />
-      </div>
-
       <main className="flex-grow">
 
         {/* CONTENT */}
@@ -69,8 +48,29 @@ export default function Home() {
         {/* TITRE ABOUT EN FONT AMSTERDAM */}   
         <div className="mt-15t lg:mt-[2.275rem] xl:mt-[2.275rem] pt-2 px-2 flex flex-col items-center" ref={aboutRef}>
           
-          {/* BLOC TITRE + PARAGRAPHES alignés ensemble */}
-          <div className="max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
+          {/* BLOC TITRE + PARAGRAPHES + AVATAR alignés ensemble */}
+          <div className="relative max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
+
+            {/* AVATAR — positionné à droite du bloc About */}
+            <div
+              className="
+                absolute z-10
+                right-0 top-0
+                w-[100px] h-[100px]
+                sm:w-[130px] sm:h-[130px]
+                md:w-[160px] md:h-[160px]
+                lg:w-[140px] lg:h-[140px]
+                xl:w-[160px] xl:h-[160px]
+                2xl:w-[200px] 2xl:h-[200px]
+                rounded-full overflow-hidden"
+            >
+              <img
+                src="/images/contenu/avatar.png"
+                alt="avatar"
+                className="w-full h-full object-cover object-center"
+                style={{ objectPosition: "center 15%" }}
+              />
+            </div>
             
             <h1
               className="text-[1.5rem] mt-4 lg:text-[3rem] xl:text-[3rem] mb-[2.275rem] lg:mt-[2.275rem] lg:mb-[2.275rem] xl:mt-[2.275rem] xl:mb-[2.275rem]"
