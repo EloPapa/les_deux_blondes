@@ -54,10 +54,10 @@ export default function Home() {
             {/* TITRE + AVATAR côte à côte */}
             <div className="flex items-center gap-4 mt-2 lg:mt-[1rem] mb-[1rem]">
 
-              {/* AVATAR — à gauche du titre, réduit de 20% */}
+              {/* AVATAR — à gauche du titre*/}
               <div
                 className="
-                  flex-shrink-0 mr-4 -mt-8
+                  flex-shrink-0 mr-4 -mt-4
                   w-[94px] h-[94px]
                   sm:w-[125px] sm:h-[125px]
                   md:w-[140px] md:h-[140px]
