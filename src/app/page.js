@@ -30,7 +30,7 @@ export default function Home() {
 
   const handleContentScroll = () => {
     const rect = contentRef.current.getBoundingClientRect();
-    const top = window.scrollY + rect.top + (57 * getHeaderOffset());
+    const top = window.scrollY + rect.top + (56 * getHeaderOffset());
     window.scrollTo({ top, behavior: "smooth" });
   };
 
