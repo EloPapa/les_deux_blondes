@@ -87,7 +87,10 @@ const mediaStyle = {
   transition: "transform 0.3s ease, filter 0.3s ease",
 };
 
-function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {}, showYoutubeBadge = false, badgeSize = 36, onClick }) {
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* imgStyle — prop optionnel pour surcharger le style de l'image (ex: objectFit: "contain" pour barJus).
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {}, showYoutubeBadge = false, badgeSize = 36, onClick, imgStyle = {} }) {
   const handleClick = onClick ? (e) => { e.preventDefault(); onClick(); } : undefined;
   return (
     <a
@@ -101,7 +104,7 @@ function ContentCard({ src, alt, ariaLabel, href, external = true, cardStyle = {
       onMouseLeave={(e) => hoverLeave(e, "img")}
     >
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
-        <img src={src} alt={alt} loading="lazy" style={mediaStyle} />
+        <img src={src} alt={alt} loading="lazy" style={{ ...mediaStyle, ...imgStyle }} />
       </div>
       {onClick && (
         <span style={{
@@ -248,15 +251,16 @@ export default function Content({ lang = "fr" }) {
               cardStyle={{ width: "100%", aspectRatio: "4 / 4" }}
             />
 
-            {/* BAR A JUS */}
-            <div style={{ display: "flex", flexDirection: "column", width: "65%" }}>
+            {/* BAR A JUS — objectFit "contain" pour afficher l'image entière sans la rogner */}
+            <div style={{ display: "flex", flexDirection: "column", width: "55%" }}>
               <ContentCard
-                src="/images/contenu/barJus.png"                
+                src="/images/contenu/barJus.png"
                 alt={t.alt.imageContent2}
                 ariaLabel={t.ariaLink}
                 href={YOUTUBE_URL}
                 external={true}
-                cardStyle={{ width: "165%", aspectRatio: "1.4 / 2.25" }}
+                cardStyle={{ width: "100%", aspectRatio: "1.4 / 2.25" }}
+                imgStyle={{ objectFit: "contain" }}
               />
             </div>
           </div>
