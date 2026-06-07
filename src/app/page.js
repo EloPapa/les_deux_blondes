@@ -30,7 +30,16 @@ export default function Home() {
 
   const handleContentScroll = () => {
     const rect = contentRef.current.getBoundingClientRect();
-    const top = window.scrollY + rect.top + (56 * getHeaderOffset());
+    
+      /* AJUSTER LE OFFSET QUAND ON SCROLL TO A PARTIR DU DES BOUTONS DU HEADER */
+        const getHeaderOffset = () => {
+          if (window.innerWidth < 640) return 560;   // Cellulaire et Tablette
+          if (window.innerWidth < 1024) return 75; // Écran Large
+          return 75; // Écran XL et plus
+        };
+    
+    const top = window.scrollY + rect.top + (getHeaderOffset());    
+    
     window.scrollTo({ top, behavior: "smooth" });
   };
 
