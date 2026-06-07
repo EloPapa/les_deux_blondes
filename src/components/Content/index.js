@@ -259,7 +259,7 @@ export default function Content({ lang = "fr" }) {
                 ariaLabel={t.ariaLink}
                 href={YOUTUBE_URL}
                 external={true}
-                cardStyle={{ width: "100%", height: "150%", aspectRatio: "1 / 1" }}
+                cardStyle={{ width: "100%", aspectRatio: "1 / 1" }}
                 imgStyle={{ objectFit: "contain" }}
               />
             </div>
