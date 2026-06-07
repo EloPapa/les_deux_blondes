@@ -421,14 +421,15 @@ export default function Content({ lang = "fr" }) {
           >
             {/* Baby Sitting — ouvre popup vidéo */}
             <ContentCard
-              src="/images/contenu/babySitting.png"
-              alt={t.alt.imageContent1}
-              ariaLabel={t.ariaLink}
-              href="#"
-              external={false}
-              cardStyle={{ width: "100%", aspectRatio: "3 / 4" }}
-              onClick={() => setShowVideoPopup(true)}
-            />
+                src="/images/contenu/babySitting.png"
+                alt={t.alt.imageContent1}
+                ariaLabel={t.ariaLink}
+                href="#"
+                external={false}
+                cardStyle={{ width: "100%", aspectRatio: "9 / 16" }}  {/* ← ratio ajusté */}
+                imgStyle={{ objectFit: "contain" }}                    {/* ← ajout */}
+                onClick={() => setShowVideoPopup(true)}
+              />
 
             {/* Tablette + logo YouTube */}
             <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
