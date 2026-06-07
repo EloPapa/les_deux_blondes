@@ -29,7 +29,9 @@ export default function Home() {
   };
 
   const handleContentScroll = () => {
-    contentRef.current?.scrollIntoView({ behavior: "smooth" });  
+    const rect = contentRefRef.current.getBoundingClientRect();
+    const top = window.scrollY + rect.top - getHeaderOffset();
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   const handleContactScroll = () => {
