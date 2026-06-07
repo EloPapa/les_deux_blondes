@@ -35,12 +35,11 @@ export default function Home() {
         const getContentOffset = () => {
           if (window.innerWidth < 640) return 560;   // Cellulaire et Tablette
           if (window.innerWidth < 1024) return 300; // Écran Large
-          return 300; // Écran XL et plus
+          return 1000; // Écran XL et plus
         };
     
-    const top = window.scrollY + rect.top + (getContentOffset());    
-    
-    window.scrollTo({ top, behavior: "smooth" });
+    const top = window.scrollY + rect.top + (getContentOffset());        
+    window.scrollTo({ top, behavior: "smooth" });    
   };
 
   const handleContactScroll = () => {
