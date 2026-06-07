@@ -252,6 +252,7 @@ export default function Content({ lang = "fr" }) {
             <div style={{ display: "flex", flexDirection: "column", width: "65%" }}>
               <ContentCard
                 src="/images/contenu/barJus.png"
+                style={{ transform: "scale(0.85)", transformOrigin: "top center" }}
                 alt={t.alt.imageContent2}
                 ariaLabel={t.ariaLink}
                 href={YOUTUBE_URL}
