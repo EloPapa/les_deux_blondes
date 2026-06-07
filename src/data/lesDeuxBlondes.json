@@ -3,8 +3,8 @@
 
   "socials": [
     { "id": "1", "title": "Github",  "link": "https://github.com/" },
-    { "id": "2", "title": "Youtube", "link": "https://www.youtube.com" },
-    { "id": "3", "title": "LinkedIn",   "link": "https://www.linkedin.com/" }
+    { "id": "2", "title": "Youtube", "link": "https://www.youtube.com/@HappyEloiseB" },
+    { "id": "3", "title": "LinkedIn",   "link": "https://www.linkeddin.com/" }
   ],
 
   "about": [
