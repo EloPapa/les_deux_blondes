@@ -62,20 +62,20 @@ export default function Home() {
           <div className="max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
 
             {/* TITRE + AVATAR côte à côte */}
-            <div className="flex items-center gap-4 mt-2 lg:mt-[1rem] mb-[1rem]">
+            <div className="flex items-center gap-2 mt-2 lg:mt-[1rem] mb-[1rem]">
 
               {/* AVATAR — à gauche du titre*/}
               <div
                 className="
-                    flex-shrink-0 mr-2 -mt-4
-                    w-[108px] h-[108px]
-                    sm:w-[144px] sm:h-[144px]
-                    md:w-[161px] md:h-[161px]
-                    lg:w-[144px] lg:h-[144px]
-                    xl:w-[161px] xl:h-[161px]
-                    2xl:w-[198px] 2xl:h-[198px]
-                    rounded-full overflow-hidden"
-                  >
+                  flex-shrink-0 mr-2 -mt-4
+                  w-[119px] h-[119px]
+                  sm:w-[158px] sm:h-[158px]
+                  md:w-[177px] md:h-[177px]
+                  lg:w-[158px] lg:h-[158px]
+                  xl:w-[177px] xl:h-[177px]
+                  2xl:w-[218px] 2xl:h-[218px]
+                  rounded-full overflow-hidden"
+                >
                 <img
                   src="/images/contenu/avatar.png"
                   alt="avatar"
