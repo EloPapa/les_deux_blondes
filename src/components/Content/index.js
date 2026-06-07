@@ -251,7 +251,7 @@ export default function Content({ lang = "fr" }) {
               cardStyle={{ width: "100%", aspectRatio: "4 / 4" }}
             />
 
-            {/* BAR A JUS — objectFit "contain" pour afficher l'image entière sans la rogner */}
+            {/* BAR A JUS — objectFit "contain" pour afficher l'image entière sans la rogner */}            
             <div style={{ display: "flex", flexDirection: "column", width: "55%" }}>
               <ContentCard
                 src="/images/contenu/barJus.png"
@@ -259,7 +259,7 @@ export default function Content({ lang = "fr" }) {
                 ariaLabel={t.ariaLink}
                 href={YOUTUBE_URL}
                 external={true}
-                cardStyle={{ width: "100%", aspectRatio: "1.4 / 2.25" }}
+                cardStyle={{ width: "100%", aspectRatio: "1 / 1.3" }}
                 imgStyle={{ objectFit: "contain" }}
               />
             </div>
