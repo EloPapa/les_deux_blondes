@@ -83,6 +83,7 @@ function HeroVideo({ alt }) {
           background: #1a1a1a;
           /* Desktop : 16/9 — pas de max-height pour éviter le conflit avec aspect-ratio */
           aspect-ratio: 16 / 9;
+          line-height: 0;  
         }
 
         @media (max-width: 767px) {
