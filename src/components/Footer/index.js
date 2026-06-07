@@ -25,7 +25,7 @@ const Footer = () => {
         </h2>
         {/* SECTION CONTACTEZ-NOUS */}
         <div className="mt-7">
-          <Button type="primary">{t.footer.scheduleSession}</Button>
+          <Button type="primary" classes="scale-150">{t.footer.scheduleSession}</Button>
         </div>
         <div className="mt-7">
           <Socials />
