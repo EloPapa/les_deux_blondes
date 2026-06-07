@@ -50,7 +50,7 @@ export default function Home() {
       <main className="flex-grow">
 
         {/* MÉDIA */}
-        <div className="mt-0 p-0 pl-1" ref={contentRef}>
+        <div className="mt-0 p-0" ref={contentRef}>
           <h1 className="sr-only">{t.header.content}</h1>
           <Content lang={lang} />
         </div>
@@ -85,7 +85,7 @@ export default function Home() {
               </div>
 
               <h1
-                className="text-[1.95rem] lg:text-[3.9rem] xl:text-[3.9rem]"
+                className="text-[1.95rem] lg:text-[3.9rem] xl:text-[3.9rem] pl-1"
                 style={{
                   fontFamily: "'Amsterdam', cursive",
                   textDecoration: "underline",
