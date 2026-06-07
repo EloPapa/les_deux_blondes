@@ -253,16 +253,16 @@ export default function Content({ lang = "fr" }) {
 
             {/* BAR A JUS — objectFit "contain" pour afficher l'image entière sans la rogner */}            
             <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-  <ContentCard
-    src="/images/contenu/barJus.png"
-    alt={t.alt.imageContent2}
-    ariaLabel={t.ariaLink}
-    href={YOUTUBE_URL}
-    external={true}
-    cardStyle={{ width: "100%", aspectRatio: "1 / 1" }}
-    imgStyle={{ objectFit: "contain" }}
-  />
-</div>
+              <ContentCard
+                src="/images/contenu/barJus.png"
+                alt={t.alt.imageContent2}
+                ariaLabel={t.ariaLink}
+                href={YOUTUBE_URL}
+                external={true}
+                cardStyle={{ width: "100%", aspectRatio: "2 / 1" }}
+                imgStyle={{ objectFit: "contain" }}
+              />
+            </div>
           </div>
         </div>
 
