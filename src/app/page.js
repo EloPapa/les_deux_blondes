@@ -62,7 +62,7 @@ export default function Home() {
           <div className="max-w-2xl lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl w-full">
 
             {/* TITRE + AVATAR côte à côte */}
-            <div className="flex items-center gap-1 mt-2 lg:mt-[1rem] mb-[1rem]">
+            <div className="flex items-center gap-0 mt-2 lg:mt-[1rem] mb-[1rem]">
 
               {/* AVATAR — à gauche du titre*/}
               <div
