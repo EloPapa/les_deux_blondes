@@ -50,7 +50,7 @@ export default function Home() {
       <main className="flex-grow">
 
         {/* MÉDIA */}
-        <div className="mt-90 lg:mt-[32rem] xl:mt-[32rem] 2xl:mt-[40rem] p-2" ref={contentRef}>
+        <div className="mt-4 p-2" ref={contentRef}>
           <h1 className="sr-only">{t.header.content}</h1>
           <Content lang={lang} />
         </div>

@@ -80,33 +80,29 @@ function HeroVideo({ alt }) {
           position: relative;
           overflow: hidden;
           border-radius: 4px;
-          background: #000;
-          margin-bottom: 0;
-          /* Desktop par défaut : ratio 16/9, hauteur plafonnée */
+          background: #1a1a1a;
+          /* Desktop : 16/9 — pas de max-height pour éviter le conflit avec aspect-ratio */
           aspect-ratio: 16 / 9;
-          max-height: 480px;
         }
 
         @media (max-width: 767px) {
+          /* Tablette : 4/3 */
           .hero-video-wrapper {
-            /* Tablette / petit écran : ratio 4/3 */
             aspect-ratio: 4 / 3;
-            max-height: none;
           }
         }
 
         @media (max-width: 479px) {
+          /* Mobile : portrait 9/16, limité à 70vh */
           .hero-video-wrapper {
-            /* Mobile : ratio portrait 9/16 */
             aspect-ratio: 9 / 16;
-            max-height: 75vh;
+            max-height: 70vh;
           }
         }
 
         .hero-video-wrapper video {
           position: absolute;
-          top: 0;
-          left: 0;
+          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -120,6 +116,7 @@ function HeroVideo({ alt }) {
           muted
           loop
           playsInline
+          preload="auto"
           aria-label={alt}
         >
           <source src="/images/contenu/lesDeuxBlondesVideo.mp4" type="video/mp4" />
