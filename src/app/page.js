@@ -29,7 +29,7 @@ export default function Home() {
   };
 
   const handleContentScroll = () => {
-    const rect = contentRefRef.current.getBoundingClientRect();
+    const rect = contentRef.current.getBoundingClientRect();
     const top = window.scrollY + rect.top + getHeaderOffset();
     window.scrollTo({ top, behavior: "smooth" });
   };
