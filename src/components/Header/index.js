@@ -206,6 +206,14 @@ const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
 };
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* amsterdamStyle — style réutilisable pour tous les boutons de navigation en font Amsterdam.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+const amsterdamStyle = {
+  fontFamily: "'Amsterdam', cursive",
+  color: "#664b23",
+};
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * Header — composant principal.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll }) => {
@@ -334,7 +342,7 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
                     </button>
 
                     <Button onClick={toggle}>
-                      {lang === "fr" ? "EN" : "FR"}
+                      <span style={amsterdamStyle}>{lang === "fr" ? "EN" : "FR"}</span>
                     </Button>
 
                     <PopoverButton>
@@ -356,13 +364,13 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
             >
               <div className="flex flex-col items-center">
                 <Button onClick={handleContentScroll}>
-                  {t.header.content}
+                  <span style={amsterdamStyle}>{t.header.content}</span>
                 </Button>
                 <Button onClick={handleAboutScroll}>
-                  {t.header.about}
+                  <span style={amsterdamStyle}>{t.header.about}</span>
                 </Button>
                 <Button onClick={handleContactScroll}>
-                  {t.header.contact}
+                  <span style={amsterdamStyle}>{t.header.contact}</span>
                 </Button>
               </div>
             </PopoverPanel>
@@ -405,19 +413,28 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
           )}
 
           <Button onClick={handleContentScroll}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+            <span
+              className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]"
+              style={amsterdamStyle}
+            >
               {t.header.presentation}
             </span>
           </Button>
 
           <Button onClick={handleAboutScroll}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+            <span
+              className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]"
+              style={amsterdamStyle}
+            >
               {t.header.about}
             </span>
           </Button>
 
           <Button onClick={handleContactScroll}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+            <span
+              className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]"
+              style={amsterdamStyle}
+            >
               {t.header.contact}
             </span>
           </Button>
@@ -435,7 +452,10 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
           </button>
 
           <Button onClick={toggle}>
-            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
+            <span
+              className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]"
+              style={amsterdamStyle}
+            >
               {lang === "fr" ? "EN" : "FR"}
             </span>
           </Button>
