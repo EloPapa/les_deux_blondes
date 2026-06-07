@@ -69,7 +69,7 @@ function YouTubeIcon({ size = 36 }) {
    HERO VIDEO — responsive toutes tailles
    Mobile  < 480px  → ratio 9/16 (portrait)
    Tablette 480–768 → ratio 4/3
-   Desktop  > 768px → ratio 16/9, max 480px
+   Desktop  > 768px → ratio 16/9
 ───────────────────────────────────────────── */
 function HeroVideo({ alt }) {
   return (
@@ -81,20 +81,17 @@ function HeroVideo({ alt }) {
           overflow: hidden;
           border-radius: 4px;
           background: #1a1a1a;
-          /* Desktop : 16/9 — pas de max-height pour éviter le conflit avec aspect-ratio */
           aspect-ratio: 16 / 9;
-          line-height: 0;  
+          line-height: 0;
         }
 
         @media (max-width: 767px) {
-          /* Tablette : 4/3 */
           .hero-video-wrapper {
             aspect-ratio: 4 / 3;
           }
         }
 
         @media (max-width: 479px) {
-          /* Mobile : portrait 9/16, limité à 70vh */
           .hero-video-wrapper {
             aspect-ratio: 9 / 16;
             max-height: 70vh;
@@ -177,8 +174,6 @@ const mediaStyle = {
 
 /* ─────────────────────────────────────────────
    CONTENT CARD
-   imgStyle — prop optionnel pour surcharger
-   (ex: objectFit "contain" pour barJus)
 ───────────────────────────────────────────── */
 function ContentCard({
   src,
@@ -263,7 +258,7 @@ function ContentCard({
 }
 
 /* ─────────────────────────────────────────────
-   POPUP VIDÉO
+   POPUP VIDÉO — agrandi pour afficher tout le contenu
 ───────────────────────────────────────────── */
 function VideoPopup({ src, alt, onClose }) {
   return (
@@ -277,17 +272,20 @@ function VideoPopup({ src, alt, onClose }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        padding: "16px",
       }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
           position: "relative",
-          width: "50vw",
-          maxWidth: "340px",
+          width: "min(90vw, 480px)",
+          maxHeight: "90vh",
           borderRadius: "12px",
           overflow: "hidden",
           background: "#000",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <button
@@ -322,9 +320,8 @@ function VideoPopup({ src, alt, onClose }) {
           style={{
             width: "100%",
             display: "block",
-            aspectRatio: "3 / 4",
-            objectFit: "cover",
-            maxHeight: "80vh",
+            maxHeight: "90vh",
+            objectFit: "contain",
           }}
         >
           <source src={src} type="video/mp4" />
