@@ -34,8 +34,8 @@ export default function Home() {
       /* AJUSTER LE OFFSET QUAND ON SCROLL TO A PARTIR DU DES BOUTONS DU HEADER */
         const getHeaderOffset = () => {
           if (window.innerWidth < 640) return 560;   // Cellulaire et Tablette
-          if (window.innerWidth < 1024) return 75; // Écran Large
-          return 75; // Écran XL et plus
+          if (window.innerWidth < 1024) return 150; // Écran Large
+          return 150; // Écran XL et plus
         };
     
     const top = window.scrollY + rect.top + (getHeaderOffset());    
