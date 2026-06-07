@@ -35,7 +35,7 @@ export default function Home() {
         const getContentOffset = () => {
           if (window.innerWidth < 640) return 560;   // Cellulaire et Tablette
           if (window.innerWidth < 1024) return 300; // Écran Large
-          return 500; // Écran XL et plus
+          return 400; // Écran XL et plus
         };
     
     const top = window.scrollY + rect.top + (getContentOffset());        
