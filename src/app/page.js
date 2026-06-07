@@ -67,15 +67,15 @@ export default function Home() {
               {/* AVATAR — à gauche du titre*/}
               <div
                 className="
-                  flex-shrink-0 mr-4 -mt-4
-                  w-[94px] h-[94px]
-                  sm:w-[125px] sm:h-[125px]
-                  md:w-[140px] md:h-[140px]
-                  lg:w-[125px] lg:h-[125px]
-                  xl:w-[140px] xl:h-[140px]
-                  2xl:w-[172px] 2xl:h-[172px]
-                  rounded-full overflow-hidden"
-              >
+                    flex-shrink-0 mr-2 -mt-4
+                    w-[108px] h-[108px]
+                    sm:w-[144px] sm:h-[144px]
+                    md:w-[161px] md:h-[161px]
+                    lg:w-[144px] lg:h-[144px]
+                    xl:w-[161px] xl:h-[161px]
+                    2xl:w-[198px] 2xl:h-[198px]
+                    rounded-full overflow-hidden"
+                  >
                 <img
                   src="/images/contenu/avatar.png"
                   alt="avatar"
