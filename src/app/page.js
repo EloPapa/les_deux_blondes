@@ -30,7 +30,7 @@ export default function Home() {
 
   const handleContentScroll = () => {
     const rect = contentRef.current.getBoundingClientRect();
-    const top = window.scrollY + rect.top + getHeaderOffset();
+    const top = window.scrollY + rect.top + (5 * getHeaderOffset());
     window.scrollTo({ top, behavior: "smooth" });
   };
 
@@ -52,7 +52,7 @@ export default function Home() {
       <main className="flex-grow">
 
         {/* MÉDIA */}
-        <div className="mt-0 p-0 pl-0.3" ref={contentRef}>
+        <div className="mt-0 p-0 pl-0.25" ref={contentRef}>
           <h1 className="sr-only">{t.header.content}</h1>
           <Content lang={lang} />
         </div>
