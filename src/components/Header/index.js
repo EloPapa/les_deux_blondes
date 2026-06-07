@@ -206,7 +206,8 @@ const SearchBar = ({ isOpen, onClose, onSearch, inputRef, textColor }) => {
 };
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* amsterdamStyle — style réutilisable pour tous les boutons de navigation en font Amsterdam.
+* amsterdamStyle — font Amsterdam pour les boutons de nav desktop (À propos, Contact, Présentation).
+* Le bouton de langue (EN/FR) et tous les boutons mobile gardent leur font par défaut.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const amsterdamStyle = {
   fontFamily: "'Amsterdam', cursive",
@@ -296,7 +297,7 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
   return (
     <>
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          📱 MOBILE
+          📱 MOBILE — font par défaut (pas Amsterdam) pour tous les boutons
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <Popover
         className="relative block tablet:hidden w-full z-[9999]"
@@ -342,7 +343,7 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
                     </button>
 
                     <Button onClick={toggle}>
-                      <span style={amsterdamStyle}>{lang === "fr" ? "EN" : "FR"}</span>
+                      {lang === "fr" ? "EN" : "FR"}
                     </Button>
 
                     <PopoverButton>
@@ -364,13 +365,13 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
             >
               <div className="flex flex-col items-center">
                 <Button onClick={handleContentScroll}>
-                  <span style={amsterdamStyle}>{t.header.content}</span>
+                  {t.header.content}
                 </Button>
                 <Button onClick={handleAboutScroll}>
-                  <span style={amsterdamStyle}>{t.header.about}</span>
+                  {t.header.about}
                 </Button>
                 <Button onClick={handleContactScroll}>
-                  <span style={amsterdamStyle}>{t.header.contact}</span>
+                  {t.header.contact}
                 </Button>
               </div>
             </PopoverPanel>
@@ -379,7 +380,7 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
       </Popover>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          💻 DESKTOP
+          💻 DESKTOP — Amsterdam pour Présentation / À propos / Contact, font défaut pour EN/FR
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <div
         className="hidden tablet:flex justify-between items-center sticky top-0 z-10 w-full px-6"
@@ -451,11 +452,9 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
             />
           </button>
 
+          {/* LANGUE — font par défaut, pas Amsterdam */}
           <Button onClick={toggle}>
-            <span
-              className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]"
-              style={amsterdamStyle}
-            >
+            <span className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]">
               {lang === "fr" ? "EN" : "FR"}
             </span>
           </Button>
