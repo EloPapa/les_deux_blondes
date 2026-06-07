@@ -426,7 +426,7 @@ export default function Content({ lang = "fr" }) {
                 ariaLabel={t.ariaLink}
                 href="#"
                 external={false}
-                cardStyle={{ width: "100%", aspectRatio: "9 / 16" }}  
+                cardStyle={{ width: "100%", aspectRatio: "3 / 4" }}  
                 imgStyle={{ objectFit: "contain" }}                    
                 onClick={() => setShowVideoPopup(true)}
               />
