@@ -418,7 +418,7 @@ const Header = ({ handleAboutScroll, handleContentScroll, handleContactScroll })
               className="lg:text-[0.819rem] xl:text-[1.17rem] 2xl:text-[1.65rem]"
               style={amsterdamStyle}
             >
-              {t.header.presentation}
+              {t.header.content}
             </span>
           </Button>
 
