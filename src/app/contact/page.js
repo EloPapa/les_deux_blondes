@@ -61,7 +61,7 @@ const MiniHeader = () => {
   return (
     <div
       className="sticky top-0 z-10 w-full flex items-center justify-between px-6"
-      style={{ background: "#f0f8ff", height: "70px" }}
+      style={{ background: "#f0f8ff", height: "70px", paddingBottom: "12px" }}
     >
       <h1
         onClick={() => router.push("/")}
@@ -207,7 +207,7 @@ export default function ContactPage() {
         </div>
 
         {/* ── FORMULAIRE ── */}
-        <div className="flex justify-center px-4 mt-10 mb-16">
+        <div className="flex justify-center px-4 mt-10 mb-16 py-10 rounded-xl mx-4" style={{ background: "#f0f8ff" }}>
           <div className="w-full max-w-lg">
 
             <h2
