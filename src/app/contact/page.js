@@ -51,29 +51,23 @@ const EmailIcon = () => (
 );
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* MiniHeader — header simplifié pour la page contact : nom uniquement + bouton langue.
-* Les boutons Média / À propos / Contact sont retirés.
+* MiniHeader — header simplifié : nom + langue seulement, fond Alice Blue, séparé de la bannière.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const MiniHeader = () => {
   const router = useRouter();
   const { lang, toggle } = useLanguage();
   const { name } = data;
 
-  const backgroundGradient =
-    "linear-gradient(to bottom, transparent 60%, #f0f8ff 100%), linear-gradient(to right, #f0f8ff 0%, #cce8f4 30%, #b3ddf0 50%, #cce8f4 70%, #f0f8ff 100%)"
-  const textColor = "#664b23";
-
   return (
     <div
       className="sticky top-0 z-10 w-full flex items-center justify-between px-6"
-      style={{ background: backgroundGradient, height: "70px" }}
+      style={{ background: "#f0f8ff", height: "70px" }}
     >
-      {/* NOM — clique ramène à l'accueil */}
       <h1
         onClick={() => router.push("/")}
         className="font-medium cursor-pointer"
         style={{
-          color: textColor,
+          color: "#664b23",
           fontFamily: "'Amsterdam', cursive",
           fontSize: "1.625rem",
         }}
@@ -81,11 +75,10 @@ const MiniHeader = () => {
         {name}.
       </h1>
 
-      {/* Bouton langue uniquement */}
       <button
         onClick={toggle}
         className="text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
-        style={{ color: textColor }}
+        style={{ color: "#664b23" }}
       >
         {lang === "fr" ? "EN" : "FR"}
       </button>
@@ -94,13 +87,12 @@ const MiniHeader = () => {
 };
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* ContactPage — page complète avec mini-header, bouton retour, cartes de contact et formulaire.
+* ContactPage
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 export default function ContactPage() {
   const router = useRouter();
   const { lang } = useLanguage();
 
-  /* État du formulaire */
   const [form, setForm] = useState({
     prenom: "",
     nom: "",
@@ -111,7 +103,6 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
-  /* Validation simple */
   const validate = () => {
     const newErrors = {};
     if (!form.prenom.trim()) newErrors.prenom = true;
@@ -140,7 +131,6 @@ export default function ContactPage() {
 
   const textColor = "#664b23";
 
-  /* Champ de formulaire réutilisable */
   const inputClass = (field) =>
     `w-full border-b bg-transparent outline-none py-1 text-sm transition-colors ${
       errors[field] ? "border-red-400" : "border-gray-300 focus:border-[#2d7fa0]"
@@ -149,17 +139,16 @@ export default function ContactPage() {
   return (
     <div className="relative flex flex-col min-h-screen">
 
-      {/* ── MINI HEADER (nom + langue seulement, sans Média / À propos / Contact) ── */}
       <MiniHeader />
 
       <main className="flex-grow">
 
-        {/* ── BANNIÈRE TEAL — agrandie de 30% (minHeight 220px → 286px) ── */}
+        {/* ── BANNIÈRE TEAL ── pt-10 pour descendre le contenu et ne pas toucher le header */}
         <div
-          className="relative w-full px-4 flex flex-col items-center justify-center text-center overflow-hidden"
+          className="relative w-full px-4 pt-10 pb-14 flex flex-col items-center justify-center text-center overflow-hidden"
           style={{ backgroundColor: "#2d7fa0", minHeight: "286px" }}
         >
-          {/* Bouton retour — coin supérieur gauche */}
+          {/* Bouton retour */}
           <button
             onClick={() => router.push("/")}
             className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-opacity hover:opacity-80"
@@ -174,7 +163,7 @@ export default function ContactPage() {
             <span>{lang === "fr" ? "Retour" : "Back"}</span>
           </button>
 
-          {/* Titre — remonté avec mb-6 pour l'éloigner du bas */}
+          {/* Titre */}
           <h1
             className="text-3xl lg:text-4xl xl:text-5xl font-bold tracking-wide mb-6"
             style={{ color: "#ffffff", fontFamily: "'Amsterdam', cursive" }}
@@ -198,20 +187,17 @@ export default function ContactPage() {
         {/* ── CARTES DE CONTACT ── */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 px-4 -mt-10 z-10 relative">
 
-          {/* Adresse */}
           <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:w-52 lg:w-60">
             <LocationIcon />
             <p className="font-semibold text-sm" style={{ color: "#2d7fa0" }}>HappyLand Canada</p>
           </div>
 
-          {/* Téléphone */}
           <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:w-52 lg:w-60">
             <PhoneIcon />
             <p className="font-semibold text-sm" style={{ color: "#2d7fa0" }}>(xxx)-xxx-xxxx</p>
             <p className="text-xs text-gray-500">{lang === "fr" ? "Appelez-nous" : "Call us"}</p>
           </div>
 
-          {/* Courriel */}
           <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:w-52 lg:w-60">
             <EmailIcon />
             <p className="font-semibold text-sm" style={{ color: "#2d7fa0" }}>info@lesDeuxBlondes.ca</p>
@@ -232,7 +218,6 @@ export default function ContactPage() {
             </h2>
 
             {submitted ? (
-              /* Message de confirmation */
               <div
                 className="text-center py-10 px-6 rounded-lg"
                 style={{ background: "#f0fdf4", border: "1px solid #86efac" }}
@@ -254,10 +239,8 @@ export default function ContactPage() {
                 </button>
               </div>
             ) : (
-              /* Formulaire */
               <div className="flex flex-col gap-5">
 
-                {/* Prénom + Nom côte à côte */}
                 <div className="flex gap-4">
                   <div className="flex-1">
                     <label className="block text-xs mb-1" style={{ color: textColor }}>
@@ -285,7 +268,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Courriel */}
                 <div>
                   <label className="block text-xs mb-1" style={{ color: textColor }}>
                     {lang === "fr" ? "Adresse courriel" : "Email Address"} <span className="text-red-400">*</span>
@@ -300,7 +282,6 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Sujet */}
                 <div>
                   <label className="block text-xs mb-1" style={{ color: textColor }}>
                     {lang === "fr" ? "Sujet" : "Subject"}
@@ -314,7 +295,6 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Message */}
                 <div>
                   <label className="block text-xs mb-1" style={{ color: textColor }}>
                     {lang === "fr" ? "Votre message" : "Your Message"} <span className="text-red-400">*</span>
@@ -329,7 +309,6 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Bouton soumettre */}
                 <div className="flex justify-center mt-2">
                   <button
                     onClick={handleSubmit}
