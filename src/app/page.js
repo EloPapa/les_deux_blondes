@@ -43,7 +43,7 @@ export default function Home() {
   };
 
   const handleContactScroll = () => {
-    contactRef.current?.scrollIntoView({ behavior: "smooth" }); 
+    router.push("/contact");
   };
   
   const aboutParagraphs = lang === "fr" ? data.about_fr || data.about : data.about;
