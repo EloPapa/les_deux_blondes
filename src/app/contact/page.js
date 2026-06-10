@@ -60,7 +60,7 @@ const MiniHeader = () => {
   const { name } = data;
 
   const backgroundGradient =
-    "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)";
+    "linear-gradient(to bottom, transparent 60%, #f0f8ff 100%), linear-gradient(to right, #f0f8ff 0%, #cce8f4 30%, #b3ddf0 50%, #cce8f4 70%, #f0f8ff 100%)"
   const textColor = "#664b23";
 
   return (
