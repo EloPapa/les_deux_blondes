@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useLanguage } from "../../context/LanguageContext";
-import Header from "../../components/Header";
 import data from "../../data/lesDeuxBlondes.json";
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,11 +51,54 @@ const EmailIcon = () => (
 );
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* ContactPage — page complète avec header, bouton retour, cartes de contact et formulaire.
+* MiniHeader — header simplifié pour la page contact : nom uniquement + bouton langue.
+* Les boutons Média / À propos / Contact sont retirés.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+const MiniHeader = () => {
+  const router = useRouter();
+  const { lang, toggle } = useLanguage();
+  const { name } = data;
+
+  const backgroundGradient =
+    "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)";
+  const textColor = "#664b23";
+
+  return (
+    <div
+      className="sticky top-0 z-10 w-full flex items-center justify-between px-6"
+      style={{ background: backgroundGradient, height: "70px" }}
+    >
+      {/* NOM — clique ramène à l'accueil */}
+      <h1
+        onClick={() => router.push("/")}
+        className="font-medium cursor-pointer"
+        style={{
+          color: textColor,
+          fontFamily: "'Amsterdam', cursive",
+          fontSize: "1.625rem",
+        }}
+      >
+        {name}.
+      </h1>
+
+      {/* Bouton langue uniquement */}
+      <button
+        onClick={toggle}
+        className="text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
+        style={{ color: textColor }}
+      >
+        {lang === "fr" ? "EN" : "FR"}
+      </button>
+    </div>
+  );
+};
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* ContactPage — page complète avec mini-header, bouton retour, cartes de contact et formulaire.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 export default function ContactPage() {
   const router = useRouter();
-  const { lang, t } = useLanguage();
+  const { lang } = useLanguage();
 
   /* État du formulaire */
   const [form, setForm] = useState({
@@ -96,10 +138,7 @@ export default function ContactPage() {
     setSubmitted(true);
   };
 
-  /* Couleurs et style identiques au Header */
   const textColor = "#664b23";
-  const backgroundGradient =
-    "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)";
 
   /* Champ de formulaire réutilisable */
   const inputClass = (field) =>
@@ -110,19 +149,15 @@ export default function ContactPage() {
   return (
     <div className="relative flex flex-col min-h-screen">
 
-      {/* ── HEADER (identique à la page principale, sans les callbacks de scroll) ── */}
-      <Header
-        handleAboutScroll={() => { router.push("/"); }}
-        handleContentScroll={() => { router.push("/"); }}
-        handleContactScroll={() => {}}   /* déjà sur la page contact */
-      />
+      {/* ── MINI HEADER (nom + langue seulement, sans Média / À propos / Contact) ── */}
+      <MiniHeader />
 
       <main className="flex-grow">
 
-        {/* ── BANNIÈRE TEAL ── */}
+        {/* ── BANNIÈRE TEAL — agrandie de 30% (minHeight 220px → 286px) ── */}
         <div
-          className="relative w-full py-12 px-4 flex flex-col items-center justify-center text-center overflow-hidden"
-          style={{ backgroundColor: "#2d7fa0", minHeight: "220px" }}
+          className="relative w-full px-4 flex flex-col items-center justify-center text-center overflow-hidden"
+          style={{ backgroundColor: "#2d7fa0", minHeight: "286px" }}
         >
           {/* Bouton retour — coin supérieur gauche */}
           <button
@@ -139,16 +174,16 @@ export default function ContactPage() {
             <span>{lang === "fr" ? "Retour" : "Back"}</span>
           </button>
 
-          {/* Titre */}
+          {/* Titre — remonté avec mb-6 pour l'éloigner du bas */}
           <h1
-            className="text-3xl lg:text-4xl xl:text-5xl font-bold tracking-wide"
+            className="text-3xl lg:text-4xl xl:text-5xl font-bold tracking-wide mb-6"
             style={{ color: "#ffffff", fontFamily: "'Amsterdam', cursive" }}
           >
             {lang === "fr" ? "Contactez-nous" : "Contact Us"}
           </h1>
 
-          {/* Sous-titre */}
-          <p className="mt-3 text-sm lg:text-base max-w-lg" style={{ color: "rgba(255,255,255,0.88)" }}>
+          {/* Sous-titres */}
+          <p className="text-sm lg:text-base max-w-lg" style={{ color: "rgba(255,255,255,0.88)" }}>
             {lang === "fr"
               ? "Vous souhaitez nous contacter\u00a0? Nous serions ravis de vous entendre."
               : "Want to get in touch? We'd love to hear from you."}
@@ -314,26 +349,3 @@ export default function ContactPage() {
     </div>
   );
 }
-
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* INTÉGRATION DANS page.js (page principale)
-* ─────────────────────────────────────────────
-* Remplacez le handleContactScroll existant par une navigation vers /contact :
-*
-*   import { useRouter } from "next/navigation";
-*   ...
-*   const router = useRouter();
-*   ...
-*   const handleContactScroll = () => {
-*     router.push("/contact");
-*   };
-*
-* Et dans le Header, passez ce handleContactScroll modifié.
-* Le bouton "Retour" dans contact.js redirige déjà vers "/".
-*
-* STRUCTURE DE FICHIERS :
-*   app/
-*   ├── page.js          ← page principale (modifier handleContactScroll)
-*   └── contact/
-*       └── page.js      ← ce fichier (renommer en page.js dans le dossier contact/)
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
