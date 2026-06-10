@@ -5,30 +5,13 @@ import { useState } from "react";
 import { useLanguage } from "../../context/LanguageContext";
 import data from "../../data/lesDeuxBlondes.json";
 
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* Icône flèche retour — SVG inline, pas de dépendance externe.
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const BackArrowIcon = ({ size = 20, color = "#664b23" }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke={color}
-    strokeWidth="2.2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <line x1="19" y1="12" x2="5" y2="12" />
     <polyline points="12 19 5 12 12 5" />
   </svg>
 );
 
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* Icônes de contact — adresse, téléphone, courriel.
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const LocationIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d7fa0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
@@ -50,9 +33,6 @@ const EmailIcon = () => (
   </svg>
 );
 
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* MiniHeader — header simplifié : nom + langue seulement, fond Alice Blue, séparé de la bannière.
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const MiniHeader = () => {
   const router = useRouter();
   const { lang, toggle } = useLanguage();
@@ -66,15 +46,10 @@ const MiniHeader = () => {
       <h1
         onClick={() => router.push("/")}
         className="font-medium cursor-pointer"
-        style={{
-          color: "#664b23",
-          fontFamily: "'Amsterdam', cursive",
-          fontSize: "1.625rem",
-        }}
+        style={{ color: "#664b23", fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" }}
       >
         {name}.
       </h1>
-
       <button
         onClick={toggle}
         className="text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
@@ -86,20 +61,11 @@ const MiniHeader = () => {
   );
 };
 
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* ContactPage
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 export default function ContactPage() {
   const router = useRouter();
   const { lang } = useLanguage();
 
-  const [form, setForm] = useState({
-    prenom: "",
-    nom: "",
-    courriel: "",
-    sujet: "",
-    message: "",
-  });
+  const [form, setForm] = useState({ prenom: "", nom: "", courriel: "", sujet: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -114,18 +80,13 @@ export default function ContactPage() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    if (errors[e.target.name]) {
-      setErrors({ ...errors, [e.target.name]: false });
-    }
+    if (errors[e.target.name]) setErrors({ ...errors, [e.target.name]: false });
   };
 
   const handleSubmit = () => {
     const newErrors = validate();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-    /* TODO : brancher ici votre logique d'envoi (API route, EmailJS, etc.) */
+    if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+    /* TODO : brancher ici votre logique d'envoi */
     setSubmitted(true);
   };
 
@@ -141,29 +102,24 @@ export default function ContactPage() {
 
       <MiniHeader />
 
-      <main className="flex-grow">
+      {/* ── fond très légèrement bleu pour tout le contenu sous le header ── */}
+      <main className="flex-grow" style={{ background: "#f8fcff" }}>
 
-        {/* ── BANNIÈRE TEAL ── pt-10 pour descendre le contenu et ne pas toucher le header */}
+        {/* ── BANNIÈRE TEAL ── */}
         <div
           className="relative w-full px-4 pt-10 pb-14 flex flex-col items-center justify-center text-center overflow-hidden"
           style={{ backgroundColor: "#2d7fa0", minHeight: "286px" }}
         >
-          {/* Bouton retour */}
           <button
             onClick={() => router.push("/")}
             className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-opacity hover:opacity-80"
-            style={{
-              background: "rgba(255,255,255,0.15)",
-              color: "#ffffff",
-              border: "1px solid rgba(255,255,255,0.35)",
-            }}
+            style={{ background: "rgba(255,255,255,0.15)", color: "#ffffff", border: "1px solid rgba(255,255,255,0.35)" }}
             aria-label="Retour à la page principale"
           >
             <BackArrowIcon size={16} color="#ffffff" />
             <span>{lang === "fr" ? "Retour" : "Back"}</span>
           </button>
 
-          {/* Titre */}
           <h1
             className="text-3xl lg:text-4xl xl:text-5xl font-bold tracking-wide mb-6"
             style={{ color: "#ffffff", fontFamily: "'Amsterdam', cursive" }}
@@ -171,64 +127,49 @@ export default function ContactPage() {
             {lang === "fr" ? "Contactez-nous" : "Contact Us"}
           </h1>
 
-          {/* Sous-titres */}
           <p className="text-sm lg:text-base max-w-lg" style={{ color: "rgba(255,255,255,0.88)" }}>
             {lang === "fr"
               ? "Vous souhaitez nous contacter\u00a0? Nous serions ravis de vous entendre."
               : "Want to get in touch? We'd love to hear from you."}
           </p>
           <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.88)" }}>
-            {lang === "fr"
-              ? "Voici comment vous pouvez nous joindre."
-              : "Here's how you can reach us."}
+            {lang === "fr" ? "Voici comment vous pouvez nous joindre." : "Here's how you can reach us."}
           </p>
         </div>
 
         {/* ── CARTES DE CONTACT ── */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 px-4 -mt-10 z-10 relative">
-
           <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:w-52 lg:w-60">
             <LocationIcon />
             <p className="font-semibold text-sm" style={{ color: "#2d7fa0" }}>HappyLand Canada</p>
           </div>
-
           <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:w-52 lg:w-60">
             <PhoneIcon />
             <p className="font-semibold text-sm" style={{ color: "#2d7fa0" }}>(xxx)-xxx-xxxx</p>
             <p className="text-xs text-gray-500">{lang === "fr" ? "Appelez-nous" : "Call us"}</p>
           </div>
-
           <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:w-52 lg:w-60">
             <EmailIcon />
             <p className="font-semibold text-sm" style={{ color: "#2d7fa0" }}>info@lesDeuxBlondes.ca</p>
             <p className="text-xs text-gray-500">{lang === "fr" ? "Contactez-nous par email." : "Email us."}</p>
           </div>
-
         </div>
 
         {/* ── FORMULAIRE ── */}
-        <div className="flex justify-center px-4 mt-10 mb-16 py-10 rounded-xl mx-4" style={{ background: "#f0f8ff" }}>
+        <div className="flex justify-center px-4 mt-10 mb-16">
           <div className="w-full max-w-lg">
 
-            <h2
-              className="text-xl lg:text-2xl text-center mb-6 font-semibold"
-              style={{ color: "#2d7fa0" }}
-            >
+            <h2 className="text-xl lg:text-2xl text-center mb-6 font-semibold" style={{ color: "#2d7fa0" }}>
               {lang === "fr" ? "Entrer en contact" : "Get in Touch"}
             </h2>
 
             {submitted ? (
-              <div
-                className="text-center py-10 px-6 rounded-lg"
-                style={{ background: "#f0fdf4", border: "1px solid #86efac" }}
-              >
+              <div className="text-center py-10 px-6 rounded-lg" style={{ background: "#f0fdf4", border: "1px solid #86efac" }}>
                 <p className="text-lg font-semibold" style={{ color: "#16a34a" }}>
                   {lang === "fr" ? "Message envoyé\u00a0!" : "Message sent!"}
                 </p>
                 <p className="mt-2 text-sm text-gray-600">
-                  {lang === "fr"
-                    ? "Nous vous répondrons dans les plus brefs délais."
-                    : "We'll get back to you as soon as possible."}
+                  {lang === "fr" ? "Nous vous répondrons dans les plus brefs délais." : "We'll get back to you as soon as possible."}
                 </p>
                 <button
                   onClick={() => { setSubmitted(false); setForm({ prenom: "", nom: "", courriel: "", sujet: "", message: "" }); }}
@@ -246,25 +187,13 @@ export default function ContactPage() {
                     <label className="block text-xs mb-1" style={{ color: textColor }}>
                       {lang === "fr" ? "Prénom" : "First Name"} <span className="text-red-400">*</span>
                     </label>
-                    <input
-                      name="prenom"
-                      value={form.prenom}
-                      onChange={handleChange}
-                      className={inputClass("prenom")}
-                      style={{ color: textColor }}
-                    />
+                    <input name="prenom" value={form.prenom} onChange={handleChange} className={inputClass("prenom")} style={{ color: textColor }} />
                   </div>
                   <div className="flex-1">
                     <label className="block text-xs mb-1" style={{ color: textColor }}>
                       {lang === "fr" ? "Nom de famille" : "Last Name"} <span className="text-red-400">*</span>
                     </label>
-                    <input
-                      name="nom"
-                      value={form.nom}
-                      onChange={handleChange}
-                      className={inputClass("nom")}
-                      style={{ color: textColor }}
-                    />
+                    <input name="nom" value={form.nom} onChange={handleChange} className={inputClass("nom")} style={{ color: textColor }} />
                   </div>
                 </div>
 
@@ -272,27 +201,14 @@ export default function ContactPage() {
                   <label className="block text-xs mb-1" style={{ color: textColor }}>
                     {lang === "fr" ? "Adresse courriel" : "Email Address"} <span className="text-red-400">*</span>
                   </label>
-                  <input
-                    name="courriel"
-                    type="email"
-                    value={form.courriel}
-                    onChange={handleChange}
-                    className={inputClass("courriel")}
-                    style={{ color: textColor }}
-                  />
+                  <input name="courriel" type="email" value={form.courriel} onChange={handleChange} className={inputClass("courriel")} style={{ color: textColor }} />
                 </div>
 
                 <div>
                   <label className="block text-xs mb-1" style={{ color: textColor }}>
                     {lang === "fr" ? "Sujet" : "Subject"}
                   </label>
-                  <input
-                    name="sujet"
-                    value={form.sujet}
-                    onChange={handleChange}
-                    className={inputClass("sujet")}
-                    style={{ color: textColor }}
-                  />
+                  <input name="sujet" value={form.sujet} onChange={handleChange} className={inputClass("sujet")} style={{ color: textColor }} />
                 </div>
 
                 <div>
