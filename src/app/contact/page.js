@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
-import Header from "../components/Header";
-import data from "../data/lesDeuxBlondes.json";
+import { useLanguage } from "../../context/LanguageContext";
+import Header from "../../components/Header";
+import data from "../../data/lesDeuxBlondes.json";
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * Icône flèche retour — SVG inline, pas de dépendance externe.
