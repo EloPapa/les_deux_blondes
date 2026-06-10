@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useRouter } from "next/navigation";   /* ← AJOUT */
 import dynamic from "next/dynamic";
 import { useLanguage } from "../context/LanguageContext";
 import Header from "../components/Header";
@@ -9,10 +10,10 @@ import data from "../data/lesDeuxBlondes.json";
 import Footer from "../components/Footer";
 
 export default function Home() {
+  const router = useRouter();                  /* ← AJOUT */
   const { lang, t } = useLanguage();
   const aboutRef = useRef(null);
   const contentRef = useRef(null);
-  const contactRef = useRef(null);
 
   /* AJUSTER LE OFFSET QUAND ON SCROLL TO A PARTIR DU DES BOUTONS DU HEADER */
   const getHeaderOffset = () => {
@@ -21,7 +22,7 @@ export default function Home() {
     return 75; // Écran XL et plus
   };
 
-   {/* getBoundingClientRect().top donne la position relative au viewport actuel, donc en ajoutant window.scrollY tu obtiens la position absolue — et l'offset s'applique correctement dans les deux directions.*/}
+  {/* getBoundingClientRect().top donne la position relative au viewport actuel, donc en ajoutant window.scrollY tu obtiens la position absolue — et l'offset s'applique correctement dans les deux directions.*/}
   const handleAboutScroll = () => {
     const rect = aboutRef.current.getBoundingClientRect();
     const top = window.scrollY + rect.top - getHeaderOffset();
@@ -42,6 +43,7 @@ export default function Home() {
     window.scrollTo({ top, behavior: "smooth" });    
   };
 
+  /* ← MODIFIÉ : navigue vers /contact au lieu de scroller vers le Footer */
   const handleContactScroll = () => {
     router.push("/contact");
   };
@@ -120,9 +122,7 @@ export default function Home() {
         </div>      
       </main>
 
-      <div ref={contactRef}>
-        <Footer />
-      </div>
+      <Footer />   {/* ← contactRef retiré, le Footer reste mais le bouton Contact navigue vers /contact */}
     </div>
   );
 }
