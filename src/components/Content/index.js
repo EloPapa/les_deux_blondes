@@ -79,7 +79,7 @@ function HeroVideo({ alt }) {
           width: 100%;
           position: relative;
           overflow: hidden;
-          border-radius: 4px;
+          border-radius: 0px;
           background: #1a1a1a;
           aspect-ratio: 16 / 9;
           line-height: 0;
