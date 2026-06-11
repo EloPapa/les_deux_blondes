@@ -47,8 +47,8 @@ const MiniHeader = () => {
       style={{
         background: HEADER_BG,
         gridTemplateColumns: "1fr auto 1fr",
-        paddingTop: "20px",
-        paddingBottom: "20px",
+        paddingTop: "10px",
+        paddingBottom: "10px",
       }}
     >
       {/* Colonne gauche - Bouton retour */}
