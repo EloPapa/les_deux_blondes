@@ -41,20 +41,39 @@ const MiniHeader = () => {
   return (
     <div
       className="sticky top-0 z-10 w-full flex items-center justify-between px-6 relative"
-      style={{ background: "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)", height: "70px", paddingBottom: "12px" }}
+      style={{
+        background: "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)",
+        height: "70px",
+        paddingBottom: "12px"
+      }}
     >
-      {/* Titre centré en absolu */}
+      {/* Bouton retour à gauche */}
+      <button
+        onClick={() => router.push("/")}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-opacity hover:opacity-80"
+        style={{ background: "rgba(255,255,255,0.15)", color: "#2d7fa0", border: "1px solid #2d7fa0" }}
+      >
+        <BackArrowIcon size={16} color="#2d7fa0" />
+        <span>{lang === "fr" ? "Retour" : "Back"}</span>
+      </button>
+
+      {/* Titre centré */}
       <h1
         onClick={() => router.push("/")}
         className="font-medium cursor-pointer absolute left-1/2 -translate-x-1/2"
-        style={{ color: "#ffffff", fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" }}
+        style={{
+          fontFamily: "'Amsterdam', cursive",
+          fontSize: "1.625rem",
+          background: "linear-gradient(to bottom, #2d7a5f 0%, #8ecfb0 50%, #d4f0e4 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+        }}
       >
         {name}.
       </h1>
-      
-      {/* Spacer gauche pour équilibrer */}
-      <div className="w-8" />  
 
+      {/* Bouton langue à droite */}
       <button
         onClick={toggle}
         className="text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
@@ -88,18 +107,18 @@ export default function ContactPage() {
     if (errors[e.target.name]) setErrors({ ...errors, [e.target.name]: false });
   };
 
-const handleSubmit = async () => {
-  const newErrors = validate();
-  if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+  const handleSubmit = async () => {
+    const newErrors = validate();
+    if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
 
-  await fetch("/api/contact", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(form),
-  });
+    await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
 
-  setSubmitted(true);
-};
+    setSubmitted(true);
+  };
 
   const textColor = "#664b23";
 
@@ -113,24 +132,16 @@ const handleSubmit = async () => {
 
       <MiniHeader />
 
-      {/* ── fond  pour tout le contenu sous le header ── */}
       <main className="flex-grow" style={{ background: "#ffffff" }}>
 
-        {/* ── BANNIÈRE TEAL ── */}
+        {/* ── BANNIÈRE ── */}
         <div
           className="relative w-full px-4 pt-10 pb-14 flex flex-col items-center justify-center text-center overflow-hidden"
-          style={{ background: "linear-gradient(to top, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)", minHeight: "286px" }}
+          style={{
+            background: "linear-gradient(to top, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)",
+            minHeight: "286px"
+          }}
         >
-          <button
-            onClick={() => router.push("/")}
-            className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-opacity hover:opacity-80"
-            style={{ background: "rgba(255,255,255,0.15)", color: "#2d7fa0" , border: "1px solid #2d7fa0" }}
-            aria-label="Retour à la page principale"
-          >
-            <BackArrowIcon size={16} color="#2d7fa0" />
-            <span>{lang === "fr" ? "Retour" : "Back"}</span>
-          </button>
-
           <h1
             className="text-3xl lg:text-4xl xl:text-5xl font-bold tracking-wide mb-6"
             style={{ color: "#ffffff", fontFamily: "'Amsterdam', cursive" }}
