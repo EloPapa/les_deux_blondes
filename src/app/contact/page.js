@@ -73,6 +73,7 @@ const MiniHeader = () => {
             fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
             whiteSpace: "nowrap",
             lineHeight: "2",
+            paddingBottom: "10px",
             display: "block",
             background: "linear-gradient(to bottom, #2d7a5f 0%, #8ecfb0 50%, #d4f0e4 100%)",
             WebkitBackgroundClip: "text",
