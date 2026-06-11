@@ -53,7 +53,7 @@ const MiniHeader = () => {
       <button
         onClick={toggle}
         className="text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
-        style={{ color: "#ffffff" }}
+        style={{ color: "#2d7fa0" }}
       >
         {lang === "fr" ? "EN" : "FR"}
       </button>
