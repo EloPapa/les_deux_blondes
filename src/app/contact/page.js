@@ -64,7 +64,7 @@ const MiniHeader = () => {
       </div>
 
       {/* Colonne centre - Titre */}
-      <div className="flex items-center justify-center py-2">
+      <div className="flex items-center justify-center" style={{ paddingTop: "16px", paddingBottom: "16px" }}>
         <h1
           onClick={() => router.push("/")}
           className="font-medium cursor-pointer"
@@ -72,6 +72,8 @@ const MiniHeader = () => {
             fontFamily: "'Amsterdam', cursive",
             fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
             whiteSpace: "nowrap",
+            lineHeight: "2",
+            display: "block",
             background: "linear-gradient(to bottom, #2d7a5f 0%, #8ecfb0 50%, #d4f0e4 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
