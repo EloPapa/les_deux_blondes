@@ -46,7 +46,7 @@ const MiniHeader = () => {
       <h1
         onClick={() => router.push("/")}
         className="font-medium cursor-pointer"
-        style={{ color: "#2d7a5f" , fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" }}
+        style={{ color: "#ffffff" , fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" }}
       >
         {name}.
       </h1>
@@ -114,7 +114,7 @@ const handleSubmit = async () => {
         {/* ── BANNIÈRE TEAL ── */}
         <div
           className="relative w-full px-4 pt-10 pb-14 flex flex-col items-center justify-center text-center overflow-hidden"
-          style={{ background: "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)", minHeight: "286px" }}
+          style={{ background: "linear-gradient(to top, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)", minHeight: "286px" }}
         >
           <button
             onClick={() => router.push("/")}
