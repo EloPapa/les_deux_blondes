@@ -83,12 +83,18 @@ export default function ContactPage() {
     if (errors[e.target.name]) setErrors({ ...errors, [e.target.name]: false });
   };
 
-  const handleSubmit = () => {
-    const newErrors = validate();
-    if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
-    /* TODO : brancher ici votre logique d'envoi */
-    setSubmitted(true);
-  };
+const handleSubmit = async () => {
+  const newErrors = validate();
+  if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+
+  await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(form),
+  });
+
+  setSubmitted(true);
+};
 
   const textColor = "#664b23";
 
