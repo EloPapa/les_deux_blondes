@@ -25,7 +25,7 @@ const Footer = (handleContactScroll) => {
         </h2>
         {/* SECTION CONTACTEZ-NOUS */}
         <div className="mt-7">          
-          <Button onClick={handleContactScroll} type="primary" classes="scale-125">{t.footer.scheduleSession} router.push("/contact"); </Button>
+          <Button onClick={() => router.push("/contact")} type="primary" classes="scale-125">{t.footer.scheduleSession} </Button>
            
         </div>
         

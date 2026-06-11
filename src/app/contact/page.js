@@ -64,7 +64,7 @@ const MiniHeader = () => {
       </div>
 
       {/* Colonne centre - Titre */}
-      <div className="flex items-center justify-center" style={{ paddingTop: "16px", paddingBottom: "16px" }}>
+      <div className="flex items-center justify-center" style={{ paddingTop: "10px", paddingBottom: "16px" }}>
         <h1
           onClick={() => router.push("/")}
           className="font-medium cursor-pointer"
