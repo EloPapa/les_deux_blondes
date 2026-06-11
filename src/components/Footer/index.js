@@ -1,16 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useLanguage } from "../../context/LanguageContext";
 import Button from "../Button";
 import Socials from "../Socials";
 
-const Footer = (handleContactScroll) => {
+const Footer = ({ handleContactScroll }) => {
+  const router = useRouter();
   const { t } = useLanguage();
   
   const backgroundGradient = "linear-gradient(to top, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)";
-
-  /**rosé:"linear-gradient(to top, transparent 60%, #fef2f5 100%), linear-gradient(to right, #fef2f5 0%, #f9d0de 30%, #f5b8cc 50%, #f9d0de 70%, #fef2f5 100%)"; */
-  /**jaune doux: "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)"; */
 
   return (
     <footer className="w-full flex flex-col items-center mt-5">
@@ -23,10 +22,10 @@ const Footer = (handleContactScroll) => {
         <h2 className="text-3xl tablet:text-4xl laptop:text-4xl laptopl:text-4xl font-bold">
           {t.sections.collaborate2}
         </h2>
-        {/* SECTION CONTACTEZ-NOUS */}
         <div className="mt-7">          
-          <Button onClick={() => router.push("/contact")} type="primary" classes="scale-125">{t.footer.scheduleSession} </Button>
-           
+          <Button onClick={() => router.push("/contact")} type="primary" classes="scale-125">
+            {t.footer.scheduleSession}
+          </Button>
         </div>
         
         <div className="mt-7">
@@ -34,10 +33,10 @@ const Footer = (handleContactScroll) => {
         </div>
       </div>
 
-      {/* FOOTER BAS — pleine largeur */}
+      {/* FOOTER BAS */}
       <div
         className="w-full mt- p-8 text-center"
-        style={{ background: backgroundGradient,  color: "#664b23"}}
+        style={{ background: backgroundGradient, color: "#664b23" }}
       >
         <h2 className="text-sm tablet:text-base laptop:text-base laptopl:text-base font-bold">
           {t.footer.madeWith}{" "}
@@ -50,3 +49,7 @@ const Footer = (handleContactScroll) => {
 };
 
 export default Footer;
+
+
+/**rosé:"linear-gradient(to top, transparent 60%, #fef2f5 100%), linear-gradient(to right, #fef2f5 0%, #f9d0de 30%, #f5b8cc 50%, #f9d0de 70%, #fef2f5 100%)"; */
+  /**jaune doux: "linear-gradient(to bottom, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)"; */
