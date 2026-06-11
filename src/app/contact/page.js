@@ -46,7 +46,7 @@ const MiniHeader = () => {
       className="sticky top-0 z-20 w-full flex items-center justify-between px-4 sm:px-6 relative"
       style={{
         background: HEADER_BG,
-        height: "60px",
+        height: "100px",
         overflow: "hidden",
       }}
     >
