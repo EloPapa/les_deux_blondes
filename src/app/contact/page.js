@@ -44,7 +44,7 @@ const MiniHeader = () => {
       style={{
         background: "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)",
         height: "70px",
-        paddingBottom: "12px"
+        paddingBottom: "0px"
       }}
     >
       {/* Bouton retour à gauche */}
