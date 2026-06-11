@@ -46,14 +46,14 @@ const MiniHeader = () => {
       <h1
         onClick={() => router.push("/")}
         className="font-medium cursor-pointer"
-        style={{ color: "#16a34a" , fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" }}
+        style={{ color: "#59f392" , fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" }}
       >
         {name}.
       </h1>
       <button
         onClick={toggle}
         className="text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
-        style={{ color: "#16a34a"  }}
+        style={{ color: "#59f392"  }}
       >
         {lang === "fr" ? "EN" : "FR"}
       </button>
