@@ -40,16 +40,21 @@ const MiniHeader = () => {
 
   return (
     <div
-      className="sticky top-0 z-10 w-full flex items-center justify-between px-6"
+      className="sticky top-0 z-10 w-full flex items-center justify-between px-6 relative"
       style={{ background: "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)", height: "70px", paddingBottom: "12px" }}
     >
+      {/* Titre centré en absolu */}
       <h1
         onClick={() => router.push("/")}
-        className="font-medium cursor-pointer"
-        style={{ color: "#2d7a5f" , fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" }}
+        className="font-medium cursor-pointer absolute left-1/2 -translate-x-1/2"
+        style={{ color: "#ffffff", fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" }}
       >
         {name}.
       </h1>
+      
+      {/* Spacer gauche pour équilibrer */}
+      <div className="w-8" />  
+
       <button
         onClick={toggle}
         className="text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
