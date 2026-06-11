@@ -48,7 +48,15 @@ const MiniHeader = () => {
       }}
     >
             
-      
+      {/* Bouton retour à gauche */}
+      <button
+        onClick={() => router.push("/")}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-opacity hover:opacity-80"
+        style={{ background: "rgba(255,255,255,0.15)", color: "#2d7fa0", border: "1px solid #2d7fa0" }}
+      >
+        <BackArrowIcon size={16} color="#2d7fa0" />
+        <span>{lang === "fr" ? "Retour" : "Back"}</span>
+      </button>
 
       {/* Titre centré */}
       <h1

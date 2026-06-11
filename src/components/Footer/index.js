@@ -4,7 +4,7 @@ import { useLanguage } from "../../context/LanguageContext";
 import Button from "../Button";
 import Socials from "../Socials";
 
-const Footer = () => {
+const Footer = (handleContactScroll) => {
   const { t } = useLanguage();
   
   const backgroundGradient = "linear-gradient(to top, transparent 60%, #fffef5 100%), linear-gradient(to right, #fffef5 0%, #fef4c0 30%, #fdeea0 50%, #fef4c0 70%, #fffef5 100%)";
@@ -24,9 +24,11 @@ const Footer = () => {
           {t.sections.collaborate2}
         </h2>
         {/* SECTION CONTACTEZ-NOUS */}
-        <div className="mt-7">
-          <Button type="primary" classes="scale-125">{t.footer.scheduleSession}</Button>
+        <div className="mt-7">          
+          <Button nClick={handleContactScroll} type="primary" classes="scale-125">{t.footer.scheduleSession} </Button>
+        
         </div>
+        
         <div className="mt-7">
           <Socials />
         </div>
