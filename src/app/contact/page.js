@@ -33,6 +33,9 @@ const EmailIcon = () => (
   </svg>
 );
 
+const HEADER_BG = "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)";
+const BANNER_BG = "linear-gradient(to top, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)";
+
 const MiniHeader = () => {
   const router = useRouter();
   const { lang, toggle } = useLanguage();
@@ -40,31 +43,33 @@ const MiniHeader = () => {
 
   return (
     <div
-      className="sticky top-0 z-10 w-full flex items-center justify-between px-6 relative"
+      className="sticky top-0 z-20 w-full flex items-center justify-between px-4 sm:px-6 relative"
       style={{
-        background: "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)",
-        height: "80px",
-        paddingBottom: "0px"
+        background: HEADER_BG,
+        height: "60px",
+        overflow: "hidden",
       }}
     >
-            
       {/* Bouton retour à gauche */}
       <button
         onClick={() => router.push("/")}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-opacity hover:opacity-80"
+        className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-opacity hover:opacity-80 shrink-0 z-10"
         style={{ background: "rgba(255,255,255,0.15)", color: "#2d7fa0", border: "1px solid #2d7fa0" }}
       >
-        <BackArrowIcon size={16} color="#2d7fa0" />
+        <BackArrowIcon size={14} color="#2d7fa0" />
         <span>{lang === "fr" ? "Retour" : "Back"}</span>
       </button>
 
-      {/* Titre centré */}
+      {/* Titre centré en absolu */}
       <h1
         onClick={() => router.push("/")}
-        className="font-medium cursor-pointer absolute left-1/2 -translate-x-1/2"
+        className="font-medium cursor-pointer absolute left-1/2 top-1/2 z-10"
         style={{
+          transform: "translate(-50%, -50%)",
           fontFamily: "'Amsterdam', cursive",
-          fontSize: "1.625rem",
+          fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
+          lineHeight: "1",
+          whiteSpace: "nowrap",
           background: "linear-gradient(to bottom, #2d7a5f 0%, #8ecfb0 50%, #d4f0e4 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
@@ -77,7 +82,7 @@ const MiniHeader = () => {
       {/* Bouton langue à droite */}
       <button
         onClick={toggle}
-        className="text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
+        className="text-xs sm:text-sm font-medium opacity-80 hover:opacity-100 transition-opacity shrink-0 z-10"
         style={{ color: "#2d7a5f" }}
       >
         {lang === "fr" ? "EN" : "FR"}
@@ -137,52 +142,65 @@ export default function ContactPage() {
 
         {/* ── BANNIÈRE ── */}
         <div
-          className="relative w-full px-4 pt-10 pb-14 flex flex-col items-center justify-center text-center overflow-hidden"
+          className="relative w-full flex flex-col items-center justify-center text-center overflow-hidden px-4 pt-10 pb-16 sm:pt-12 sm:pb-20"
           style={{
-            background: "linear-gradient(to top, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)",
-            minHeight: "286px"
+            background: BANNER_BG,
+            minHeight: "260px",
           }}
         >
           <h1
-            className="text-3xl lg:text-4xl xl:text-5xl font-bold tracking-wide mb-6"
-            style={{ color: "#ffffff", fontFamily: "'Amsterdam', cursive" }}
+            className="font-bold tracking-wide mb-4 sm:mb-6"
+            style={{
+              color: "#ffffff",
+              fontFamily: "'Amsterdam', cursive",
+              fontSize: "clamp(2rem, 6vw, 3.5rem)",
+            }}
           >
             {lang === "fr" ? "Contactez-nous" : "Contact Us"}
           </h1>
 
-          <p className="text-sm lg:text-base max-w-lg" style={{ color: "rgba(255,255,255,0.88)" }}>
+          <p
+            className="max-w-xs sm:max-w-md lg:max-w-lg"
+            style={{ color: "rgba(255,255,255,0.88)", fontSize: "clamp(0.8rem, 2vw, 1rem)" }}
+          >
             {lang === "fr"
               ? "Vous souhaitez nous contacter\u00a0? Nous serions ravis de vous entendre."
               : "Want to get in touch? We'd love to hear from you."}
           </p>
-          <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.88)" }}>
+          <p
+            className="mt-1"
+            style={{ color: "rgba(255,255,255,0.88)", fontSize: "clamp(0.75rem, 1.8vw, 0.9rem)" }}
+          >
             {lang === "fr" ? "Voici comment vous pouvez nous joindre." : "Here's how you can reach us."}
           </p>
         </div>
 
         {/* ── CARTES DE CONTACT ── */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 px-4 -mt-10 z-10 relative">
-          <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:w-52 lg:w-60">
+        <div className="flex flex-col sm:flex-row justify-center gap-4 px-4 sm:px-6 lg:px-8 -mt-10 z-10 relative max-w-4xl mx-auto w-full">
+          <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:flex-1">
             <LocationIcon />
-            <p className="font-semibold text-sm" style={{ color: "#2d7fa0" }}>HappyLand Canada</p>
+            <p className="font-semibold text-sm text-center" style={{ color: "#2d7fa0" }}>HappyLand Canada</p>
           </div>
-          <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:w-52 lg:w-60">
+          <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:flex-1">
             <PhoneIcon />
             <p className="font-semibold text-sm" style={{ color: "#2d7fa0" }}>(xxx)-xxx-xxxx</p>
             <p className="text-xs text-gray-500">{lang === "fr" ? "Appelez-nous" : "Call us"}</p>
           </div>
-          <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:w-52 lg:w-60">
+          <div className="bg-white rounded-lg shadow-md px-6 py-5 flex flex-col items-center gap-2 w-full sm:flex-1">
             <EmailIcon />
-            <p className="font-semibold text-sm" style={{ color: "#2d7fa0" }}>info@lesDeuxBlondes.ca</p>
+            <p className="font-semibold text-sm text-center break-all" style={{ color: "#2d7fa0" }}>info@lesDeuxBlondes.ca</p>
             <p className="text-xs text-gray-500">{lang === "fr" ? "Contactez-nous par email." : "Email us."}</p>
           </div>
         </div>
 
         {/* ── FORMULAIRE ── */}
-        <div className="flex justify-center px-4 mt-10 mb-16">
+        <div className="flex justify-center px-4 sm:px-6 mt-10 mb-16">
           <div className="w-full max-w-lg">
 
-            <h2 className="text-xl lg:text-2xl text-center mb-6 font-semibold" style={{ color: "#2d7fa0" }}>
+            <h2
+              className="text-center mb-6 font-semibold"
+              style={{ color: "#2d7fa0", fontSize: "clamp(1.1rem, 3vw, 1.5rem)" }}
+            >
               {lang === "fr" ? "Entrer en contact" : "Get in Touch"}
             </h2>
 
@@ -205,18 +223,30 @@ export default function ContactPage() {
             ) : (
               <div className="flex flex-col gap-5">
 
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex-1">
                     <label className="block text-xs mb-1" style={{ color: textColor }}>
                       {lang === "fr" ? "Prénom" : "First Name"} <span className="text-red-400">*</span>
                     </label>
-                    <input name="prenom" value={form.prenom} onChange={handleChange} className={inputClass("prenom")} style={{ color: textColor }} />
+                    <input
+                      name="prenom"
+                      value={form.prenom}
+                      onChange={handleChange}
+                      className={inputClass("prenom")}
+                      style={{ color: textColor }}
+                    />
                   </div>
                   <div className="flex-1">
                     <label className="block text-xs mb-1" style={{ color: textColor }}>
                       {lang === "fr" ? "Nom de famille" : "Last Name"} <span className="text-red-400">*</span>
                     </label>
-                    <input name="nom" value={form.nom} onChange={handleChange} className={inputClass("nom")} style={{ color: textColor }} />
+                    <input
+                      name="nom"
+                      value={form.nom}
+                      onChange={handleChange}
+                      className={inputClass("nom")}
+                      style={{ color: textColor }}
+                    />
                   </div>
                 </div>
 
@@ -224,14 +254,27 @@ export default function ContactPage() {
                   <label className="block text-xs mb-1" style={{ color: textColor }}>
                     {lang === "fr" ? "Adresse courriel" : "Email Address"} <span className="text-red-400">*</span>
                   </label>
-                  <input name="courriel" type="email" value={form.courriel} onChange={handleChange} className={inputClass("courriel")} style={{ color: textColor }} />
+                  <input
+                    name="courriel"
+                    type="email"
+                    value={form.courriel}
+                    onChange={handleChange}
+                    className={inputClass("courriel")}
+                    style={{ color: textColor }}
+                  />
                 </div>
 
                 <div>
                   <label className="block text-xs mb-1" style={{ color: textColor }}>
                     {lang === "fr" ? "Sujet" : "Subject"}
                   </label>
-                  <input name="sujet" value={form.sujet} onChange={handleChange} className={inputClass("sujet")} style={{ color: textColor }} />
+                  <input
+                    name="sujet"
+                    value={form.sujet}
+                    onChange={handleChange}
+                    className={inputClass("sujet")}
+                    style={{ color: textColor }}
+                  />
                 </div>
 
                 <div>
@@ -244,7 +287,14 @@ export default function ContactPage() {
                     onChange={handleChange}
                     rows={5}
                     className={`${inputClass("message")} resize-y`}
-                    style={{ color: textColor, borderBottom: "none", border: errors.message ? "1px solid #f87171" : "1px solid #d1d5db", borderRadius: "4px", padding: "8px", fontSize: "0.875rem" }}
+                    style={{
+                      color: textColor,
+                      borderBottom: "none",
+                      border: errors.message ? "1px solid #f87171" : "1px solid #d1d5db",
+                      borderRadius: "4px",
+                      padding: "8px",
+                      fontSize: "0.875rem",
+                    }}
                   />
                 </div>
 
