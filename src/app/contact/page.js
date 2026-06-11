@@ -41,7 +41,7 @@ const MiniHeader = () => {
   return (
     <div
       className="sticky top-0 z-10 w-full flex items-center justify-between px-6"
-      style={{ background: "linear-gradient(to bottom, transparent 60%, #f0f8ff 100%), linear-gradient(to right, #f0f8ff 0%, #cce8f4 30%, #b9dae9 50%, #cce8f4 70%, #f0f8ff 100%)", height: "70px", paddingBottom: "12px" }}
+      style={{ background: "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)", height: "70px", paddingBottom: "12px" }}
     >
       <h1
         onClick={() => router.push("/")}
