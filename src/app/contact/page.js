@@ -43,7 +43,7 @@ const MiniHeader = () => {
       className="sticky top-0 z-10 w-full flex items-center justify-between px-6 relative"
       style={{
         background: "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)",
-        height: "70px",
+        height: "80px",
         paddingBottom: "0px"
       }}
     >
