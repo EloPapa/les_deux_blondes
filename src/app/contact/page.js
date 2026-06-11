@@ -43,59 +43,58 @@ const MiniHeader = () => {
 
   return (
     <div
-      className="sticky top-0 z-20 w-full grid px-4 sm:px-6"
+  className="sticky top-0 z-20 w-full grid px-4 sm:px-6"
+  style={{
+    background: HEADER_BG,
+    gridTemplateColumns: "1fr auto 1fr",
+    alignItems: "center",
+  }}
+>
+  {/* Colonne gauche - Bouton retour */}
+  <div className="flex items-center py-3">
+    <button
+      onClick={() => router.push("/")}
+      className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-opacity hover:opacity-80"
+      style={{ background: "rgba(255,255,255,0.15)", color: "#2d7fa0", border: "1px solid #2d7fa0" }}
+    >
+      <BackArrowIcon size={14} color="#2d7fa0" />
+      <span>{lang === "fr" ? "Retour" : "Back"}</span>
+    </button>
+  </div>
+
+  {/* Colonne centre - Titre */}
+  <div className="flex justify-center">
+    <h1
+      onClick={() => router.push("/")}
+      className="font-medium cursor-pointer"
       style={{
-        background: HEADER_BG,
-        gridTemplateColumns: "1fr auto 1fr",
-        paddingTop: "10px",
-        paddingBottom: "10px",
+        fontFamily: "'Amsterdam', cursive",
+        fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
+        whiteSpace: "nowrap",
+        lineHeight: "1",
+        paddingTop: "18px",
+        paddingBottom: "18px",
+        background: "linear-gradient(to bottom, #2d7a5f 0%, #8ecfb0 50%, #d4f0e4 100%)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
       }}
     >
-      {/* Colonne gauche - Bouton retour */}
-      <div className="flex items-center">
-        <button
-          onClick={() => router.push("/")}
-          className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-opacity hover:opacity-80"
-          style={{ background: "rgba(255,255,255,0.15)", color: "#2d7fa0", border: "1px solid #2d7fa0" }}
-        >
-          <BackArrowIcon size={14} color="#2d7fa0" />
-          <span>{lang === "fr" ? "Retour" : "Back"}</span>
-        </button>
-      </div>
+      {name}.
+    </h1>
+  </div>
 
-      {/* Colonne centre - Titre */}
-      <div className="flex items-center justify-center" style={{ paddingTop: "2px", paddingBottom: "16px" }}>
-        <h1
-          onClick={() => router.push("/")}
-          className="font-medium cursor-pointer"
-          style={{
-            fontFamily: "'Amsterdam', cursive",
-            fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
-            whiteSpace: "nowrap",
-            lineHeight: "2",
-            paddingBottom: "12px",
-            display: "block",
-            background: "linear-gradient(to bottom, #2d7a5f 0%, #8ecfb0 50%, #d4f0e4 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          {name}.
-        </h1>
-      </div>
-
-      {/* Colonne droite - Bouton langue */}
-      <div className="flex items-center justify-end">
-        <button
-          onClick={toggle}
-          className="text-xs sm:text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
-          style={{ color: "#2d7a5f" }}
-        >
-          {lang === "fr" ? "EN" : "FR"}
-        </button>
-      </div>
-    </div>
+  {/* Colonne droite - Bouton langue */}
+  <div className="flex items-center justify-end py-3">
+    <button
+      onClick={toggle}
+      className="text-xs sm:text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
+      style={{ color: "#2d7a5f" }}
+    >
+      {lang === "fr" ? "EN" : "FR"}
+    </button>
+  </div>
+</div>
   );
 };
 
