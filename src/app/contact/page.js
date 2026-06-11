@@ -46,7 +46,7 @@ const MiniHeader = () => {
       <h1
         onClick={() => router.push("/")}
         className="font-medium cursor-pointer"
-        style={{ color: "#ffffff" , fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" }}
+        style={{ color: "#ffffff" , fontFamily: "'Amsterdam', cursive", fontSize: "1.625rem" , WebkitTextStroke: "1px #2d7fa0"}}
       >
         {name}.
       </h1>
