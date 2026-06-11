@@ -46,8 +46,8 @@ const MiniHeader = () => {
       className="sticky top-0 z-20 w-full flex items-center justify-between px-4 sm:px-6 relative"
       style={{
         background: HEADER_BG,
-        height: "100px",
-        overflow: "hidden",
+        paddingTop: "14px",
+        paddingBottom: "14px",
       }}
     >
       {/* Bouton retour à gauche */}
@@ -60,7 +60,7 @@ const MiniHeader = () => {
         <span>{lang === "fr" ? "Retour" : "Back"}</span>
       </button>
 
-      {/* Titre centré en absolu */}
+      {/* Titre centré */}
       <h1
         onClick={() => router.push("/")}
         className="font-medium cursor-pointer absolute left-1/2 top-1/2 z-10"
@@ -68,7 +68,7 @@ const MiniHeader = () => {
           transform: "translate(-50%, -50%)",
           fontFamily: "'Amsterdam', cursive",
           fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
-          lineHeight: "1",
+          lineHeight: "1.4",
           whiteSpace: "nowrap",
           background: "linear-gradient(to bottom, #2d7a5f 0%, #8ecfb0 50%, #d4f0e4 100%)",
           WebkitBackgroundClip: "text",

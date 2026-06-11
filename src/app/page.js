@@ -122,7 +122,9 @@ export default function Home() {
         </div>      
       </main>
 
-      <Footer />   {/* ← contactRef retiré, le Footer reste mais le bouton Contact navigue vers /contact */}
+      <Footer 
+        handleContactScroll={handleContactScroll}
+      />   
     </div>
   );
 }
