@@ -73,7 +73,7 @@ const MiniHeader = () => {
         whiteSpace: "nowrap",
         lineHeight: "1",
         paddingTop: "22px",
-        paddingBottom: "25px",
+        paddingBottom: "26px",
         background: "linear-gradient(to bottom, #d4f0e4 , #8ecfb0 50%, #2d7a5f 0% 100%)",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
