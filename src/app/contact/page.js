@@ -43,50 +43,55 @@ const MiniHeader = () => {
 
   return (
     <div
-      className="sticky top-0 z-20 w-full flex items-center justify-between px-4 sm:px-6 relative"
+      className="sticky top-0 z-20 w-full grid px-4 sm:px-6"
       style={{
         background: HEADER_BG,
-        paddingTop: "14px",
-        paddingBottom: "14px",
+        gridTemplateColumns: "1fr auto 1fr",
+        paddingTop: "10px",
+        paddingBottom: "10px",
       }}
     >
-      {/* Bouton retour à gauche */}
-      <button
-        onClick={() => router.push("/")}
-        className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-opacity hover:opacity-80 shrink-0 z-10"
-        style={{ background: "rgba(255,255,255,0.15)", color: "#2d7fa0", border: "1px solid #2d7fa0" }}
-      >
-        <BackArrowIcon size={14} color="#2d7fa0" />
-        <span>{lang === "fr" ? "Retour" : "Back"}</span>
-      </button>
+      {/* Colonne gauche - Bouton retour */}
+      <div className="flex items-center">
+        <button
+          onClick={() => router.push("/")}
+          className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-opacity hover:opacity-80"
+          style={{ background: "rgba(255,255,255,0.15)", color: "#2d7fa0", border: "1px solid #2d7fa0" }}
+        >
+          <BackArrowIcon size={14} color="#2d7fa0" />
+          <span>{lang === "fr" ? "Retour" : "Back"}</span>
+        </button>
+      </div>
 
-      {/* Titre centré */}
-      <h1
-        onClick={() => router.push("/")}
-        className="font-medium cursor-pointer absolute left-1/2 top-1/2 z-10"
-        style={{
-          transform: "translate(-50%, -50%)",
-          fontFamily: "'Amsterdam', cursive",
-          fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
-          lineHeight: "1.4",
-          whiteSpace: "nowrap",
-          background: "linear-gradient(to bottom, #2d7a5f 0%, #8ecfb0 50%, #d4f0e4 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-        }}
-      >
-        {name}.
-      </h1>
+      {/* Colonne centre - Titre */}
+      <div className="flex items-center justify-center py-2">
+        <h1
+          onClick={() => router.push("/")}
+          className="font-medium cursor-pointer"
+          style={{
+            fontFamily: "'Amsterdam', cursive",
+            fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
+            whiteSpace: "nowrap",
+            background: "linear-gradient(to bottom, #2d7a5f 0%, #8ecfb0 50%, #d4f0e4 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          {name}.
+        </h1>
+      </div>
 
-      {/* Bouton langue à droite */}
-      <button
-        onClick={toggle}
-        className="text-xs sm:text-sm font-medium opacity-80 hover:opacity-100 transition-opacity shrink-0 z-10"
-        style={{ color: "#2d7a5f" }}
-      >
-        {lang === "fr" ? "EN" : "FR"}
-      </button>
+      {/* Colonne droite - Bouton langue */}
+      <div className="flex items-center justify-end">
+        <button
+          onClick={toggle}
+          className="text-xs sm:text-sm font-medium opacity-80 hover:opacity-100 transition-opacity"
+          style={{ color: "#2d7a5f" }}
+        >
+          {lang === "fr" ? "EN" : "FR"}
+        </button>
+      </div>
     </div>
   );
 };
