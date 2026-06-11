@@ -108,7 +108,7 @@ export default function ContactPage() {
         {/* ── BANNIÈRE TEAL ── */}
         <div
           className="relative w-full px-4 pt-10 pb-14 flex flex-col items-center justify-center text-center overflow-hidden"
-          style={{ backgroundColor: "#2d7fa0", minHeight: "286px" }}
+          style={{ background:"linear-gradient(to bottom, transparent 60%, #f0fff6 100%), linear-gradient(to right, #f0fff6 0%, #c8e8d8 30%, #b2d9c6 50%, #c8e8d8 70%, #f0fff6 100%)", minHeight: "286px" }}
         >
           <button
             onClick={() => router.push("/")}
