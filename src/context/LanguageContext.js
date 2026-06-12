@@ -15,13 +15,13 @@
 
 const fr = {
   header: {
-    content: "Média",
+    content: "Les Deux Blondes", //"Média"
     about: "À propos",
     contact: "Contact",    
   },
 
   sections: {
-    content: "Média",
+    content: "Média",  
     about: "À propos.",
     contact: "Contact.",  
 
@@ -36,13 +36,13 @@ const fr = {
 
 const en = {
   header: {
-    content: "Media",
+    content: "Les Deux Blondes",   //"Media"
     about: "About",
     contact: "Contact",    
   },
   
   sections: {
-    content: "Media",
+    content: "Media",   
     about: "About.",
     contact: "Contact.",    
   },
