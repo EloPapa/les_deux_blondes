@@ -74,7 +74,7 @@ const MiniHeader = () => {
         lineHeight: "1",
         paddingTop: "22px",
         paddingBottom: "28px",
-        background: "#ffffff",
+        background: "#2d7a5f",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
         backgroundClip: "text",
