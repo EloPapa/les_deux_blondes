@@ -15,7 +15,7 @@
 
 const fr = {
   header: {
-    content: "Les Deux Blondes", //"Média"
+    content: "Média", //"Média"
     about: "À propos",
     contact: "Contact",    
   },
@@ -36,7 +36,7 @@ const fr = {
 
 const en = {
   header: {
-    content: "Les Deux Blondes",   //"Media"
+    content: "Media",   //"Media"
     about: "About",
     contact: "Contact",    
   },
