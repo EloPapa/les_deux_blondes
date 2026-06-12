@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Les Deux Blondes",            //  title:       "Les Deux Blondes - [ajoutez ici ce que vous faites: vidéos, contenu, etc.]",
   description: "Les Deux Blondes : ",   //  description: "Les Deux Blondes : [description avec mots-clés pertinents, 150-160 caractères]",
+  verification: {
+    google: "pDOZtr9gZYf_OqtAbp_Vw5yN7hqrGA6RNLiwSMgHvSY"  // ← collez le code ici
+  },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",        // iOS
