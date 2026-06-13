@@ -35,7 +35,7 @@ const EmailIcon = () => (
 
 const HEADER_BG = "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)";
 const BANNER_BG = "linear-gradient(to top, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)";
-const TITRE_HEADER =   "radial-gradient(circle at center, #fdfcf8 0%, #eef8f1 30%, #8bb89a 70%, #5f9273 100%)";
+const TITRE_HEADER = "linear-gradient(to right, #5f9273 0%, #8bb89a 30%, #fdfcf8 50%, #8bb89a 70%, #5f9273 100%), linear-gradient(to bottom, #5f9273 0%, #8bb89a 30%, transparent 50%, #8bb89a 70%, #5f9273 100%)";
 
 const MiniHeader = () => {
   const router = useRouter();
