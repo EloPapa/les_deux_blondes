@@ -35,6 +35,7 @@ const EmailIcon = () => (
 
 const HEADER_BG = "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)";
 const BANNER_BG = "linear-gradient(to top, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)";
+const TITRE_HEADER = "linear-gradient(to bottom, transparent 60%, #d4f0e4 100%), linear-gradient(to right, #d4f0e4 0%, #8ecfb0 30%, #6bbf9a 50%, #8ecfb0 70%, #d4f0e4 100%)";
 
 const MiniHeader = () => {
   const router = useRouter();
@@ -74,7 +75,7 @@ const MiniHeader = () => {
         lineHeight: "1",
         paddingTop: "22px",
         paddingBottom: "28px",
-        background: "#2d7a5f",
+        background: TITRE_HEADER,
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
         backgroundClip: "text",
